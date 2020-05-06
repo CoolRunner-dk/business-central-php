@@ -8,6 +8,7 @@
 namespace BusinessCentral\Query;
 
 
+use BusinessCentral\ClassMap;
 use BusinessCentral\Entity;
 use BusinessCentral\EntityCollection;
 use BusinessCentral\Exceptions\QueryException;
@@ -75,16 +76,24 @@ class Builder
         $singular = (bool)preg_match('/\$entity/', $response['@odata.context']);
 
         if ($singular) {
-            return new Entity($response, $this->clone(), $this->getEntityType($response['@odata.context']));
+            return Entity::make($response, $this->clone(), $this->getEntityType($response['@odata.context']));
         }
 
         return new EntityCollection($this->clone(), $this->getEntitySet($response['@odata.context']), $response['value']);
     }
 
+    public function find($id)
+    {
+        $component = $this->components->last();
+        $query     = $this->clone();
+        $query->component($component[0], $id);
+
+        return $query->fetch();
+    }
+
     public function exists()
     {
         $result = $this->fetch();
-        dd($result);
         if ($result instanceof EntityCollection) {
             return ! ! $result->count();
         }

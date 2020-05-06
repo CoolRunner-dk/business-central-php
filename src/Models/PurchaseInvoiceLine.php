@@ -1,0 +1,43 @@
+<?php
+namespace BusinessCentral\Models;
+
+
+use BusinessCentral\Entity;
+
+/**
+ *
+ * Class PurchaseInvoiceLine
+ * Auto-generated on: 2020-05-06 09:08:24
+ *
+ * @property-read string $id
+ * @property string $documentId
+ * @property int $sequence
+ * @property string $itemId
+ * @property string $accountId
+ * @property string $lineType
+ * @property array|string[] $lineDetails
+ * @property string $description
+ * @property array|string[] $unitOfMeasure
+ * @property float $unitCost
+ * @property float $quantity
+ * @property float $discountAmount
+ * @property float $discountPercent
+ * @property bool $discountAppliedBeforeTax
+ * @property float $amountExcludingTax
+ * @property string $taxCode
+ * @property float $taxPercent
+ * @property float $totalTaxAmount
+ * @property float $amountIncludingTax
+ * @property float $invoiceDiscountAllocation
+ * @property float $netAmount
+ * @property float $netTaxAmount
+ * @property float $netAmountIncludingTax
+ * @property string $expectedReceiptDate
+ * @property-read \BusinessCentral\Models\Item $item
+ * @property-read \BusinessCentral\Models\Account $account
+ *
+ */
+class PurchaseInvoiceLine extends Entity
+{
+    protected static $schema_type = 'purchaseInvoiceLine';
+}

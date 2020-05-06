@@ -96,6 +96,29 @@ class Property
         }
     }
 
+    public function getDocType()
+    {
+        switch ($this->type) {
+            case 'Edm.String':
+            case 'Edm.Guid':
+            case 'Edm.DateTimeOffset':
+                return 'string';
+            case 'Edm.Boolean':
+                return 'bool';
+            case 'Edm.Decimal':
+                return 'float';
+            case 'Edm.Int32':
+            case 'Edm.Int64':
+                return 'int';
+            default:
+                if (strpos($this->type, 'Microsoft.NAV.') !== false) {
+                    return $this->schema->getComplexType(Schema::getType($this->type));
+                }
+
+                return 'string';
+        }
+    }
+
     public function getValidation()
     {
         $rules = [];

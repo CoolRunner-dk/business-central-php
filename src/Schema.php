@@ -43,6 +43,11 @@ class Schema
 
     // region EntityTypes
 
+    public function getEntityTypes()
+    {
+        return $this->entity_types;
+    }
+
     public function hasEntityType(string $type)
     {
         return isset($this->entity_types[$type]);
@@ -68,6 +73,11 @@ class Schema
 
     // region EntitySets
 
+    public function getEntitySets()
+    {
+        return $this->entity_sets;
+    }
+
     public function hasEntitySet(string $set)
     {
         return isset($this->entity_sets[$set]);
@@ -80,7 +90,7 @@ class Schema
 
     public function getEntitySetByType(string $type)
     {
-        return $this->entity_sets->first(function(EntitySet $entity_set) use($type) {
+        return $this->entity_sets->first(function (EntitySet $entity_set) use ($type) {
             return $entity_set->type;
         });
     }

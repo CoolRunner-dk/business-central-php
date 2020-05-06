@@ -20,21 +20,13 @@ use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Pluralizer;
 
-/**
- * Class Entity
- *
- * @property string $id
- *
- * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
- * @package BusinessCentral
- */
 class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 {
     use HasQueryBuilder;
 
     protected $guarded = [
         'id',
-        'lastModifiedDateTime'
+        'lastModifiedDateTime',
     ];
 
     protected $attributes = [];
@@ -45,12 +37,21 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
     protected $etag;
 
+    protected static $schema_type = null;
+
     public function __construct(array $attributes, Builder $query, EntityType $type)
     {
         $this->query = $query;
         $this->type  = $type;
 
         $this->setAttributes($attributes);
+    }
+
+    public static function make(array $attributes, Builder $query, EntityType $type)
+    {
+        $class = ClassMap::map($type);
+
+        return new $class($attributes, $query, $type);
     }
 
     protected function setAttributes(array $attributes)
@@ -110,6 +111,17 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         return $this->type->getValidationRules();
     }
 
+    protected function fetchRelation(string $relation)
+    {
+        if (isset($this->relations[$relation])) {
+            return $this->relations[$relation];
+        }
+
+        $query = $this->query->clone();
+
+        return $this->relations[$relation] = $query->component($relation)->fetch();
+    }
+
     // region Interfaces
 
     public function offsetGet($offset)
@@ -117,7 +129,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         if ($this->type->propertyExists($offset)) {
             return $this->attributes[$offset] ?? null;
         } elseif ($this->type->relationExists($offset)) {
-            return $this->relations[$offset] ?? null;
+            return $this->fetchRelation($offset);
         }
     }
 
@@ -156,6 +168,14 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function __set($name, $value)
     {
         $this->offsetSet($name, $value);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if ($this->type->relationExists($name)) {
+            return $this->query->clone()->component($name);
+        }
+        // TODO: Implement __call() method.
     }
 
     public function toArray()

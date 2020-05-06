@@ -8,3 +8,4 @@
 /.vagrant
 
 /test.php
+/build_credentials.json

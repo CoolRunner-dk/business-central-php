@@ -8,6 +8,7 @@
 namespace BusinessCentral;
 
 
+use BusinessCentral\Models\Company;
 use BusinessCentral\Query\Builder;
 use BusinessCentral\Traits\HasSchema;
 use GuzzleHttp\Client;
@@ -66,6 +67,18 @@ class SDK
     public function query()
     {
         return new Builder($this);
+    }
+
+    /**
+     * @param string $id
+     *
+     * @return Company
+     * @throws Exceptions\QueryException
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
+    public function company(string $id)
+    {
+        return $this->query()->component('companies', $id)->fetch();
     }
 
     public function mapEntities()

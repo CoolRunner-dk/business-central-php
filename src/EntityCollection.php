@@ -42,7 +42,7 @@ class EntityCollection implements \ArrayAccess, \IteratorAggregate, \JsonSeriali
 
         foreach ($items as $item) {
             $entity_query = $this->query->clone()->component($this->type->name, $item['id'] ?? null);
-            $entity       = new Entity($item, $entity_query, $this->type->type);
+            $entity       = Entity::make($item, $entity_query, $this->type->type);
 
             $this->collection[$entity['id']] = $entity;
         }
