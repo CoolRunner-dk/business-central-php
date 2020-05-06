@@ -1,0 +1,27 @@
+{
+    "name"        : "coolrunner/business-central-sdk",
+    "description" : "PHP SDK for Microsoft Business Central",
+    "type"        : "library",
+    "require"     : {
+        "php"                : "^7.3",
+        "ext-json"           : "*",
+        "guzzlehttp/guzzle"  : "^6.5",
+        "illuminate/support" : "^5.8"
+    },
+    "require-dev" : {
+        "symfony/var-dumper" : "^4.4",
+        "filp/whoops"        : "2.7.1"
+    },
+    "license"     : "MIT",
+    "authors"     : [
+        {
+            "name"  : "Morten Harders",
+            "email" : "mh@coolrunner.dk"
+        }
+    ],
+    "autoload"    : {
+        "psr-4" : {
+            "BusinessCentral\\" : "src"
+        }
+    }
+}
