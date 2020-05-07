@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -43,25 +43,50 @@ class SDK
         return static::$instances[$key] ?? static::$instances[$key] = new static($tenant, $options);
     }
 
-    protected $tenant, $options;
-
+    protected $tenant;
     protected $client;
+
+    protected $request_log = [];
+
+    protected $options = [
+        // Credentials
+        'username'                => null,
+        'token'                   => null,
+        'environment'             => 'production',
+
+        // Defaults
+        'default_collection_size' => 20,
+    ];
 
     protected function __construct($tenant, $options)
     {
+
         $this->tenant = $tenant;
 
-        $this->options = $options;
+        $this->options = array_merge($this->options, $options);
+
+        if ( ! $this->option('username') || ! $this->option('token')) {
+            throw new \RuntimeException("Missing credentials for BusinessCentral SDK");
+        }
+
+        if ( ! $this->option('environment')) {
+            throw new \RuntimeException("Missing environment for BusinessCentral SDK");
+        }
 
         $this->client = new Client([
             'base_uri' => "https://api.businesscentral.dynamics.com/v1.0/$this->tenant/$this->environment/api/v1.0/",
             'headers'  => [
                 'User-Agent'    => 'Business Central SDK',
-                'Authorization' => "Basic " . base64_encode("{$this->options['username']}:{$this->options['token']}"),
+                'Authorization' => "Basic " . base64_encode("{$this->option('username')}:{$this->option('token')}"),
             ],
         ]);
 
         $this->mapEntities();
+    }
+
+    public function logRequest(string $uri)
+    {
+        $this->request_log[] = $uri;
     }
 
     public function query()
@@ -78,7 +103,12 @@ class SDK
      */
     public function company(string $id)
     {
-        return $this->query()->component('companies', $id)->fetch();
+        return $this->query()->navigateTo('companies')->find($id);
+    }
+
+    public function companies()
+    {
+        return $this->query()->navigateTo('companies');
     }
 
     public function mapEntities()
@@ -98,11 +128,16 @@ class SDK
             case 'tenant':
                 return $this->tenant;
             case 'environment':
-                return $this->options['environment'] ?? 'production';
+                return $this->option('environment');
             case 'client':
                 return $this->client;
             case 'schema':
                 return $this->schema;
         }
+    }
+
+    public function option(string $option, $default = null)
+    {
+        return $this->options[$option] ?? $default;
     }
 }

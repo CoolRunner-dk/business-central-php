@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CustomerPayment
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $journalDisplayName
@@ -26,9 +26,29 @@ use BusinessCentral\Entity;
  * @property array|string[] $dimensions
  * @property-read string $lastModifiedDateTime
  * @property-read \BusinessCentral\Models\Customer $customer
+ * @method \BusinessCentral\Query\Builder customer()
  *
  */
 class CustomerPayment extends Entity
 {
     protected static $schema_type = 'customerPayment';
+
+    protected $fillable = [
+        'id',
+        'journalDisplayName',
+        'lineNumber',
+        'customerId',
+        'customerNumber',
+        'contactId',
+        'postingDate',
+        'documentNumber',
+        'externalDocumentNumber',
+        'amount',
+        'appliesToInvoiceId',
+        'appliesToInvoiceNumber',
+        'description',
+        'comment',
+        'dimensions',
+        'lastModifiedDateTime',
+    ];
 }

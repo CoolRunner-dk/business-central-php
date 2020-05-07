@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class JournalLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $journalDisplayName
@@ -25,9 +25,28 @@ use BusinessCentral\Entity;
  * @property-read string $lastModifiedDateTime
  * @property-read \BusinessCentral\Models\Attachments[]|\BusinessCentral\EntityCollection $attachments
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder attachments()
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class JournalLine extends Entity
 {
     protected static $schema_type = 'journalLine';
+
+    protected $fillable = [
+        'id',
+        'journalDisplayName',
+        'lineNumber',
+        'accountType',
+        'accountId',
+        'accountNumber',
+        'postingDate',
+        'documentNumber',
+        'externalDocumentNumber',
+        'amount',
+        'description',
+        'comment',
+        'dimensions',
+        'lastModifiedDateTime',
+    ];
 }

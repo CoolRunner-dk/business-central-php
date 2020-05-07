@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -8,30 +8,39 @@
 namespace BusinessCentral\Query;
 
 
-use BusinessCentral\ClassMap;
-use BusinessCentral\Entity;
 use BusinessCentral\EntityCollection;
 use BusinessCentral\Exceptions\QueryException;
+use BusinessCentral\Query\Contracts\Expands;
+use BusinessCentral\Query\Contracts\Filters;
+use BusinessCentral\Query\Contracts\Pagination;
+use BusinessCentral\Query\Contracts\Sorting;
 use BusinessCentral\SDK;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\RequestOptions;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Pluralizer;
-use Psr\Http\Message\ResponseInterface;
 
+/**
+ * Class Builder
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Query
+ *
+ * @mixin EntityCollection
+ */
 class Builder
 {
     use Filters;
     use Expands;
+    use Pagination;
+    use Sorting;
 
-    /** @var Collection|array[]|string[][] */
-    protected $components;
+    protected $components = [];
     protected $sdk;
 
     public function __construct(SDK $sdk)
     {
-        $this->sdk        = $sdk;
-        $this->components = new Collection();
+        $this->sdk = $sdk;
+
+        $this->limit = $sdk->option('default_collection_size', 20);
     }
 
     public function sendRequest(string $method, array $data = null, array $headers = [])
@@ -39,66 +48,32 @@ class Builder
         try {
             $uri = $this->getUri();
 
-            $expand = $this->buildExpandString();
-            $filter = $this->buildFilterString();
-
-            $query_string = implode('&', array_filter([$expand, $filter]));
-
-            $uri .= $query_string ? "?$query_string" : null;
-
             $response = $this->sdk->client->request($method, $uri, array_filter([
                 RequestOptions::JSON    => $data,
                 RequestOptions::HEADERS => $headers,
             ]));
 
+            $this->sdk->logRequest($uri);
+
             return json_decode($response->getBody()->getContents(), true);
 
         } catch (RequestException $exception) {
-            $response = $exception->getResponse();
+            $response      = $exception->getResponse();
+            $response_data = json_decode($response->getBody()->getContents(), true);
 
-            throw new QueryException($this, json_decode($response->getBody()->getContents(), true), $exception);
+            throw new QueryException($this, $response_data, $exception);
         }
     }
 
 
     public function fetch()
     {
-        try {
-            $response = $this->get();
-        } catch (QueryException $exception) {
-            if ( ! $exception->is('BadRequest_ResourceNotFound')) {
-                throw $exception;
-            }
-
-            return null;
-        }
-
-        $singular = (bool)preg_match('/\$entity/', $response['@odata.context']);
-
-        if ($singular) {
-            return Entity::make($response, $this->clone(), $this->getEntityType($response['@odata.context']));
-        }
-
-        return new EntityCollection($this->clone(), $this->getEntitySet($response['@odata.context']), $response['value']);
-    }
-
-    public function find($id)
-    {
-        $component = $this->components->last();
-        $query     = $this->clone();
-        $query->component($component[0], $id);
-
-        return $query->fetch();
+        return new EntityCollection($this);
     }
 
     public function exists()
     {
-        $result = $this->fetch();
-        if ($result instanceof EntityCollection) {
-            return ! ! $result->count();
-        }
-
-        return ! ! $result;
+        return ! ! $this->fetch()->first(false);
     }
 
     public function get()
@@ -125,7 +100,7 @@ class Builder
         ]);
     }
 
-    protected function getContext(string $odata_context)
+    public function getContext(string $odata_context)
     {
         $context = explode('#', $odata_context, 2)[1] ?? false;
 
@@ -141,60 +116,81 @@ class Builder
         return $components->last();
     }
 
-    protected function getEntityType(string $odata_context)
+    public function getEntityTypeBySet(string $odata_context)
     {
         return $this->sdk->schema->getEntityTypeBySet($this->getContext($odata_context));
     }
 
-    protected function getEntitySet(string $odata_context)
+    public function getEntitySet(string $odata_context)
     {
         return $this->sdk->schema->getEntitySet($this->getContext($odata_context));
     }
 
-    protected function getUri()
+    public function getEntitySetByType(string $odata_context)
     {
-        return $this->compileComponents();
+        return $this->sdk->schema->getEntitySetByType($this->getContext($odata_context));
     }
 
-    protected function getExpandComponent()
+    public function getEntityType(string $odata_context)
     {
-        return $this->expands->isNotEmpty() ? $this->expands->toArray() : '';
+        return $this->sdk->schema->getEntitySet($this->getContext($odata_context));
     }
 
-    protected function getFilterComponent()
+    public function getUri()
     {
-        $filters = [];
-        foreach ($this->filters as $filter) {
-            $filters[] = implode(' ', array_map('urlencode', $filter));
+        $uri = $this->compileComponents();
+
+        $query_string = implode('&', $this->getQueryOptions());
+
+        $uri .= $query_string ? "?$query_string" : null;
+
+        return $uri;
+    }
+
+    public function getQueryOptions()
+    {
+        $query_string = [];
+
+
+        $rfc = new \ReflectionClass($this);
+        foreach ($rfc->getTraits() as $class) {
+            $basename = $class->getShortName();
+            if ($class->hasMethod("get{$basename}String")) {
+                $result       = $this->{"get{$basename}String"}(true);
+                $result       = ! is_array($result) ? [$result] : $result;
+                $query_string = array_merge($query_string, $result);
+            }
         }
 
-        return $filters;
+        $query_string[] = '$count=true';
+
+        return array_filter($query_string);
     }
 
-    public function component($component, $id = null)
+    public function navigateTo($component, $id = null)
     {
-        $this->components[$component] = array_filter([$component, (string)$id]);
+        $this->components[$component] = array_filter(['component' => $component, 'id' => $id]);
 
         return $this;
     }
 
     public function setComponents(array $components)
     {
-        $this->components = collect($components);
+        $this->components = $components;
 
         return $this;
     }
 
     public function getComponents()
     {
-        return $this->components->toArray();
+        return $this->components;
     }
 
     protected function compileComponents()
     {
         $components = [];
         foreach ($this->components as $entity => $item) {
-            $components[$entity] = $item[0] . (isset($item[1]) ? "($item[1])" : '');
+            $components[] = $item['component'] . (isset($item['id']) ? "($item[id])" : '');
         }
 
         return implode('/', $components);
@@ -204,9 +200,29 @@ class Builder
     {
         $clone = new static($this->sdk);
         $clone->setComponents($this->getComponents());
-        $clone->setExpands($this->getExpands());
-        $clone->setFilters($this->getFilters());
+        $clone->setExpands($this->expands);
+        $clone->setFilters($this->filters);
+        $clone->limit($this->limit);
+        $clone->page($this->page);
+        $clone->orderBy($this->order_by);
 
         return $clone;
+    }
+
+    public function cloneWithoutExtensions()
+    {
+        $clone = new static($this->sdk);
+        $clone->setComponents($this->getComponents());
+
+        return $clone;
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (method_exists(EntityCollection::class, $name)) {
+            return $this->fetch()->{$name}(...$arguments);
+        }
+
+        trigger_error('Call to undefined method ' . static::class . '::' . "$name()", E_USER_ERROR);
     }
 }

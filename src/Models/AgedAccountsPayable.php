@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class AgedAccountsPayable
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $vendorId
  * @property string $vendorNumber
@@ -25,4 +25,18 @@ use BusinessCentral\Entity;
 class AgedAccountsPayable extends Entity
 {
     protected static $schema_type = 'agedAccountsPayable';
+
+    protected $fillable = [
+        'vendorId',
+        'vendorNumber',
+        'name',
+        'currencyCode',
+        'balanceDue',
+        'currentAmount',
+        'period1Amount',
+        'period2Amount',
+        'period3Amount',
+        'agedAsOfDate',
+        'periodLengthFilter',
+    ];
 }

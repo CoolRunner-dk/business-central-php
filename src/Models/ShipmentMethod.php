@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class ShipmentMethod
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $code
@@ -18,4 +18,11 @@ use BusinessCentral\Entity;
 class ShipmentMethod extends Entity
 {
     protected static $schema_type = 'shipmentMethod';
+
+    protected $fillable = [
+        'id',
+        'code',
+        'displayName',
+        'lastModifiedDateTime',
+    ];
 }

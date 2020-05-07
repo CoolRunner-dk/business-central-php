@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesQuoteLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $documentId
@@ -34,9 +34,37 @@ use BusinessCentral\Entity;
  * @property float $netAmountIncludingTax
  * @property-read \BusinessCentral\Models\Item $item
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder item()
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class SalesQuoteLine extends Entity
 {
     protected static $schema_type = 'salesQuoteLine';
+
+    protected $fillable = [
+        'id',
+        'documentId',
+        'sequence',
+        'itemId',
+        'accountId',
+        'lineType',
+        'lineDetails',
+        'description',
+        'unitOfMeasureId',
+        'unitOfMeasure',
+        'unitPrice',
+        'quantity',
+        'discountAmount',
+        'discountPercent',
+        'discountAppliedBeforeTax',
+        'amountExcludingTax',
+        'taxCode',
+        'taxPercent',
+        'totalTaxAmount',
+        'amountIncludingTax',
+        'netAmount',
+        'netTaxAmount',
+        'netAmountIncludingTax',
+    ];
 }

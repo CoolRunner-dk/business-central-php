@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Vendor
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -31,9 +31,34 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\Currency $currency
  * @property-read \BusinessCentral\Models\PaymentTerm $paymentTerm
  * @property-read \BusinessCentral\Models\PaymentMethod $paymentMethod
+ * @method \BusinessCentral\Query\Builder picture()
+ * @method \BusinessCentral\Query\Builder defaultDimensions()
+ * @method \BusinessCentral\Query\Builder currency()
+ * @method \BusinessCentral\Query\Builder paymentTerm()
+ * @method \BusinessCentral\Query\Builder paymentMethod()
  *
  */
 class Vendor extends Entity
 {
     protected static $schema_type = 'vendor';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+        'address',
+        'phoneNumber',
+        'email',
+        'website',
+        'taxRegistrationNumber',
+        'currencyId',
+        'currencyCode',
+        'irs1099Code',
+        'paymentTermsId',
+        'paymentMethodId',
+        'taxLiable',
+        'blocked',
+        'balance',
+        'lastModifiedDateTime',
+    ];
 }

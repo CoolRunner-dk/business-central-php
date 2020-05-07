@@ -1,0 +1,7 @@
+{
+    "customer" : {
+        "taxAreaDisplayName" : {
+            "readOnly" : true
+        }
+    }
+}

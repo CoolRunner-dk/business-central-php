@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class AgedAccountsReceivable
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $customerId
  * @property string $customerNumber
@@ -25,4 +25,18 @@ use BusinessCentral\Entity;
 class AgedAccountsReceivable extends Entity
 {
     protected static $schema_type = 'agedAccountsReceivable';
+
+    protected $fillable = [
+        'customerId',
+        'customerNumber',
+        'name',
+        'currencyCode',
+        'balanceDue',
+        'currentAmount',
+        'period1Amount',
+        'period2Amount',
+        'period3Amount',
+        'agedAsOfDate',
+        'periodLengthFilter',
+    ];
 }

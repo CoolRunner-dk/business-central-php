@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Picture
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property int $width
@@ -19,4 +19,12 @@ use BusinessCentral\Entity;
 class Picture extends Entity
 {
     protected static $schema_type = 'picture';
+
+    protected $fillable = [
+        'id',
+        'width',
+        'height',
+        'contentType',
+        'content',
+    ];
 }

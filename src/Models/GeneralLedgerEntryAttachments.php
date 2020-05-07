@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class GeneralLedgerEntryAttachments
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property int $generalLedgerEntryNumber
  * @property-read string $id
@@ -16,9 +16,19 @@ use BusinessCentral\Entity;
  * @property string $content
  * @property string $createdDateTime
  * @property-read \BusinessCentral\Models\GeneralLedgerEntry $generalLedgerEntry
+ * @method \BusinessCentral\Query\Builder generalLedgerEntry()
  *
  */
 class GeneralLedgerEntryAttachments extends Entity
 {
     protected static $schema_type = 'generalLedgerEntryAttachments';
+
+    protected $fillable = [
+        'generalLedgerEntryNumber',
+        'id',
+        'fileName',
+        'byteSize',
+        'content',
+        'createdDateTime',
+    ];
 }

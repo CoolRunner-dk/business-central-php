@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TaxGroup
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $code
@@ -19,4 +19,12 @@ use BusinessCentral\Entity;
 class TaxGroup extends Entity
 {
     protected static $schema_type = 'taxGroup';
+
+    protected $fillable = [
+        'id',
+        'code',
+        'displayName',
+        'taxType',
+        'lastModifiedDateTime',
+    ];
 }

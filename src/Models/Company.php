@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Company
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $systemVersion
@@ -65,9 +65,68 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\BankAccount[]|\BusinessCentral\EntityCollection $bankAccounts
  * @property-read \BusinessCentral\Models\CustomerSale[]|\BusinessCentral\EntityCollection $customerSales
  * @property-read \BusinessCentral\Models\VendorPurchase[]|\BusinessCentral\EntityCollection $vendorPurchases
+ * @method \BusinessCentral\Query\Builder items()
+ * @method \BusinessCentral\Query\Builder picture()
+ * @method \BusinessCentral\Query\Builder defaultDimensions()
+ * @method \BusinessCentral\Query\Builder customers()
+ * @method \BusinessCentral\Query\Builder customerFinancialDetails()
+ * @method \BusinessCentral\Query\Builder vendors()
+ * @method \BusinessCentral\Query\Builder companyInformation()
+ * @method \BusinessCentral\Query\Builder salesInvoices()
+ * @method \BusinessCentral\Query\Builder salesInvoiceLines()
+ * @method \BusinessCentral\Query\Builder pdfDocument()
+ * @method \BusinessCentral\Query\Builder customerPaymentJournals()
+ * @method \BusinessCentral\Query\Builder customerPayments()
+ * @method \BusinessCentral\Query\Builder accounts()
+ * @method \BusinessCentral\Query\Builder taxGroups()
+ * @method \BusinessCentral\Query\Builder journals()
+ * @method \BusinessCentral\Query\Builder journalLines()
+ * @method \BusinessCentral\Query\Builder attachments()
+ * @method \BusinessCentral\Query\Builder employees()
+ * @method \BusinessCentral\Query\Builder timeRegistrationEntries()
+ * @method \BusinessCentral\Query\Builder generalLedgerEntries()
+ * @method \BusinessCentral\Query\Builder currencies()
+ * @method \BusinessCentral\Query\Builder paymentMethods()
+ * @method \BusinessCentral\Query\Builder dimensions()
+ * @method \BusinessCentral\Query\Builder dimensionValues()
+ * @method \BusinessCentral\Query\Builder dimensionLines()
+ * @method \BusinessCentral\Query\Builder paymentTerms()
+ * @method \BusinessCentral\Query\Builder shipmentMethods()
+ * @method \BusinessCentral\Query\Builder itemCategories()
+ * @method \BusinessCentral\Query\Builder cashFlowStatement()
+ * @method \BusinessCentral\Query\Builder countriesRegions()
+ * @method \BusinessCentral\Query\Builder salesOrders()
+ * @method \BusinessCentral\Query\Builder salesOrderLines()
+ * @method \BusinessCentral\Query\Builder retainedEarningsStatement()
+ * @method \BusinessCentral\Query\Builder unitsOfMeasure()
+ * @method \BusinessCentral\Query\Builder agedAccountsReceivable()
+ * @method \BusinessCentral\Query\Builder agedAccountsPayable()
+ * @method \BusinessCentral\Query\Builder balanceSheet()
+ * @method \BusinessCentral\Query\Builder trialBalance()
+ * @method \BusinessCentral\Query\Builder incomeStatement()
+ * @method \BusinessCentral\Query\Builder taxAreas()
+ * @method \BusinessCentral\Query\Builder salesQuotes()
+ * @method \BusinessCentral\Query\Builder salesQuoteLines()
+ * @method \BusinessCentral\Query\Builder salesCreditMemos()
+ * @method \BusinessCentral\Query\Builder salesCreditMemoLines()
+ * @method \BusinessCentral\Query\Builder generalLedgerEntryAttachments()
+ * @method \BusinessCentral\Query\Builder purchaseInvoices()
+ * @method \BusinessCentral\Query\Builder purchaseInvoiceLines()
+ * @method \BusinessCentral\Query\Builder projects()
+ * @method \BusinessCentral\Query\Builder bankAccounts()
+ * @method \BusinessCentral\Query\Builder customerSales()
+ * @method \BusinessCentral\Query\Builder vendorPurchases()
  *
  */
 class Company extends Entity
 {
     protected static $schema_type = 'company';
+
+    protected $fillable = [
+        'id',
+        'systemVersion',
+        'name',
+        'displayName',
+        'businessProfileId',
+    ];
 }

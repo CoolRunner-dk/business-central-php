@@ -8,6 +8,7 @@
 namespace BusinessCentral\Exceptions;
 
 
+use BusinessCentral\Exceptions\Query\InvalidColumnException;
 use BusinessCentral\Query\Builder;
 use Throwable;
 
@@ -129,6 +130,17 @@ class QueryException extends \Exception
     public function isApplication()
     {
         return ! ! preg_match('/^Application_.+$/', $this->error_code);
+    }
+
+    /**
+     * Who knows! ¯\_(ツ)_/¯
+     *
+     * @return bool
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
+    public function isUnknown()
+    {
+        return $this->error_code === 'Unknown';
     }
 
     protected static $error_codes = [

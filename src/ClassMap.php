@@ -26,6 +26,7 @@ class ClassMap
     }
 
     protected static $map = [
+        // Generated on 2020-05-07 09:06:12
         'account'  => \BusinessCentral\Models\Account::class,
         'agedAccountsPayable'  => \BusinessCentral\Models\AgedAccountsPayable::class,
         'agedAccountsReceivable'  => \BusinessCentral\Models\AgedAccountsReceivable::class,

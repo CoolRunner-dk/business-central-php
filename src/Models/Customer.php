@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Customer
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -19,7 +19,7 @@ use BusinessCentral\Entity;
  * @property string $website
  * @property bool $taxLiable
  * @property string $taxAreaId
- * @property string $taxAreaDisplayName
+ * @property-read string $taxAreaDisplayName
  * @property string $taxRegistrationNumber
  * @property string $currencyId
  * @property string $currencyCode
@@ -35,9 +35,37 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\PaymentTerm $paymentTerm
  * @property-read \BusinessCentral\Models\ShipmentMethod $shipmentMethod
  * @property-read \BusinessCentral\Models\PaymentMethod $paymentMethod
+ * @method \BusinessCentral\Query\Builder customerFinancialDetails()
+ * @method \BusinessCentral\Query\Builder picture()
+ * @method \BusinessCentral\Query\Builder defaultDimensions()
+ * @method \BusinessCentral\Query\Builder currency()
+ * @method \BusinessCentral\Query\Builder paymentTerm()
+ * @method \BusinessCentral\Query\Builder shipmentMethod()
+ * @method \BusinessCentral\Query\Builder paymentMethod()
  *
  */
 class Customer extends Entity
 {
     protected static $schema_type = 'customer';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+        'type',
+        'address',
+        'phoneNumber',
+        'email',
+        'website',
+        'taxLiable',
+        'taxAreaId',
+        'taxRegistrationNumber',
+        'currencyId',
+        'currencyCode',
+        'paymentTermsId',
+        'shipmentMethodId',
+        'paymentMethodId',
+        'blocked',
+        'lastModifiedDateTime',
+    ];
 }

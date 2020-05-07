@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PdfDocument
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $content
@@ -16,4 +16,9 @@ use BusinessCentral\Entity;
 class PdfDocument extends Entity
 {
     protected static $schema_type = 'pdfDocument';
+
+    protected $fillable = [
+        'id',
+        'content',
+    ];
 }

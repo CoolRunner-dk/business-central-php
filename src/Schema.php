@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -17,17 +17,17 @@ class Schema
 {
     protected $version;
 
+    const GUID_FORMAT = '/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i';
+
     /** @var Collection|EntityType[] */
     protected $entity_types;
     /** @var Collection|EntitySet[] */
     protected $entity_sets;
     /** @var Collection|ComplexType */
     protected $complex_types;
-//    protected $entity_types;
-//    protected $entity_types;
-//    protected $entity_types;
 
-    protected $raw;
+    /** @var array */
+    protected $raw, $overrides;
 
     public function __construct(array $json)
     {
@@ -38,7 +38,24 @@ class Schema
         $this->entity_sets   = new Collection();
         $this->complex_types = new Collection();
 
-        $this->parse();
+        $this->loadOverrides();
+
+        $this->propagate();
+    }
+
+    protected function propagate()
+    {
+        foreach ($this->raw['DataServices']['Schema']['ComplexType'] as $type) {
+            $this->complex_types[$type['@attributes']['Name']] = new ComplexType($type, $this);
+        }
+
+        foreach ($this->raw['DataServices']['Schema']['EntityType'] as $type) {
+            $this->entity_types[$type['@attributes']['Name']] = new EntityType($type, $this);
+        }
+
+        foreach ($this->raw['DataServices']['Schema']['EntityContainer']['EntitySet'] as $set) {
+            $this->entity_sets[$set['@attributes']['Name']] = new EntitySet($set, $this);
+        }
     }
 
     // region EntityTypes
@@ -61,12 +78,12 @@ class Schema
      */
     public function getEntityType(string $type)
     {
-        return $this->entity_types[static::getType($type)] ?? null;
+        return $this->entity_types[static::getType($type)];
     }
 
     public function getEntityTypeBySet(string $set)
     {
-        return $this->getEntitySet($set)->type ?? null;
+        return $this->getEntitySet(static::getType($set))->getEntityType();
     }
 
     // endregion
@@ -91,7 +108,7 @@ class Schema
     public function getEntitySetByType(string $type)
     {
         return $this->entity_sets->first(function (EntitySet $entity_set) use ($type) {
-            return $entity_set->type;
+            return $entity_set->getEntityType()->name === $type;
         });
     }
 
@@ -111,21 +128,6 @@ class Schema
 
     // endregion
 
-    protected function parse()
-    {
-        foreach ($this->raw['DataServices']['Schema']['ComplexType'] as $type) {
-            $this->complex_types[$type['@attributes']['Name']] = new ComplexType($type, $this);
-        }
-
-        foreach ($this->raw['DataServices']['Schema']['EntityType'] as $type) {
-            $this->entity_types[$type['@attributes']['Name']] = new EntityType($type, $this);
-        }
-
-        foreach ($this->raw['DataServices']['Schema']['EntityContainer']['EntitySet'] as $set) {
-            $this->entity_sets[$set['@attributes']['Name']] = new EntitySet($set, $this);
-        }
-    }
-
     public static function getType(string $type)
     {
         if (preg_match('/Collection\(.+\)/', $type)) {
@@ -136,5 +138,22 @@ class Schema
         $type = str_replace('Microsoft.NAV.', '', $type);
 
         return $type;
+    }
+
+    protected function loadOverrides()
+    {
+        $file = __DIR__ . '/../schema_overrides.json';
+
+        return $this->overrides = json_decode(file_get_contents(realpath($file)), true);
+    }
+
+    public function hasOverrides(string $type, string $property)
+    {
+        return ! empty($this->getOverrides($type, $property));
+    }
+
+    public function getOverrides(string $type, string $property)
+    {
+        return $this->overrides[$type][$property] ?? [];
     }
 }

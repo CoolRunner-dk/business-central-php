@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PurchaseInvoice
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -41,9 +41,44 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\PdfDocument[]|\BusinessCentral\EntityCollection $pdfDocument
  * @property-read \BusinessCentral\Models\Vendor $vendor
  * @property-read \BusinessCentral\Models\Currency $currency
+ * @method \BusinessCentral\Query\Builder purchaseInvoiceLines()
+ * @method \BusinessCentral\Query\Builder pdfDocument()
+ * @method \BusinessCentral\Query\Builder vendor()
+ * @method \BusinessCentral\Query\Builder currency()
  *
  */
 class PurchaseInvoice extends Entity
 {
     protected static $schema_type = 'purchaseInvoice';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'invoiceDate',
+        'postingDate',
+        'dueDate',
+        'vendorInvoiceNumber',
+        'vendorId',
+        'vendorNumber',
+        'vendorName',
+        'payToName',
+        'payToContact',
+        'payToVendorId',
+        'payToVendorNumber',
+        'shipToName',
+        'shipToContact',
+        'buyFromAddress',
+        'payToAddress',
+        'shipToAddress',
+        'currencyId',
+        'currencyCode',
+        'pricesIncludeTax',
+        'discountAmount',
+        'discountAppliedBeforeTax',
+        'totalAmountExcludingTax',
+        'totalTaxAmount',
+        'totalAmountIncludingTax',
+        'status',
+        'lastModifiedDateTime',
+    ];
 }

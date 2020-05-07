@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Employee
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -30,9 +30,33 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\Picture[]|\BusinessCentral\EntityCollection $picture
  * @property-read \BusinessCentral\Models\DefaultDimensions[]|\BusinessCentral\EntityCollection $defaultDimensions
  * @property-read \BusinessCentral\Models\TimeRegistrationEntry[]|\BusinessCentral\EntityCollection $timeRegistrationEntries
+ * @method \BusinessCentral\Query\Builder picture()
+ * @method \BusinessCentral\Query\Builder defaultDimensions()
+ * @method \BusinessCentral\Query\Builder timeRegistrationEntries()
  *
  */
 class Employee extends Entity
 {
     protected static $schema_type = 'employee';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+        'givenName',
+        'middleName',
+        'surname',
+        'jobTitle',
+        'address',
+        'phoneNumber',
+        'mobilePhone',
+        'email',
+        'personalEmail',
+        'employmentDate',
+        'terminationDate',
+        'status',
+        'birthDate',
+        'statisticsGroupCode',
+        'lastModifiedDateTime',
+    ];
 }

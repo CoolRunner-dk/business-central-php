@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Project
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -17,4 +17,10 @@ use BusinessCentral\Entity;
 class Project extends Entity
 {
     protected static $schema_type = 'project';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+    ];
 }

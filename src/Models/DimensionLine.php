@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DimensionLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $parentId
  * @property-read string $id
@@ -17,9 +17,20 @@ use BusinessCentral\Entity;
  * @property string $valueCode
  * @property string $valueDisplayName
  * @property-read \BusinessCentral\Models\Dimension $dimension
+ * @method \BusinessCentral\Query\Builder dimension()
  *
  */
 class DimensionLine extends Entity
 {
     protected static $schema_type = 'dimensionLine';
+
+    protected $fillable = [
+        'parentId',
+        'id',
+        'code',
+        'displayName',
+        'valueId',
+        'valueCode',
+        'valueDisplayName',
+    ];
 }

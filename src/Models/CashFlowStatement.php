@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CashFlowStatement
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property int $lineNumber
  * @property string $display
@@ -20,4 +20,13 @@ use BusinessCentral\Entity;
 class CashFlowStatement extends Entity
 {
     protected static $schema_type = 'cashFlowStatement';
+
+    protected $fillable = [
+        'lineNumber',
+        'display',
+        'netChange',
+        'lineType',
+        'indentation',
+        'dateFilter',
+    ];
 }

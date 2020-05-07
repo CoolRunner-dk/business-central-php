@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -16,6 +16,7 @@ use Carbon\Carbon;
  *
  * @property string $name
  * @property string $type
+ * @property bool   $read_only
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -29,11 +30,15 @@ class Property
 
     protected $validation = [];
 
-    public function __construct($property, Schema $schema)
+    protected $read_only = false;
+
+    public function __construct($property, Schema $schema, EntityType $entity_type)
     {
         $this->schema = $schema;
         $this->name   = $property['@attributes']['Name'];
         $this->type   = $property['@attributes']['Type'];
+
+        $this->read_only = $this->schema->getOverrides($entity_type->name, $this->name)['readOnly'] ?? false;
 
         $this->validation = [
             'nullable'   => filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN),
@@ -46,7 +51,13 @@ class Property
         switch ($this->type) {
             case 'Edm.DateTimeOffset':
             case 'Edm.String':
+            case 'Edm.Stream':
+                return (string)$value;
             case 'Edm.Guid':
+                if ($value === '00000000-0000-0000-0000-000000000000') {
+                    return null;
+                }
+
                 return (string)$value;
             case 'Edm.Boolean':
                 return filter_var($value, FILTER_VALIDATE_BOOLEAN);
@@ -60,9 +71,10 @@ class Property
                         $data = [
                             '$complex_type' => $complex_type->name,
                         ];
-                        foreach ($value as $key => $value) {
+
+                        foreach ($value ?? [] as $key => $attribute) {
                             if ($property = $complex_type->getProperty($key)) {
-                                $data[$key] = $property->convert($value);
+                                $data[$key] = $property->convert($attribute);
                             }
                         }
 
@@ -78,8 +90,10 @@ class Property
     {
         switch ($this->type) {
             case 'Edm.String':
-            case 'Edm.Guid':
+            case 'Edm.Stream':
                 return 'string';
+            case 'Edm.Guid':
+                return 'guid';
             case 'Edm.Boolean':
                 return 'bool';
             case 'Edm.Decimal':
@@ -102,6 +116,7 @@ class Property
             case 'Edm.String':
             case 'Edm.Guid':
             case 'Edm.DateTimeOffset':
+            case 'Edm.Stream':
                 return 'string';
             case 'Edm.Boolean':
                 return 'bool';
@@ -155,7 +170,13 @@ class Property
         switch ($name) {
             case 'name':
             case 'type':
+            case 'read_only':
                 return $this->{$name};
         }
+    }
+
+    public function getEntityType()
+    {
+        return $this->schema->getEntityType($this->type);
     }
 }

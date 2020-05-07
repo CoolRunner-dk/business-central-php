@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesCreditMemo
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -47,9 +47,50 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\Currency $currency
  * @property-read \BusinessCentral\Models\PaymentTerm $paymentTerm
  * @property-read \BusinessCentral\Models\ShipmentMethod $shipmentMethod
+ * @method \BusinessCentral\Query\Builder salesCreditMemoLines()
+ * @method \BusinessCentral\Query\Builder pdfDocument()
+ * @method \BusinessCentral\Query\Builder customer()
+ * @method \BusinessCentral\Query\Builder currency()
+ * @method \BusinessCentral\Query\Builder paymentTerm()
+ * @method \BusinessCentral\Query\Builder shipmentMethod()
  *
  */
 class SalesCreditMemo extends Entity
 {
     protected static $schema_type = 'salesCreditMemo';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'externalDocumentNumber',
+        'creditMemoDate',
+        'postingDate',
+        'dueDate',
+        'customerId',
+        'contactId',
+        'customerNumber',
+        'customerName',
+        'billToName',
+        'billToCustomerId',
+        'billToCustomerNumber',
+        'sellingPostalAddress',
+        'billingPostalAddress',
+        'currencyId',
+        'currencyCode',
+        'paymentTermsId',
+        'shipmentMethodId',
+        'salesperson',
+        'pricesIncludeTax',
+        'discountAmount',
+        'discountAppliedBeforeTax',
+        'totalAmountExcludingTax',
+        'totalTaxAmount',
+        'totalAmountIncludingTax',
+        'status',
+        'lastModifiedDateTime',
+        'invoiceId',
+        'invoiceNumber',
+        'phoneNumber',
+        'email',
+    ];
 }

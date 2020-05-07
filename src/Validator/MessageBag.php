@@ -8,7 +8,7 @@
 namespace BusinessCentral\Validator;
 
 
-class MessageBag implements \JsonSerializable
+class MessageBag implements \JsonSerializable, \ArrayAccess, \IteratorAggregate
 {
     protected $messages;
 
@@ -35,5 +35,35 @@ class MessageBag implements \JsonSerializable
     public function jsonSerialize()
     {
         return $this->messages;
+    }
+
+    public function all()
+    {
+        return $this->messages;
+    }
+
+    public function getIterator()
+    {
+        new \ArrayIterator($this->messages);
+    }
+
+    public function offsetExists($key)
+    {
+        return array_key_exists($key, $this->messages);
+    }
+
+    public function offsetGet($key)
+    {
+        return $this->messages[$key];
+    }
+
+    public function offsetSet($offset, $value)
+    {
+
+    }
+
+    public function offsetUnset($offset)
+    {
+
     }
 }

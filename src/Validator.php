@@ -93,6 +93,8 @@ class Validator
                 switch ($type) {
                     case 'required':
                         return ! is_null($value);
+                    case 'guid':
+                        return preg_match(Schema::GUID_FORMAT, $value);
                     case 'string':
                         if ($length) {
                             return is_string($value) && strlen($value) <= $length;
@@ -144,6 +146,7 @@ class Validator
             },
             'int'      => "':attr' must be of type integer",
             'float'    => "':attr' must be of type integer",
+            'guid'     => ":attr must be in a valid GUID format",
         ];
     }
 }

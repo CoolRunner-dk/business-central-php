@@ -47,11 +47,14 @@ class EntitySet
         }
     }
 
+    public function getEntityType()
+    {
+        return $this->schema->getEntityType($this->type);
+    }
+
     public function __get($name)
     {
         switch ($name) {
-            case 'type':
-                return $this->schema->getEntityType($this->type);
             case 'name':
                 return $this->name;
         }

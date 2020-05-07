@@ -7,4 +7,8 @@ use BusinessCentral\Entity;
 class {CLASS_NAME} extends Entity
 {
     protected static $schema_type = '{SCHEMA_TYPE}';
+
+    protected $fillable = [
+{FILLABLE}
+    ];
 }

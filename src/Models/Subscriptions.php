@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Subscriptions
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $subscriptionId
  * @property string $notificationUrl
@@ -21,4 +21,14 @@ use BusinessCentral\Entity;
 class Subscriptions extends Entity
 {
     protected static $schema_type = 'subscriptions';
+
+    protected $fillable = [
+        'subscriptionId',
+        'notificationUrl',
+        'resource',
+        'userId',
+        'lastModifiedDateTime',
+        'clientState',
+        'expirationDateTime',
+    ];
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -14,6 +14,15 @@ use BusinessCentral\Query\Builder;
 use BusinessCentral\Schema;
 use BusinessCentral\Traits\HasSchema;
 
+/**
+ * Class Property
+ *
+ * @property string $name
+ * @property string $type
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Schema
+ */
 class NavigationProperty
 {
     use HasSchema;
@@ -45,13 +54,19 @@ class NavigationProperty
         if ($this->isCollection()) {
             $entity_set = $this->schema->getEntitySet($this->name);
 
-            $query->component($this->name);
+            $expands = $query->getExpands()[$entity_set->name] ?? null;
+            if ($expands instanceof Builder) {
+                $expands->getExpands();
+            }
+
+            $query->navigateTo($this->name)
+                  ->setExpands($expands);
 
             return new EntityCollection($query, $entity_set, $value);
         } else {
             $entity_type = $this->schema->getEntityType($this->name);
 
-            $query->component($this->name, $value['id']);
+            $query->navigateTo($this->name, $value['id']);
 
             return new Entity($value, $query, $entity_type);
         }

@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TrialBalance
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $number
  * @property string $accountId
@@ -19,9 +19,22 @@ use BusinessCentral\Entity;
  * @property string $balanceAtDateCredit
  * @property string $dateFilter
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class TrialBalance extends Entity
 {
     protected static $schema_type = 'trialBalance';
+
+    protected $fillable = [
+        'number',
+        'accountId',
+        'accountType',
+        'display',
+        'totalDebit',
+        'totalCredit',
+        'balanceAtDateDebit',
+        'balanceAtDateCredit',
+        'dateFilter',
+    ];
 }

@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesCreditMemoLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $documentId
@@ -36,9 +36,39 @@ use BusinessCentral\Entity;
  * @property string $shipmentDate
  * @property-read \BusinessCentral\Models\Item $item
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder item()
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class SalesCreditMemoLine extends Entity
 {
     protected static $schema_type = 'salesCreditMemoLine';
+
+    protected $fillable = [
+        'id',
+        'documentId',
+        'sequence',
+        'itemId',
+        'accountId',
+        'lineType',
+        'lineDetails',
+        'description',
+        'unitOfMeasureId',
+        'unitOfMeasure',
+        'unitPrice',
+        'quantity',
+        'discountAmount',
+        'discountPercent',
+        'discountAppliedBeforeTax',
+        'amountExcludingTax',
+        'taxCode',
+        'taxPercent',
+        'totalTaxAmount',
+        'amountIncludingTax',
+        'invoiceDiscountAllocation',
+        'netAmount',
+        'netTaxAmount',
+        'netAmountIncludingTax',
+        'shipmentDate',
+    ];
 }

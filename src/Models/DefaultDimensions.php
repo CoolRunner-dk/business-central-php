@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DefaultDimensions
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $parentId
  * @property string $dimensionId
@@ -18,9 +18,21 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\Account $account
  * @property-read \BusinessCentral\Models\Dimension $dimension
  * @property-read \BusinessCentral\Models\DimensionValue $dimensionValue
+ * @method \BusinessCentral\Query\Builder account()
+ * @method \BusinessCentral\Query\Builder dimension()
+ * @method \BusinessCentral\Query\Builder dimensionValue()
  *
  */
 class DefaultDimensions extends Entity
 {
     protected static $schema_type = 'defaultDimensions';
+
+    protected $fillable = [
+        'parentId',
+        'dimensionId',
+        'dimensionCode',
+        'dimensionValueId',
+        'dimensionValueCode',
+        'postingValidation',
+    ];
 }

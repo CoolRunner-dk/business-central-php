@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TimeRegistrationEntry
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $employeeId
@@ -24,9 +24,27 @@ use BusinessCentral\Entity;
  * @property array|string[] $dimensions
  * @property string $lastModfiedDateTime
  * @property-read \BusinessCentral\Models\Project $project
+ * @method \BusinessCentral\Query\Builder project()
  *
  */
 class TimeRegistrationEntry extends Entity
 {
     protected static $schema_type = 'timeRegistrationEntry';
+
+    protected $fillable = [
+        'id',
+        'employeeId',
+        'employeeNumber',
+        'jobId',
+        'jobNumber',
+        'absence',
+        'lineNumber',
+        'date',
+        'quantity',
+        'status',
+        'unitOfMeasureId',
+        'unitOfMeasure',
+        'dimensions',
+        'lastModfiedDateTime',
+    ];
 }

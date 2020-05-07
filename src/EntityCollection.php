@@ -10,7 +10,9 @@ namespace BusinessCentral;
 
 use BusinessCentral\Exceptions\EntityCollection\MethodNotAllowedException;
 use BusinessCentral\Exceptions\Exception;
+use BusinessCentral\Exceptions\OperationNotAllowedException;
 use BusinessCentral\Exceptions\QueryException;
+use BusinessCentral\Exceptions\ValidationException;
 use BusinessCentral\Query\Builder;
 use BusinessCentral\Schema\EntitySet;
 use BusinessCentral\Schema\EntityType;
@@ -18,7 +20,6 @@ use BusinessCentral\Traits\HasQueryBuilder;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Arr;
-use Illuminate\Support\Collection;
 
 /**
  * Class EntityCollection
@@ -26,109 +27,141 @@ use Illuminate\Support\Collection;
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral
  */
-class EntityCollection implements \ArrayAccess, \IteratorAggregate, \JsonSerializable, Jsonable, Arrayable
+class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Jsonable, Arrayable
 {
     use HasQueryBuilder;
 
     protected $type;
-    protected $collection;
+    protected $total_count;
+    protected $collection = [];
 
-    public function __construct(Builder $query, EntitySet $type, array $items)
+    public function __construct(Builder $query, EntitySet $type = null, array $items = [])
     {
         $this->query = $query;
         $this->type  = $type;
 
-        $this->collection = new Collection();
-
-        foreach ($items as $item) {
-            $entity_query = $this->query->clone()->component($this->type->name, $item['id'] ?? null);
-            $entity       = Entity::make($item, $entity_query, $this->type->type);
-
-            $this->collection[$entity['id']] = $entity;
+        if ($type) {
+            foreach ($items as $item) {
+                $this->insert($item);
+            }
+            $this->total_count = count($items);
+        } else {
+            $this->propagate();
         }
+    }
+
+    protected function insert($item)
+    {
+        try {
+            $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? null);
+            $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
+        } catch (\Throwable $exception) {
+            dd($item);
+        }
+
+        $this->collection[$entity['id']] = $entity;
+    }
+
+    protected function propagate()
+    {
+        $response = $this->query->get();
+
+        if (isset($response['value']) && is_array($response['value'])) {
+            $this->type        = $this->query->getEntitySet($response['@odata.context']);
+            $this->total_count = $response['@odata.count'] ?? 1;
+
+            foreach ($response['value'] as $item) {
+                $this->insert($item);
+            }
+        } else {
+            $this->type        = $this->query->getEntitySet($response['@odata.context']);
+            $this->total_count = 1;
+            $this->insert($response);
+        }
+
     }
 
     public function count()
     {
-        return $this->collection->count();
+        return $this->total_count;
     }
 
+    public function first($default = null)
+    {
+        return Arr::first($this->collection) ?? $default;
+    }
+
+    /**
+     * @param string $id
+     * @param null   $default
+     *
+     * @return Entity|mixed|null
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function find(string $id, $default = null)
     {
         if (isset($this->collection[$id])) {
             return $this->collection[$id];
         }
 
-        try {
-            $entity = $this->query->clone()->component($this->type->name, $id)->fetch();
-
-            $this->collection[$entity->id] = $entity;
-        } catch (QueryException $exception) {
-            if ( ! $exception->is('BadRequest_ResourceNotFound')) {
-                throw $exception;
-            }
-        }
-
-        return $this->collection[$id] ?? $default;
+        return $this->query
+                   ->clone()
+                   ->where('id', $id)
+                   ->limit(1)->first() ?? $default;
     }
 
+    /**
+     * Create and save a new entity to the current collection
+     *
+     * @param array $attributes Key/value pair of attributes
+     *
+     * @return Entity
+     * @throws ValidationException If entity validation failed
+     * @throws MethodNotAllowedException If the current collection doesn't support inserts
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function create(array $attributes)
     {
-        if ($this->type->insertable()) {
-            $entity_query = $this->query->clone()->component($this->type->name);
-            $entity       = new Entity($attributes, $entity_query, $this->type->type);
+        $entity_query = $this->query->clone()->withoutFilters()->navigateTo($this->getEntitySet()->name);
+        $entity       = Entity::make([], $entity_query, $this->getEntitySet()->getEntityType())->fill($attributes)->save();
 
-            $entity->save();
+        $this->collection[$entity->id] = $entity;
 
-            $this->collection[$entity->id] = $entity;
-
-            return ! ! $entity->id;
-        }
-
-        throw new MethodNotAllowedException($this, 'create', 'insertable');
+        return $entity;
     }
 
     public function update(string $id, array $attributes)
     {
-        if ($this->type->updatable()) {
-            $entity = $this->find($id);
-            if ($entity) {
-                foreach ($attributes as $key => $value) {
-                    $entity->{$key} = $value;
-                }
+        $entity = $this->find($id);
+        if ($entity) {
+            $entity->fill($attributes);
 
-                $entity->save();
+            $entity->save();
 
-                return ! ! $entity->id;
-            }
-
-            return false;
+            return $entity;
         }
 
-        throw new MethodNotAllowedException($this, 'update', 'updatable');
+        return false;
     }
 
     public function delete(string $id)
     {
-        if ($this->type->deletable()) {
-            $entity = $this->find($id);
-            if ($entity) {
-                $deleted = $entity->delete();
+        $entity = $this->find($id);
+        if ($entity) {
+            $deleted = $entity->delete();
 
-                if ($deleted) {
-                    $this->offsetUnset($id);
+            if ($deleted) {
+                $this->offsetUnset($id);
 
-                    return true;
-                }
+                return true;
             }
-
-            return false;
         }
 
-        throw new MethodNotAllowedException($this, 'delete', 'deletable');
+        return false;
     }
 
-    public function getType()
+    /** @return EntitySet */
+    public function getEntitySet()
     {
         return $this->type;
     }
@@ -137,39 +170,6 @@ class EntityCollection implements \ArrayAccess, \IteratorAggregate, \JsonSeriali
 
     // region ArrayAccess / IteratorAggregate
 
-    public function getIterator()
-    {
-        return $this->collection->getIterator();
-    }
-
-    public function offsetGet($offset)
-    {
-        return $this->collection->offsetGet($offset);
-    }
-
-    public function offsetExists($offset)
-    {
-        return $this->collection->offsetExists($offset);
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        if ($this->type->insertable()) {
-            if ( ! ($value instanceof Entity)) {
-                $type = is_object($value) ? get_class($value) : gettype($value);
-                throw new Exception("Only objects of type Entity allowed on EntitySets - Got '$type'");
-            }
-
-            $this->collection->offsetSet($offset, $value);
-        }
-    }
-
-    public function offsetUnset($offset)
-    {
-        if ($this->type->deletable()) {
-            $this->collection->offsetUnset($offset);
-        }
-    }
 
     // endregion
 
@@ -177,20 +177,69 @@ class EntityCollection implements \ArrayAccess, \IteratorAggregate, \JsonSeriali
 
     public function jsonSerialize()
     {
-        return $this->collection->jsonSerialize();
+        return $this->toArray();
     }
 
     public function toArray()
     {
-        return $this->collection->toArray();
+        return json_decode(json_encode(array_values($this->collection)), true);
     }
 
     public function toJson($options = 0)
     {
-        return $this->collection->toJson($options);
+        return json_encode($this, $options);
     }
 
     // endregion
 
     // endregion
+
+    public function current()
+    {
+        return current($this->collection);
+    }
+
+    public function next()
+    {
+        $exists = next($this->collection);
+        if ( ! $exists) {
+            $this->query->nextPage();
+            $this->propagate();
+        }
+    }
+
+    public function key()
+    {
+        return key($this->collection);
+    }
+
+    public function valid()
+    {
+        return isset($this->collection[$this->key()]);
+    }
+
+    public function rewind()
+    {
+        reset($this->collection);
+    }
+
+    public function offsetExists($offset)
+    {
+        return ! ! $this->find($offset);
+    }
+
+    public function offsetGet($offset)
+    {
+        return $this->find($offset);
+    }
+
+    public function offsetSet($offset, $value)
+    {
+        // TODO: Implement offsetSet() method.
+    }
+
+    public function offsetUnset($offset)
+    {
+        // TODO: Implement offsetUnset() method.
+    }
 }

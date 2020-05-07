@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PurchaseInvoiceLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $documentId
@@ -35,9 +35,38 @@ use BusinessCentral\Entity;
  * @property string $expectedReceiptDate
  * @property-read \BusinessCentral\Models\Item $item
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder item()
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class PurchaseInvoiceLine extends Entity
 {
     protected static $schema_type = 'purchaseInvoiceLine';
+
+    protected $fillable = [
+        'id',
+        'documentId',
+        'sequence',
+        'itemId',
+        'accountId',
+        'lineType',
+        'lineDetails',
+        'description',
+        'unitOfMeasure',
+        'unitCost',
+        'quantity',
+        'discountAmount',
+        'discountPercent',
+        'discountAppliedBeforeTax',
+        'amountExcludingTax',
+        'taxCode',
+        'taxPercent',
+        'totalTaxAmount',
+        'amountIncludingTax',
+        'invoiceDiscountAllocation',
+        'netAmount',
+        'netTaxAmount',
+        'netAmountIncludingTax',
+        'expectedReceiptDate',
+    ];
 }

@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Item
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -29,9 +29,32 @@ use BusinessCentral\Entity;
  * @property-read \BusinessCentral\Models\Picture[]|\BusinessCentral\EntityCollection $picture
  * @property-read \BusinessCentral\Models\DefaultDimensions[]|\BusinessCentral\EntityCollection $defaultDimensions
  * @property-read \BusinessCentral\Models\ItemCategory $itemCategory
+ * @method \BusinessCentral\Query\Builder picture()
+ * @method \BusinessCentral\Query\Builder defaultDimensions()
+ * @method \BusinessCentral\Query\Builder itemCategory()
  *
  */
 class Item extends Entity
 {
     protected static $schema_type = 'item';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+        'type',
+        'itemCategoryId',
+        'itemCategoryCode',
+        'blocked',
+        'baseUnitOfMeasureId',
+        'baseUnitOfMeasure',
+        'gtin',
+        'inventory',
+        'unitPrice',
+        'priceIncludesTax',
+        'unitCost',
+        'taxGroupId',
+        'taxGroupCode',
+        'lastModifiedDateTime',
+    ];
 }

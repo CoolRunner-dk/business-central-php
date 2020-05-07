@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Account
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $number
@@ -21,4 +21,14 @@ use BusinessCentral\Entity;
 class Account extends Entity
 {
     protected static $schema_type = 'account';
+
+    protected $fillable = [
+        'id',
+        'number',
+        'displayName',
+        'category',
+        'subCategory',
+        'blocked',
+        'lastModifiedDateTime',
+    ];
 }

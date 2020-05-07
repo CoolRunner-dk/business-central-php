@@ -1,6 +1,6 @@
 <?php
 /**
- * @package   CoolRunner-Core
+ * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
  */
@@ -58,7 +58,7 @@ class EntityType
     protected function parseProperties($properties)
     {
         foreach ($properties as $property) {
-            $prop = new Property($property, $this->schema);
+            $prop = new Property($property, $this->schema, $this);
 
             $this->properties[$prop->name] = $prop;
         }
@@ -81,12 +81,17 @@ class EntityType
      */
     public function getProperty(string $property)
     {
-        return $this->properties[$property] ?? $this->navigation_properties[$property] ?? null;
+        return $this->properties[$property] ?? null;
     }
 
     public function propertyExists(string $key)
     {
         return isset($this->properties[$key]);
+    }
+
+    public function getRelation(string $relation)
+    {
+        return $this->navigation_properties[$relation] ?? null;
     }
 
     public function relationExists(string $key)
@@ -120,5 +125,11 @@ class EntityType
         }
 
         return $rules;
+    }
+
+    /** @return EntitySet|null */
+    public function getEntitySet()
+    {
+        return $this->schema->getEntitySetByType($this->name);
     }
 }

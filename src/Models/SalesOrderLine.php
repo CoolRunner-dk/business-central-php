@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesOrderLine
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property-read string $id
  * @property string $documentId
@@ -40,9 +40,43 @@ use BusinessCentral\Entity;
  * @property float $shipQuantity
  * @property-read \BusinessCentral\Models\Item $item
  * @property-read \BusinessCentral\Models\Account $account
+ * @method \BusinessCentral\Query\Builder item()
+ * @method \BusinessCentral\Query\Builder account()
  *
  */
 class SalesOrderLine extends Entity
 {
     protected static $schema_type = 'salesOrderLine';
+
+    protected $fillable = [
+        'id',
+        'documentId',
+        'sequence',
+        'itemId',
+        'accountId',
+        'lineType',
+        'lineDetails',
+        'description',
+        'unitOfMeasureId',
+        'unitOfMeasure',
+        'quantity',
+        'unitPrice',
+        'discountAmount',
+        'discountPercent',
+        'discountAppliedBeforeTax',
+        'amountExcludingTax',
+        'taxCode',
+        'taxPercent',
+        'totalTaxAmount',
+        'amountIncludingTax',
+        'invoiceDiscountAllocation',
+        'netAmount',
+        'netTaxAmount',
+        'netAmountIncludingTax',
+        'shipmentDate',
+        'shippedQuantity',
+        'invoicedQuantity',
+        'invoiceQuantity',
+        'shipQuantity',
+    ];
 }

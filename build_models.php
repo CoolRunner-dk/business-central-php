@@ -55,6 +55,7 @@ __wl(" - Token:    $credentials[tenant]");
 readline("Press enter to continue");
 
 $sdk = SDK::instance($credentials['tenant'], $credentials);
+$now = (new DateTime())->format('Y-m-d H:i:s');
 
 $map = [];
 
@@ -66,15 +67,25 @@ foreach ($types as $type) {
     $schema_type = $type->name;
     $path        = "src/Models/$class_name.php";
 
+    $fillable = [];
+    foreach ($type->properties() as $property) {
+        if ( ! $property->read_only) {
+            $fillable[] = "        '$property->name',";
+        }
+    }
+    $fillable = implode("\n", $fillable);
+
     $contents = str_replace([
         '{CLASS_NAME}',
         '{SCHEMA_TYPE}',
+        '{FILLABLE}',
     ], [
         $class_name,
         $schema_type,
+        $fillable,
     ], $stub);
 
-    if ( ! file_exists($path)) {
+    if ( ! file_exists($path) || in_array('--reset', $argv)) {
         file_put_contents($path, $contents);
         __wl("Created \BusinessCentral\Models\\$class_name");
     } else {
@@ -86,7 +97,9 @@ foreach ($types as $type) {
 
 $map_contents = file_get_contents('src/ClassMap.php');
 
-$map_lines = [];
+$map_lines = [
+    "        // Generated on $now\n",
+];
 foreach ($map as $type => $class) {
     $map_lines[] = "        '$type'  => $class::class,\n";
 }
@@ -99,20 +112,25 @@ file_put_contents('src/ClassMap.php', $map_contents);
 
 function __generate_doc(string $class, EntityType $type)
 {
+    global $now, $sdk;
+
     $rfc = new ReflectionClass($class);
     $rfp = $rfc->getProperty('guarded');
     $rfp->setAccessible(true);
     $guarded = $rfp->getValue($rfc->newInstanceWithoutConstructor());
 
     $properties = [];
+    $methods    = [];
     foreach ($type->properties() as $property) {
-        $base_type    = $property->getDocType();
-        $base_type    = $base_type instanceof ComplexType ? 'array|string[]' : $base_type;
-        $doc_prop     = [
+        $base_type = $property->getDocType();
+        $base_type = $base_type instanceof ComplexType ? 'array|string[]' : $base_type;
+
+        $doc_prop = [
             'name'      => $property->name,
             'type'      => $base_type,
-            'read_only' => in_array($property->name, $guarded),
+            'read_only' => in_array($property->name, $guarded) || $property->read_only,
         ];
+
         $properties[] = $doc_prop;
     }
 
@@ -127,18 +145,22 @@ function __generate_doc(string $class, EntityType $type)
         ];
 
         $properties[] = $doc_prop;
+        $methods[]    = $doc_prop;
     }
 
     $lines = [
         "/**",
         ' *',
         ' * Class ' . class_basename($class),
-        ' * Auto-generated on: ' . (new DateTime())->format('Y-m-d H:i:s'),
+        ' * Auto-generated on: ' . $now,
         ' *',
     ];
     foreach ($properties as $property) {
         $prefix  = $property['read_only'] ? '@property-read' : '@property';
         $lines[] = " * $prefix $property[type] \$$property[name]";
+    }
+    foreach ($methods as $method) {
+        $lines[] = " * @method \BusinessCentral\Query\Builder $method[name]()";
     }
 
     $lines[] = ' *';

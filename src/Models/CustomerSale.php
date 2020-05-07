@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CustomerSale
- * Auto-generated on: 2020-05-06 09:08:24
+ * Auto-generated on: 2020-05-07 09:06:12
  *
  * @property string $customerId
  * @property string $customerNumber
@@ -19,4 +19,12 @@ use BusinessCentral\Entity;
 class CustomerSale extends Entity
 {
     protected static $schema_type = 'customerSale';
+
+    protected $fillable = [
+        'customerId',
+        'customerNumber',
+        'name',
+        'totalSalesAmount',
+        'dateFilter_FilterOnly',
+    ];
 }
