@@ -23,7 +23,7 @@
 | period1Amount | float | No |
 | period2Amount | float | No |
 | period3Amount | float | No |
-| agedAsOfDate |  | No |
+| agedAsOfDate | date | No |
 | periodLengthFilter | string | No |
 
 # AgedAccountsReceivable
@@ -39,7 +39,7 @@
 | period1Amount | float | No |
 | period2Amount | float | No |
 | period3Amount | float | No |
-| agedAsOfDate |  | No |
+| agedAsOfDate | date | No |
 | periodLengthFilter | string | No |
 
 # Attachments
@@ -62,7 +62,7 @@
 | balance | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter |  | No |
+| dateFilter | date | No |
 
 # BankAccount
 ## Properties
@@ -81,7 +81,7 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter |  | No |
+| dateFilter | date | No |
 
 # Company
 ## Properties
@@ -161,7 +161,7 @@
 | website | string | No |
 | taxRegistrationNumber | string | No |
 | currencyCode | string | No |
-| currentFiscalYearStartDate |  | No |
+| currentFiscalYearStartDate | date | No |
 | industry | string | No |
 | picture | string | No |
 | lastModifiedDateTime | date | Yes |
@@ -243,7 +243,7 @@
 | customerId | guid | No |
 | customerNumber | string | No |
 | contactId | string | No |
-| postingDate |  | No |
+| postingDate | date | No |
 | documentNumber | string | No |
 | externalDocumentNumber | string | No |
 | amount | float | No |
@@ -284,7 +284,7 @@
 | customerNumber | string | No |
 | name | string | No |
 | totalSalesAmount | float | No |
-| dateFilter_FilterOnly |  | No |
+| dateFilter_FilterOnly | date | No |
 
 # DefaultDimensions
 ## Properties
@@ -360,10 +360,10 @@
 | mobilePhone | string | No |
 | email | string | No |
 | personalEmail | string | No |
-| employmentDate |  | No |
-| terminationDate |  | No |
+| employmentDate | date | No |
+| terminationDate | date | No |
 | status | string | No |
-| birthDate |  | No |
+| birthDate | date | No |
 | statisticsGroupCode | string | No |
 | lastModifiedDateTime | date | Yes |
 
@@ -379,7 +379,7 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | int | Yes |
-| postingDate |  | No |
+| postingDate | date | No |
 | documentNumber | string | No |
 | documentType | string | No |
 | accountId | guid | No |
@@ -420,7 +420,7 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter |  | No |
+| dateFilter | date | No |
 
 # Item
 ## Properties
@@ -487,7 +487,7 @@
 | accountType | string | No |
 | accountId | guid | No |
 | accountNumber | string | No |
-| postingDate |  | No |
+| postingDate | date | No |
 | documentNumber | string | No |
 | externalDocumentNumber | string | No |
 | amount | float | No |
@@ -555,9 +555,9 @@
 | --- | --- | :-: |
 | id | guid | Yes |
 | number | string | No |
-| invoiceDate |  | No |
-| postingDate |  | No |
-| dueDate |  | No |
+| invoiceDate | date | No |
+| postingDate | date | No |
+| dueDate | date | No |
 | vendorInvoiceNumber | string | No |
 | vendorId | guid | No |
 | vendorNumber | string | No |
@@ -617,7 +617,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| expectedReceiptDate |  | No |
+| expectedReceiptDate | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -634,7 +634,7 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter |  | No |
+| dateFilter | date | No |
 
 # SalesCreditMemo
 ## Properties
@@ -643,9 +643,9 @@
 | id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| creditMemoDate |  | No |
-| postingDate |  | No |
-| dueDate |  | No |
+| creditMemoDate | date | No |
+| postingDate | date | No |
+| dueDate | date | No |
 | customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
@@ -711,7 +711,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate |  | No |
+| shipmentDate | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -726,9 +726,9 @@
 | id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| invoiceDate |  | No |
-| postingDate |  | No |
-| dueDate |  | No |
+| invoiceDate | date | No |
+| postingDate | date | No |
+| dueDate | date | No |
 | customerPurchaseOrderReference | string | No |
 | customerId | guid | No |
 | contactId | string | No |
@@ -799,7 +799,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate |  | No |
+| shipmentDate | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -814,8 +814,8 @@
 | id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| orderDate |  | No |
-| postingDate |  | No |
+| orderDate | date | No |
+| postingDate | date | No |
 | customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
@@ -835,7 +835,7 @@
 | shipmentMethodId | guid | No |
 | salesperson | string | No |
 | partialShipping | bool | No |
-| requestedDeliveryDate |  | No |
+| requestedDeliveryDate | date | No |
 | discountAmount | float | No |
 | discountAppliedBeforeTax | bool | No |
 | totalAmountExcludingTax | float | No |
@@ -884,7 +884,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate |  | No |
+| shipmentDate | date | No |
 | shippedQuantity | float | No |
 | invoicedQuantity | float | No |
 | invoiceQuantity | float | No |
@@ -903,9 +903,9 @@
 | id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| documentDate |  | No |
-| postingDate |  | No |
-| dueDate |  | No |
+| documentDate | date | No |
+| postingDate | date | No |
+| dueDate | date | No |
 | customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
@@ -929,8 +929,8 @@
 | totalAmountIncludingTax | float | No |
 | status | string | No |
 | sentDate | date | No |
-| validUntilDate |  | No |
-| acceptedDate |  | No |
+| validUntilDate | date | No |
+| acceptedDate | date | No |
 | lastModifiedDateTime | date | Yes |
 | phoneNumber | string | No |
 | email | string | No |
@@ -1031,7 +1031,7 @@
 | jobNumber | string | No |
 | absence | string | No |
 | lineNumber | int | No |
-| date |  | No |
+| date | date | No |
 | quantity | float | No |
 | status | string | No |
 | unitOfMeasureId | guid | No |
@@ -1056,7 +1056,7 @@
 | totalCredit | string | No |
 | balanceAtDateDebit | string | No |
 | balanceAtDateCredit | string | No |
-| dateFilter |  | No |
+| dateFilter | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -1112,8 +1112,8 @@
 | vendorNumber | string | No |
 | name | string | No |
 | totalPurchaseAmount | float | No |
-| dateFilter_FilterOnly |  | No |
+| dateFilter_FilterOnly | date | No |
 
 
 ---
-Generated on 2020-05-11 14:08:26
+Generated on 2020-05-11 14:10:33

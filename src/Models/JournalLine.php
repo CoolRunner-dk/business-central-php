@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class JournalLine
- * Auto-generated on: 2020-05-11 14:08:26
+ * Auto-generated on: 2020-05-11 14:10:33
  *
  * @property-read string $id
  * @property string $journalDisplayName
