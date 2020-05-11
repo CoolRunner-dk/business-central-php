@@ -72,10 +72,26 @@ $companies = $sdk->companies();
 ## Class Reference
 
 ### Entity
+Class for Entity fetched from Business Central
 
 #### Entity Properties / Relations
 
 Check the individual entity types under [Entities Overview](entities.md)
+
+##### Fetch Relation
+
+You can fetch relations from a given entity by calling the name of the relation as a property or method:
+```php
+// Returns a collection of entities if the relation is a collection,
+// else returns the single instance of the related entity or if none is found
+$customers = $entity->relation;
+// Returns a query builder pointing at the relation - Use this if you have further filters (See [Builer/Filters](#builderfilters))
+$customers = $entity->relation();
+```
+
+If the relations isn't pointing at a collection, then only the single related entity will be returned.
+
+Check [Entities Overview](entities.md) to see if the relation is a collection type or not.
 
 #### Entity Methods
 
@@ -99,6 +115,7 @@ Check the individual entity types under [Entities Overview](entities.md)
   - Get the entity as an associative array
 
 ### EntityCollection
+
 Container class for Entities fetched from Business Central
 
 #### EntityCollection Properties
@@ -136,3 +153,62 @@ None
   
 - `toArray()` : `array`
   - Get the collection as an array (converts all entities within also)
+
+### Builder
+
+Query builder used to fetch and update entities on Business Central
+
+Note: All EntityCollection method calls can be performed on the Builder instance itself,  
+due to an internal call to `$collection->fetch()` before the method call.
+
+#### Builder Properties
+
+None
+
+#### Builder Methods
+
+##### Builder Navigation
+
+- `navigateTo(string $component, string $id = null) | to(string $component, string $id = null)` : `$this`
+  - Point the Builder towards a component
+
+- `fetch()` : [EntityCollection](#entitycollection)
+  - Fetch all entities at the pointer
+  
+##### Builder Pagination
+  
+- `limit(int $limit = null)` : `$this`|`int`
+  - Set the limit if `$limit` is set, else returns the current limit
+
+- `page(int $page = null)` : `$this`|`int`
+  - Set the page if `$page` is set, else returns the current limit
+  
+- `nextPage()` : `$this`
+  - Flip to the next page
+  
+- `prevPage()` : `$this`
+  - Flip to the previous page
+  
+##### Builder Sorting
+
+- `orderBy($property, string $direction = 'asc')` : `$this`
+  - Sort the Builder by a specified property and $direction
+  - The `$field` property can be an array containing multiple conditions ( ['property' => 'direction'] )
+
+- `orderByAsc(string $property)` : `$this`
+  - Sort the Builder by a specified property ascending
+
+- `orderByDesc(string $property)` : `$this`
+  - Sort the Builder by a specified property descending
+  
+##### Builder Expansion
+
+See [Expansions](#expansions)
+  
+##### Builder Advanced
+  
+- `clone()` : `$this`
+  - Clone the current Builder instance with extentions (filters, expands, sorting etc.)
+  
+- `cloneWithoutExtentions()` : `$this`
+  - Clone the current Builder instance without extentions (filters, expands, sorting etc.)
