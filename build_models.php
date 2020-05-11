@@ -2,6 +2,8 @@
 /**
  * Build script for BusinessCentral
  *
+ * It ain't pretty but it gets the job done.
+ *
  * @package   business-central-sdk
  * @author    Morten Harders 🐢
  * @copyright 2020
