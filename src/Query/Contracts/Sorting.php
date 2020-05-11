@@ -12,16 +12,26 @@ trait Sorting
 {
     protected $order_by = [];
 
-    public function orderBy($field, string $direction = 'asc')
+    public function orderBy($property, string $direction = 'asc')
     {
-        if (is_array($field)) {
-            $this->order_by = array_merge($this->order_by, $field);
+        if (is_array($property)) {
+            $this->order_by = array_merge($this->order_by, $property);
         } else {
-            $this->order_by[$field] = $direction;
+            $this->order_by[$property] = $direction;
         }
 
 
         return $this;
+    }
+
+    public function orderByAsc(string $property)
+    {
+        $this->order_by[$property] = 'asc';
+    }
+
+    public function orderByDesc(string $property)
+    {
+        $this->order_by[$property] = 'desc';
     }
 
     public function getSorting()

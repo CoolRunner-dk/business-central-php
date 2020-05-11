@@ -49,6 +49,17 @@ trait Pagination
         return $this;
     }
 
+    public function prevPage()
+    {
+        $this->page--;
+
+        if($this->page < 0) {
+            $this->page = 0;
+        }
+
+        return $this;
+    }
+
     public function limit(int $limit = null)
     {
         if (is_null($limit)) {

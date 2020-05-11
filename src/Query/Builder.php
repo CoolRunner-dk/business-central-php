@@ -78,16 +78,34 @@ class Builder
         return ! ! $this->fetch()->first(false);
     }
 
+    /**
+     * @return mixed
+     * @throws QueryException
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function get()
     {
         return $this->sendRequest('GET');
     }
 
+    /**
+     * @return mixed
+     * @throws QueryException
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function post(array $attributes)
     {
         return $this->sendRequest('POST', $attributes);
     }
 
+    /**
+     * @return mixed
+     * @throws QueryException
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function patch(array $attributes, string $etag)
     {
         return $this->sendRequest('PATCH', $attributes, [
@@ -95,6 +113,12 @@ class Builder
         ]);
     }
 
+    /**
+     * @return mixed
+     * @throws QueryException
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function delete(string $etag)
     {
         return $this->sendRequest('DELETE', null, [
@@ -102,6 +126,13 @@ class Builder
         ]);
     }
 
+    /**
+     * @param string $odata_context
+     *
+     * @return mixed|null
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function getContext(string $odata_context)
     {
         $context = explode('#', $odata_context, 2)[1] ?? false;
@@ -118,21 +149,49 @@ class Builder
         return $components->last();
     }
 
+    /**
+     * @param string $odata_context
+     *
+     * @return \BusinessCentral\Schema\EntityType|null
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function getEntityTypeBySet(string $odata_context)
     {
         return $this->sdk->schema->getEntityTypeBySet($this->getContext($odata_context));
     }
 
+    /**
+     * @param string $odata_context
+     *
+     * @return \BusinessCentral\Schema\EntitySet|mixed|null
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function getEntitySet(string $odata_context)
     {
         return $this->sdk->schema->getEntitySet($this->getContext($odata_context));
     }
 
+    /**
+     * @param string $odata_context
+     *
+     * @return mixed
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function getEntitySetByType(string $odata_context)
     {
         return $this->sdk->schema->getEntitySetByType($this->getContext($odata_context));
     }
 
+    /**
+     * @param string $odata_context
+     *
+     * @return \BusinessCentral\Schema\EntityType|null
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     * @internal
+     */
     public function getEntityType(string $odata_context)
     {
         return $this->sdk->schema->getEntityType($this->getContext($odata_context));
