@@ -11,7 +11,7 @@ License: MIT
    - The SDK uses Basic Authentication
  - Install the library into your application
  - Load the SDK
-
+<a id="testanchor"></a>
 #### Connecting to Business Central
 
 Business Central for PHP uses a singleton pattern for SDK instances.
