@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DimensionLine
- * Auto-generated on: 2020-05-11 14:10:33
+ * Auto-generated on: 2020-05-11 17:35:34
  *
  * @property string $parentId
  * @property-read string $id

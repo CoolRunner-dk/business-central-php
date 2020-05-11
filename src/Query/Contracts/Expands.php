@@ -22,15 +22,23 @@ trait Expands
 
         $results = [];
 
-        foreach ($this->expands as $relation => $query) {
-            if (is_array($query)) {
-                $query = $this->sdk->query()->expand($query);
+        foreach ($this->expands as $relation => $expansion) {
+            if (is_array($expansion)) {
+                $query = $this->sdk->query()->expand($expansion);
                 $query->limit(0);
                 $query->page(0);
             }
 
-            if ($query instanceof Builder) {
-                $results[] = sprintf("$relation(%s)", implode(';', $query->getQueryOptions()));
+            if ($expansion instanceof \Closure) {
+                $query = $this->sdk->query();
+                $query->limit(0);
+                $query->page(0);
+                $expansion($query);
+                $expansion = $query;
+            }
+
+            if ($expansion instanceof Builder) {
+                $results[] = sprintf("$relation(%s)", implode(';', $expansion->getQueryOptions()));
             } else {
                 $results[] = $relation;
             }
@@ -48,8 +56,12 @@ trait Expands
     public function expand(array $relations)
     {
         foreach ($relations as $key => $relation) {
-            if (is_string($key)) {
-                $relation = ! is_array($relation) ? [$relation] : $relation;
+            if (is_string($key) && ! is_string($relation)) {
+                if ($relation instanceof \Closure) {
+                    $this->expands[$key] = $relation;
+                } elseif ( ! is_array($relation)) {
+                    $relation = [$relation];
+                }
 
                 $this->expands[$key] = $relation;
             } else {
@@ -60,17 +72,14 @@ trait Expands
         return $this;
     }
 
-    public function filteredExpand(string $relation, callable $callback)
-    {
-        $query = $this->sdk->query();
-        $query->limit(0);
-        $query->page(0);
-        $callback($query);
-        $this->expands[$relation] = $query;
-
-        return $this;
-    }
-
+    /**
+     * Set expansions for query
+     *
+     * @param array $expands
+     *
+     * @return $this
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function setExpands(array $expands)
     {
         $this->expands = $expands;
@@ -78,8 +87,25 @@ trait Expands
         return $this;
     }
 
+    /**
+     * Get all expansions
+     *
+     * @return array
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function getExpands()
     {
         return $this->expands;
+    }
+
+    /**
+     * Remove expansions from the query
+     *
+     * @return Expands
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
+    public function withoutExpands()
+    {
+        return $this->setExpands([]);
     }
 }

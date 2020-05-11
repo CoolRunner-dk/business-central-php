@@ -205,7 +205,7 @@
 | taxAreaDisplayName | string | Yes |
 | taxRegistrationNumber | string | No |
 | currencyId | guid | No |
-| currencyCode | string | No |
+| currencyCode | string | Yes |
 | paymentTermsId | guid | No |
 | shipmentMethodId | guid | No |
 | paymentMethodId | guid | No |
@@ -1116,4 +1116,4 @@
 
 
 ---
-Generated on 2020-05-11 14:10:33
+Generated on 2020-05-11 17:35:34

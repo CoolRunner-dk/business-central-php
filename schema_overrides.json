@@ -3,20 +3,18 @@
         "properties" : {
             "taxAreaDisplayName" : {
                 "readOnly" : true
+            },
+            "currencyCode" : {
+                "readOnly" : true
             }
-        },
-        "fillable"   : [],
-        "guarded"    : []
+        }
     },
     "__example" : {
         "properties" : {
             "property" : {
-                "readOnly" : true,
-                "guarded"  : true
+                "readOnly" : true
             }
-        },
-        "fillable"   : [],
-        "guarded"    : []
+        }
     },
     "__always"  : {
         "properties" : {

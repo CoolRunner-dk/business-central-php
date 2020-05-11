@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Customer
- * Auto-generated on: 2020-05-11 14:10:33
+ * Auto-generated on: 2020-05-11 17:35:34
  *
  * @property-read string $id
  * @property string $number
@@ -22,7 +22,7 @@ use BusinessCentral\Entity;
  * @property-read string $taxAreaDisplayName
  * @property string $taxRegistrationNumber
  * @property string $currencyId
- * @property string $currencyCode
+ * @property-read string $currencyCode
  * @property string $paymentTermsId
  * @property string $shipmentMethodId
  * @property string $paymentMethodId
@@ -60,7 +60,6 @@ class Customer extends Entity
         'taxAreaId',
         'taxRegistrationNumber',
         'currencyId',
-        'currencyCode',
         'paymentTermsId',
         'shipmentMethodId',
         'paymentMethodId',
@@ -70,6 +69,7 @@ class Customer extends Entity
     protected $guarded  = [
         'id',
         'taxAreaDisplayName',
+        'currencyCode',
         'lastModifiedDateTime',
     ];
 }
