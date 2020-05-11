@@ -301,12 +301,14 @@ Operators:
 
 # Contribution
 
-This SDK is not a finished product. Input, additions and changes are very much encouraged - Fork the repo, make the changes/additions/fixed and create a pull request.
+This SDK is not a finished product.  
+Input, additions and changes are very much encouraged - Fork the repo, make the changes/additions/fixes, and create a pull request.
 
 ## What's needed?
 
+### Schema Overrides
 A lot of entities on Business Central has read-only fields which are disguised as actual properties but are virtual 
-(like currencyCode on customers is the value of the customer's currency's code property).
+(like currencyCode on customers is the value of the customer's currency's code property and cannot be changed on the customer itself).
 
 These properties needs to be found and flagged.  
 Take a look in schema_overrides.json and follow the syntax for flagging a property as read-only.
