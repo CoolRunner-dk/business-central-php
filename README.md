@@ -79,14 +79,14 @@ None
 
 #### Methods
 
-##### `find(string $id, $default = null) : Entity|null`
-Finds and returns an entity from the collection with the given id or `$default` on failure
+- `find(string $id, $default = null) : Entity|null`
+  - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-##### `create(array $attributes) : Entity`
-Creates and returns a new Entity with the given attributes
+- `create(array $attributes) : Entity`
+  - Creates and returns a new Entity with the given attributes
 
-##### `update(string $id, array $attributes) : Entity`
-Updates and returns an existing Entity with the given attributes
+- `update(string $id, array $attributes) : Entity`
+  - Updates and returns an existing Entity with the given attributes
 
-##### `delete(string $id) : bool`
-Deletes en entity from the collection with the given id - Returns true/false on success/failure
+- `delete(string $id) : bool`
+  - Deletes en entity from the collection with the given id - Returns true/false on success/failure
