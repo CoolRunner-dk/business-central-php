@@ -75,26 +75,26 @@ $companies = $sdk->companies();
 <a id="class-entity"></a>
 
 ### EntityCollection
-<a id="class-entitycollection"></a>
+Container class for Entities fetched from Business Central
 
 #### EntityCollection Properties
 None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null)` : [Entity](#class-entity) | `null` <a id="class-entitycollection-find"></a>
+- `find(string $id, $default = null)` : [Entity](#class-entity) | `null`
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-- `create(array $attributes)` : [Entity](#class-entity) <a id="class-entitycollection-create"></a>
+- `create(array $attributes)` : [Entity](#class-entity)
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes)` : [Entity](#class-entity) <a id="class-entitycollection-update"></a>
+- `update(string $id, array $attributes)` : [Entity](#class-entity)
   - Updates and returns an existing Entity with the given attributes
 
-- `delete(string $id)` : `bool` <a id="class-entitycollection-delete"></a>
+- `delete(string $id)` : `bool`
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
 
-- `first($default = null)` : [Entity](#class-entity) | `null` | `mixed` <a id="class-entitycollection-first"></a>
+- `first($default = null)` : [Entity](#class-entity) | `null` | `mixed`
   - Returns the first index of the collection or `$default` is empty
 
 - `count()` : int <a id="class-entitycollection-count"></a>
