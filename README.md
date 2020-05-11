@@ -181,7 +181,7 @@ None
   - Set the limit if `$limit` is set, else returns the current limit
 
 - `page(int $page = null)` : `self`|`int`
-  - Set the page if `$page` is set, else returns the current limit
+  - Set the page if `$page` is set, else returns the current page
   
 - `nextPage()` : `self`
   - Flip to the next page
@@ -203,7 +203,89 @@ None
   
 ##### Builder Expansion
 
-See [Expansions](#expansions)
+OData Reference: [Reference](http://docs.oasis-open.org/odata/odata/v4.0/cs01/part1-protocol/odata-v4.0-cs01-part1-protocol.html#_System_Query_Option_6)
+
+- `expand(array $relations)` : `self`
+  - Expand selection
+Expansion allows us to fetch multiple levels of entities in a single request.  
+This allows us to minimize the amount of requests needed to get the entities needed.
+
+###### Basic Usage
+
+Example:
+```php
+$company->customers()->expand([
+    'paymentMethod',
+    'picture',
+])->fetch();
+```
+The above will fetch a collection with all customers from a company _with_ their `paymentMethod` relation in one request.
+
+###### Multilevel Expansion / Filtered Expansion
+
+Utilizing closures it is possible to nest expansions and apply filters to the expansions at any level.
+
+```php
+$company->customers()->expand([
+    'paymentMethod' => function(Builder $query) {
+    	$query->where('code', '=', 'CR3D17C4RD')
+	      ->expand(['nested_relation']);
+    },
+    'picture',
+]);
+
+// Query: companies(...)/customers?$expand=picture,paymentMethod($filter=code eq 'CR3D17C4RD';$expand=nested_relation;$count=true)&$top=40&$count=true
+```
+
+See [Filtering](#filtering)
+
+Note: The nesting can be done indefinitely and as complex as you want, but keep in mind there still is a character limit to URLs.
+
+##### Builder Filtering
+
+OData reference: [Reference](http://docs.oasis-open.org/odata/odata/v4.0/cs01/part1-protocol/odata-v4.0-cs01-part1-protocol.html#_The_$filter_System)
+
+Filtering allows us to more carefully select which entities we fetch from Business Central.  
+This allows us to improve performance and exclude irrelevant models from our processing from the start.
+
+A number of different filtering methods exists.  
+For every filter method an "OR" version exists (eg. `whereDate(...)` -> `orWhereDate(...)`  
+The `$before` argument is the boolean operator prepended to the query before every clause.  
+
+- `where(string $property, $operator = null, $value = null, string $before = 'and')` : `self`
+  - Basic where clause
+  - Shorthand: `where('displayName', 'John Doe');` is the same as `where('displayName', '=', 'John Doe')`
+  
+- `whereIn(string $property, array $values, string $before = 'and')` : `self`
+  - Where property in a group of values
+
+- `whereDateTime(string $property, $operator, DateTime $value = null, string $before = 'and')` : `self`
+  - Where property is a datetime (`Y-m-d\TH:i:s.v\Z`)
+
+- `whereContains(string $property, $value, string $before = 'and')` : `self`
+  - Where property contains the value - Same SQL `\`column\` like '%value%'`
+
+- `whereStartsWith(string $property, $value, string $before = 'and')` : `self`
+  - Where property starts with the value - Same SQL `\`column\` like 'value%'`
+
+- `whereEndsWith(string $property, $value, string $before = 'and')` : `self`
+  - Where property starts with the value - Same SQL `\`column\` like '%value'`
+  
+- `whereGroup(Closure $callback, string $before = 'and')` : `self`
+  - Grouped where clause - Example `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
+  - This functionality can be shorthanded as `where(function(Builder $query) { ... })`
+  
+Operators:  
+| Logical   | OData equiv |
+| :-:       | :-:         |
+| =         | eq          |
+| !=        | ne          |
+| >         | gt          |
+| >=        | ge          |
+| <         | lt          |
+| <=        | le          |
+
+###### Basic Usage
   
 ##### Builder Advanced
   
