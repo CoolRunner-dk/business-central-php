@@ -157,8 +157,9 @@ foreach ($docs as $class => $doc) {
         }
         $doc_contents .= "\n";
     }
-
 }
+
+$doc_contents .= "\n---\nGenerated on $now\n";
 
 file_put_contents('entities.md', $doc_contents);
 
