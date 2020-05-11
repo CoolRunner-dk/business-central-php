@@ -169,7 +169,7 @@ None
 
 ##### Builder Navigation
 
-- `navigateTo(string $component, string $id = null) | to(string $component, string $id = null)` : `$this`
+- `navigateTo(string $component, string $id = null) | to(string $component, string $id = null)` : `self`
   - Point the Builder towards a component
 
 - `fetch()` : [EntityCollection](#entitycollection)
@@ -177,28 +177,28 @@ None
   
 ##### Builder Pagination
   
-- `limit(int $limit = null)` : `$this`|`int`
+- `limit(int $limit = null)` : `self`|`int`
   - Set the limit if `$limit` is set, else returns the current limit
 
-- `page(int $page = null)` : `$this`|`int`
+- `page(int $page = null)` : `self`|`int`
   - Set the page if `$page` is set, else returns the current limit
   
-- `nextPage()` : `$this`
+- `nextPage()` : `self`
   - Flip to the next page
   
-- `prevPage()` : `$this`
+- `prevPage()` : `self`
   - Flip to the previous page
   
 ##### Builder Sorting
 
-- `orderBy($property, string $direction = 'asc')` : `$this`
+- `orderBy($property, string $direction = 'asc')` : `self`
   - Sort the Builder by a specified property and $direction
   - The `$field` property can be an array containing multiple conditions ( ['property' => 'direction'] )
 
-- `orderByAsc(string $property)` : `$this`
+- `orderByAsc(string $property)` : `self`
   - Sort the Builder by a specified property ascending
 
-- `orderByDesc(string $property)` : `$this`
+- `orderByDesc(string $property)` : `self`
   - Sort the Builder by a specified property descending
   
 ##### Builder Expansion
@@ -207,8 +207,8 @@ See [Expansions](#expansions)
   
 ##### Builder Advanced
   
-- `clone()` : `$this`
+- `clone()` : `self`
   - Clone the current Builder instance with extentions (filters, expands, sorting etc.)
   
-- `cloneWithoutExtentions()` : `$this`
+- `cloneWithoutExtentions()` : `self`
   - Clone the current Builder instance without extentions (filters, expands, sorting etc.)
