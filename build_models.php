@@ -130,7 +130,7 @@ foreach ($docs as $class => $doc) {
     $doc_contents .= sprintf("# %s\n", class_basename($class));
     $doc_contents .= "## Properties\n";
     $doc_contents .= "| Name | Type | Read Only |\n";
-    $doc_contents .= "| --- | --- | --- |\n";
+    $doc_contents .= "| --- | --- | :-: |\n";
     foreach ($doc['properties'] as $item) {
         $doc_type = $item->getDocType();
         if ($doc_type instanceof ComplexType) {
@@ -150,7 +150,7 @@ foreach ($docs as $class => $doc) {
             $doc_contents .= sprintf(
                 "| %s | [%s](#%s) | %s |\n",
                 $item->name,
-                $class,
+                $class . ($item->isCollection() ? '[]' : ''),
                 strtolower($class),
                 $item->isCollection() ? 'Yes' : 'No'
             );

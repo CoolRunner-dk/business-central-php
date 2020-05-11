@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class GeneralLedgerEntryAttachments
- * Auto-generated on: 2020-05-11 13:51:49
+ * Auto-generated on: 2020-05-11 13:54:04
  *
  * @property int $generalLedgerEntryNumber
  * @property-read string $id

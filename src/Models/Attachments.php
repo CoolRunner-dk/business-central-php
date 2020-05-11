@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Attachments
- * Auto-generated on: 2020-05-11 13:51:49
+ * Auto-generated on: 2020-05-11 13:54:04
  *
  * @property string $parentId
  * @property-read string $id

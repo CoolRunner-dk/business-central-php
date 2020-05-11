@@ -1,7 +1,7 @@
 # Account
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -13,7 +13,7 @@
 # AgedAccountsPayable
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | vendorId | string | No |
 | vendorNumber | string | No |
 | name | string | No |
@@ -29,7 +29,7 @@
 # AgedAccountsReceivable
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | customerId | string | No |
 | customerNumber | string | No |
 | name | string | No |
@@ -45,7 +45,7 @@
 # Attachments
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | parentId | string | No |
 | id | string | Yes |
 | fileName | string | No |
@@ -56,7 +56,7 @@
 # BalanceSheet
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | lineNumber | int | No |
 | display | string | No |
 | balance | float | No |
@@ -67,7 +67,7 @@
 # BankAccount
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -75,7 +75,7 @@
 # CashFlowStatement
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | lineNumber | int | No |
 | display | string | No |
 | netChange | float | No |
@@ -86,7 +86,7 @@
 # Company
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | systemVersion | string | No |
 | name | string | No |
@@ -96,62 +96,62 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| items | [Item](#item) | Yes |
-| picture | [Picture](#picture) | Yes |
-| defaultDimensions | [DefaultDimensions](#defaultdimensions) | Yes |
-| customers | [Customer](#customer) | Yes |
-| customerFinancialDetails | [CustomerFinancialDetail](#customerfinancialdetail) | Yes |
-| vendors | [Vendor](#vendor) | Yes |
-| companyInformation | [CompanyInformation](#companyinformation) | Yes |
-| salesInvoices | [SalesInvoice](#salesinvoice) | Yes |
-| salesInvoiceLines | [SalesInvoiceLine](#salesinvoiceline) | Yes |
-| pdfDocument | [PdfDocument](#pdfdocument) | Yes |
-| customerPaymentJournals | [CustomerPaymentJournal](#customerpaymentjournal) | Yes |
-| customerPayments | [CustomerPayment](#customerpayment) | Yes |
-| accounts | [Account](#account) | Yes |
-| taxGroups | [TaxGroup](#taxgroup) | Yes |
-| journals | [Journal](#journal) | Yes |
-| journalLines | [JournalLine](#journalline) | Yes |
-| attachments | [Attachments](#attachments) | Yes |
-| employees | [Employee](#employee) | Yes |
-| timeRegistrationEntries | [TimeRegistrationEntry](#timeregistrationentry) | Yes |
-| generalLedgerEntries | [GeneralLedgerEntry](#generalledgerentry) | Yes |
-| currencies | [Currency](#currency) | Yes |
-| paymentMethods | [PaymentMethod](#paymentmethod) | Yes |
-| dimensions | [Dimension](#dimension) | Yes |
-| dimensionValues | [DimensionValue](#dimensionvalue) | Yes |
-| dimensionLines | [DimensionLine](#dimensionline) | Yes |
-| paymentTerms | [PaymentTerm](#paymentterm) | Yes |
-| shipmentMethods | [ShipmentMethod](#shipmentmethod) | Yes |
-| itemCategories | [ItemCategory](#itemcategory) | Yes |
-| cashFlowStatement | [CashFlowStatement](#cashflowstatement) | Yes |
-| countriesRegions | [CountryRegion](#countryregion) | Yes |
-| salesOrders | [SalesOrder](#salesorder) | Yes |
-| salesOrderLines | [SalesOrderLine](#salesorderline) | Yes |
-| retainedEarningsStatement | [RetainedEarningsStatement](#retainedearningsstatement) | Yes |
-| unitsOfMeasure | [UnitOfMeasure](#unitofmeasure) | Yes |
-| agedAccountsReceivable | [AgedAccountsReceivable](#agedaccountsreceivable) | Yes |
-| agedAccountsPayable | [AgedAccountsPayable](#agedaccountspayable) | Yes |
-| balanceSheet | [BalanceSheet](#balancesheet) | Yes |
-| trialBalance | [TrialBalance](#trialbalance) | Yes |
-| incomeStatement | [IncomeStatement](#incomestatement) | Yes |
-| taxAreas | [TaxArea](#taxarea) | Yes |
-| salesQuotes | [SalesQuote](#salesquote) | Yes |
-| salesQuoteLines | [SalesQuoteLine](#salesquoteline) | Yes |
-| salesCreditMemos | [SalesCreditMemo](#salescreditmemo) | Yes |
-| salesCreditMemoLines | [SalesCreditMemoLine](#salescreditmemoline) | Yes |
-| generalLedgerEntryAttachments | [GeneralLedgerEntryAttachments](#generalledgerentryattachments) | Yes |
-| purchaseInvoices | [PurchaseInvoice](#purchaseinvoice) | Yes |
-| purchaseInvoiceLines | [PurchaseInvoiceLine](#purchaseinvoiceline) | Yes |
-| projects | [Project](#project) | Yes |
-| bankAccounts | [BankAccount](#bankaccount) | Yes |
-| customerSales | [CustomerSale](#customersale) | Yes |
-| vendorPurchases | [VendorPurchase](#vendorpurchase) | Yes |
+| items | [Item[]](#item) | Yes |
+| picture | [Picture[]](#picture) | Yes |
+| defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
+| customers | [Customer[]](#customer) | Yes |
+| customerFinancialDetails | [CustomerFinancialDetail[]](#customerfinancialdetail) | Yes |
+| vendors | [Vendor[]](#vendor) | Yes |
+| companyInformation | [CompanyInformation[]](#companyinformation) | Yes |
+| salesInvoices | [SalesInvoice[]](#salesinvoice) | Yes |
+| salesInvoiceLines | [SalesInvoiceLine[]](#salesinvoiceline) | Yes |
+| pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
+| customerPaymentJournals | [CustomerPaymentJournal[]](#customerpaymentjournal) | Yes |
+| customerPayments | [CustomerPayment[]](#customerpayment) | Yes |
+| accounts | [Account[]](#account) | Yes |
+| taxGroups | [TaxGroup[]](#taxgroup) | Yes |
+| journals | [Journal[]](#journal) | Yes |
+| journalLines | [JournalLine[]](#journalline) | Yes |
+| attachments | [Attachments[]](#attachments) | Yes |
+| employees | [Employee[]](#employee) | Yes |
+| timeRegistrationEntries | [TimeRegistrationEntry[]](#timeregistrationentry) | Yes |
+| generalLedgerEntries | [GeneralLedgerEntry[]](#generalledgerentry) | Yes |
+| currencies | [Currency[]](#currency) | Yes |
+| paymentMethods | [PaymentMethod[]](#paymentmethod) | Yes |
+| dimensions | [Dimension[]](#dimension) | Yes |
+| dimensionValues | [DimensionValue[]](#dimensionvalue) | Yes |
+| dimensionLines | [DimensionLine[]](#dimensionline) | Yes |
+| paymentTerms | [PaymentTerm[]](#paymentterm) | Yes |
+| shipmentMethods | [ShipmentMethod[]](#shipmentmethod) | Yes |
+| itemCategories | [ItemCategory[]](#itemcategory) | Yes |
+| cashFlowStatement | [CashFlowStatement[]](#cashflowstatement) | Yes |
+| countriesRegions | [CountryRegion[]](#countryregion) | Yes |
+| salesOrders | [SalesOrder[]](#salesorder) | Yes |
+| salesOrderLines | [SalesOrderLine[]](#salesorderline) | Yes |
+| retainedEarningsStatement | [RetainedEarningsStatement[]](#retainedearningsstatement) | Yes |
+| unitsOfMeasure | [UnitOfMeasure[]](#unitofmeasure) | Yes |
+| agedAccountsReceivable | [AgedAccountsReceivable[]](#agedaccountsreceivable) | Yes |
+| agedAccountsPayable | [AgedAccountsPayable[]](#agedaccountspayable) | Yes |
+| balanceSheet | [BalanceSheet[]](#balancesheet) | Yes |
+| trialBalance | [TrialBalance[]](#trialbalance) | Yes |
+| incomeStatement | [IncomeStatement[]](#incomestatement) | Yes |
+| taxAreas | [TaxArea[]](#taxarea) | Yes |
+| salesQuotes | [SalesQuote[]](#salesquote) | Yes |
+| salesQuoteLines | [SalesQuoteLine[]](#salesquoteline) | Yes |
+| salesCreditMemos | [SalesCreditMemo[]](#salescreditmemo) | Yes |
+| salesCreditMemoLines | [SalesCreditMemoLine[]](#salescreditmemoline) | Yes |
+| generalLedgerEntryAttachments | [GeneralLedgerEntryAttachments[]](#generalledgerentryattachments) | Yes |
+| purchaseInvoices | [PurchaseInvoice[]](#purchaseinvoice) | Yes |
+| purchaseInvoiceLines | [PurchaseInvoiceLine[]](#purchaseinvoiceline) | Yes |
+| projects | [Project[]](#project) | Yes |
+| bankAccounts | [BankAccount[]](#bankaccount) | Yes |
+| customerSales | [CustomerSale[]](#customersale) | Yes |
+| vendorPurchases | [VendorPurchase[]](#vendorpurchase) | Yes |
 
 # CompanyInformation
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | displayName | string | No |
 | address | postalAddressType | No |
@@ -169,7 +169,7 @@
 # CountryRegion
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -179,7 +179,7 @@
 # Currency
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -191,7 +191,7 @@
 # Customer
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -215,9 +215,9 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| customerFinancialDetails | [CustomerFinancialDetail](#customerfinancialdetail) | Yes |
-| picture | [Picture](#picture) | Yes |
-| defaultDimensions | [DefaultDimensions](#defaultdimensions) | Yes |
+| customerFinancialDetails | [CustomerFinancialDetail[]](#customerfinancialdetail) | Yes |
+| picture | [Picture[]](#picture) | Yes |
+| defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
@@ -226,7 +226,7 @@
 # CustomerFinancialDetail
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | balance | float | No |
@@ -236,7 +236,7 @@
 # CustomerPayment
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | journalDisplayName | string | No |
 | lineNumber | int | No |
@@ -262,7 +262,7 @@
 # CustomerPaymentJournal
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -273,13 +273,13 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| customerPayments | [CustomerPayment](#customerpayment) | Yes |
+| customerPayments | [CustomerPayment[]](#customerpayment) | Yes |
 | account | [Account](#account) | No |
 
 # CustomerSale
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | customerId | string | No |
 | customerNumber | string | No |
 | name | string | No |
@@ -289,7 +289,7 @@
 # DefaultDimensions
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | parentId | string | No |
 | dimensionId | string | No |
 | dimensionCode | string | No |
@@ -307,7 +307,7 @@
 # Dimension
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -316,12 +316,12 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| dimensionValues | [DimensionValue](#dimensionvalue) | Yes |
+| dimensionValues | [DimensionValue[]](#dimensionvalue) | Yes |
 
 # DimensionLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | parentId | string | No |
 | id | string | Yes |
 | code | string | No |
@@ -338,7 +338,7 @@
 # DimensionValue
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -347,7 +347,7 @@
 # Employee
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -370,14 +370,14 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| picture | [Picture](#picture) | Yes |
-| defaultDimensions | [DefaultDimensions](#defaultdimensions) | Yes |
-| timeRegistrationEntries | [TimeRegistrationEntry](#timeregistrationentry) | Yes |
+| picture | [Picture[]](#picture) | Yes |
+| defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
+| timeRegistrationEntries | [TimeRegistrationEntry[]](#timeregistrationentry) | Yes |
 
 # GeneralLedgerEntry
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | int | Yes |
 | postingDate | string | No |
 | documentNumber | string | No |
@@ -398,7 +398,7 @@
 # GeneralLedgerEntryAttachments
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | generalLedgerEntryNumber | int | No |
 | id | string | Yes |
 | fileName | string | No |
@@ -414,7 +414,7 @@
 # IncomeStatement
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | lineNumber | int | No |
 | display | string | No |
 | netChange | float | No |
@@ -425,7 +425,7 @@
 # Item
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -447,14 +447,14 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| picture | [Picture](#picture) | Yes |
-| defaultDimensions | [DefaultDimensions](#defaultdimensions) | Yes |
+| picture | [Picture[]](#picture) | Yes |
+| defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
 | itemCategory | [ItemCategory](#itemcategory) | No |
 
 # ItemCategory
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -463,7 +463,7 @@
 # Journal
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -474,13 +474,13 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| journalLines | [JournalLine](#journalline) | Yes |
+| journalLines | [JournalLine[]](#journalline) | Yes |
 | account | [Account](#account) | No |
 
 # JournalLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | journalDisplayName | string | No |
 | lineNumber | int | No |
@@ -499,13 +499,13 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| attachments | [Attachments](#attachments) | Yes |
+| attachments | [Attachments[]](#attachments) | Yes |
 | account | [Account](#account) | No |
 
 # PaymentMethod
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -514,7 +514,7 @@
 # PaymentTerm
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -527,14 +527,14 @@
 # PdfDocument
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | content | string | No |
 
 # Picture
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | width | int | No |
 | height | int | No |
@@ -544,7 +544,7 @@
 # Project
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -552,7 +552,7 @@
 # PurchaseInvoice
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | invoiceDate | string | No |
@@ -585,15 +585,15 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| purchaseInvoiceLines | [PurchaseInvoiceLine](#purchaseinvoiceline) | Yes |
-| pdfDocument | [PdfDocument](#pdfdocument) | Yes |
+| purchaseInvoiceLines | [PurchaseInvoiceLine[]](#purchaseinvoiceline) | Yes |
+| pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
 | vendor | [Vendor](#vendor) | No |
 | currency | [Currency](#currency) | No |
 
 # PurchaseInvoiceLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | documentId | string | No |
 | sequence | int | No |
@@ -628,7 +628,7 @@
 # RetainedEarningsStatement
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | lineNumber | int | No |
 | display | string | No |
 | netChange | float | No |
@@ -639,7 +639,7 @@
 # SalesCreditMemo
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
@@ -676,8 +676,8 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| salesCreditMemoLines | [SalesCreditMemoLine](#salescreditmemoline) | Yes |
-| pdfDocument | [PdfDocument](#pdfdocument) | Yes |
+| salesCreditMemoLines | [SalesCreditMemoLine[]](#salescreditmemoline) | Yes |
+| pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
 | customer | [Customer](#customer) | No |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
@@ -686,7 +686,7 @@
 # SalesCreditMemoLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | documentId | string | No |
 | sequence | int | No |
@@ -722,7 +722,7 @@
 # SalesInvoice
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
@@ -764,8 +764,8 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| salesInvoiceLines | [SalesInvoiceLine](#salesinvoiceline) | Yes |
-| pdfDocument | [PdfDocument](#pdfdocument) | Yes |
+| salesInvoiceLines | [SalesInvoiceLine[]](#salesinvoiceline) | Yes |
+| pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
 | customer | [Customer](#customer) | No |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
@@ -774,7 +774,7 @@
 # SalesInvoiceLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | documentId | string | No |
 | sequence | int | No |
@@ -810,7 +810,7 @@
 # SalesOrder
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
@@ -850,7 +850,7 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| salesOrderLines | [SalesOrderLine](#salesorderline) | Yes |
+| salesOrderLines | [SalesOrderLine[]](#salesorderline) | Yes |
 | customer | [Customer](#customer) | No |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
@@ -859,7 +859,7 @@
 # SalesOrderLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | documentId | string | No |
 | sequence | int | No |
@@ -899,7 +899,7 @@
 # SalesQuote
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
@@ -938,8 +938,8 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| salesQuoteLines | [SalesQuoteLine](#salesquoteline) | Yes |
-| pdfDocument | [PdfDocument](#pdfdocument) | Yes |
+| salesQuoteLines | [SalesQuoteLine[]](#salesquoteline) | Yes |
+| pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
 | customer | [Customer](#customer) | No |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
@@ -948,7 +948,7 @@
 # SalesQuoteLine
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | documentId | string | No |
 | sequence | int | No |
@@ -982,7 +982,7 @@
 # ShipmentMethod
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -991,7 +991,7 @@
 # Subscriptions
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | subscriptionId | string | No |
 | notificationUrl | string | No |
 | resource | string | No |
@@ -1003,7 +1003,7 @@
 # TaxArea
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -1013,7 +1013,7 @@
 # TaxGroup
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -1023,7 +1023,7 @@
 # TimeRegistrationEntry
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | employeeId | string | No |
 | employeeNumber | string | No |
@@ -1047,7 +1047,7 @@
 # TrialBalance
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | number | string | No |
 | accountId | string | No |
 | accountType | string | No |
@@ -1066,7 +1066,7 @@
 # UnitOfMeasure
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | code | string | No |
 | displayName | string | No |
@@ -1076,7 +1076,7 @@
 # Vendor
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | id | string | Yes |
 | number | string | No |
 | displayName | string | No |
@@ -1098,8 +1098,8 @@
 ## Relations
 | Name | Type | Collection |
 | --- | --- | :-: |
-| picture | [Picture](#picture) | Yes |
-| defaultDimensions | [DefaultDimensions](#defaultdimensions) | Yes |
+| picture | [Picture[]](#picture) | Yes |
+| defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | paymentMethod | [PaymentMethod](#paymentmethod) | No |
@@ -1107,7 +1107,7 @@
 # VendorPurchase
 ## Properties
 | Name | Type | Read Only |
-| --- | --- | --- |
+| --- | --- | :-: |
 | vendorId | string | No |
 | vendorNumber | string | No |
 | name | string | No |
