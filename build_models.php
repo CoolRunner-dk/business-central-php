@@ -80,9 +80,9 @@ foreach ($types as $type) {
     $guarded  = [];
     foreach ($type->properties() as $property) {
         if ($property->fillable) {
-            $fillable[]                                                 = "        '$property->name',";
+            $fillable[] = "        '$property->name',";
         } else {
-            $guarded[]                                                 = "        '$property->name',";
+            $guarded[] = "        '$property->name',";
         }
     }
     $fillable = implode("\n", $fillable);
@@ -140,20 +140,27 @@ foreach ($docs as $class => $doc) {
     }
     $doc_contents .= "\n";
 
-    if(!empty($doc['relations'] ?? [])) {
+    if ( ! empty($doc['relations'] ?? [])) {
         $doc_contents .= "## Relations\n";
-        $doc_contents .= "| Name | Type |\n";
-        $doc_contents .= "| --- | --- |\n";
+        $doc_contents .= "| Name | Type | Collection |\n";
+        $doc_contents .= "| --- | --- | :-: |\n";
         /** @var \BusinessCentral\Schema\NavigationProperty $item */
         foreach ($doc['relations'] ?? [] as $item) {
-            $doc_contents .= sprintf("| %s | %s |\n", $item->name, class_basename(ClassMap::map($item->getEntityType())));
+            $class        = class_basename(ClassMap::map($item->getEntityType()));
+            $doc_contents .= sprintf(
+                "| %s | [%s](#%s) | %s |\n",
+                $class,
+                strtolower($class),
+                $item->name,
+                $item->isCollection() ? 'Yes' : 'No'
+            );
         }
         $doc_contents .= "\n";
     }
 
 }
 
-file_put_contents('entities.md',$doc_contents);
+file_put_contents('entities.md', $doc_contents);
 
 function __generate_doc(string $class, EntityType $type)
 {

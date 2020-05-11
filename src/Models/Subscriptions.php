@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Subscriptions
- * Auto-generated on: 2020-05-11 13:38:48
+ * Auto-generated on: 2020-05-11 13:48:14
  *
  * @property string $subscriptionId
  * @property string $notificationUrl
