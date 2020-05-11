@@ -73,9 +73,30 @@ $companies = $sdk->companies();
 
 ### Entity
 
-#### Entity Properties
+#### Entity Properties / Relations
 
-Check the individual entity types under on [Entities.md](entities.md) 
+Check the individual entity types under [Entities Overview](entities.md)
+
+#### Entity Methods
+
+- `fill(array $attributes)` : [Entity](#entity)
+  - Update/set multiple properties as once - Only fillable properties will be set 
+  - Check the individual entity type on [Entities Overview](entities.md)
+
+- `save()` : `bool`
+  - Save the entity to Business Central
+
+- `validate()` : `bool`
+  - Validate the entity against the rules set by Business Central (this method is also called during `save()`
+
+- `getEntityType`: [EntityType](#entitytype)
+  - Get the entity's EntityType
+
+- `query()` : [Builder](#builder)
+  - Get a query pointing to the entity
+
+- `toArray()` : `array`
+  - Get the entity as an associative array
 
 ### EntityCollection
 Container class for Entities fetched from Business Central
@@ -86,13 +107,13 @@ None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null)` : [Entity](#class-entity) | `null`
+- `find(string $id, $default = null)` : [Entity](#entity) | `null`
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-- `create(array $attributes)` : [Entity](#class-entity)
+- `create(array $attributes)` : [Entity](#entity)
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes)` : [Entity](#class-entity)
+- `update(string $id, array $attributes)` : [Entity](#entity)
   - Updates and returns an existing Entity with the given attributes
 
 - `delete(string $id)` : `bool`
@@ -101,5 +122,17 @@ None
 - `first($default = null)` : [Entity](#class-entity) | `null` | `mixed`
   - Returns the first index of the collection or `$default` is empty
 
-- `count()` : int <a id="class-entitycollection-count"></a>
+- `count()` : `int`
   - Returns the amount of entities in the collection
+ 
+- `all()` : `array`
+  - Get the collection as an array
+
+- `getEntitySet`: [EntitySet](#entityset)
+  - Get the collections EntitySet
+  
+- `query()` : [Builder](#builder)
+  - Get a query pointing to the collection (includes extentions)
+  
+- `toArray()` : `array`
+  - Get the collection as an array (converts all entities within also)
