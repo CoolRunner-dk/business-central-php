@@ -72,12 +72,16 @@ $companies = $sdk->companies();
 ## Class Reference
 
 ### Entity
-<a id="class-entity"></a>
+
+#### Entity Properties
+
+Check the individual entity types under on [Entities.md](entities.md) 
 
 ### EntityCollection
 Container class for Entities fetched from Business Central
 
 #### EntityCollection Properties
+
 None
 
 #### EntityCollection Methods
