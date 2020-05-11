@@ -50,7 +50,7 @@ $query = $sdk->query();
 ```php
 $query = $sdk->query();
 
-// Navigate using navigateTo(...) (or shorthand ->to(...)
+// Navigate using ->navigateTo(...) (or shorthand ->to(...)
 $query->to('companies','companyId')->to('customers') // Equivalent of fetching from 'companies(companyId)/customers'
 ```
 
