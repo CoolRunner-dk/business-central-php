@@ -72,6 +72,8 @@ $companies = $sdk->companies();
 
 ## Class Reference
 
+### Entity
+
 ### EntityCollection
 
 #### EntityCollection Properties
@@ -79,19 +81,19 @@ None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null) : Entity|null`
+- `find(string $id, $default = null) : ` [Entity](#entity)|null
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-- `create(array $attributes) : Entity`
+- `create(array $attributes) : ` [Entity](#entity)
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes) : Entity`
+- `update(string $id, array $attributes) : ` [Entity](#entity)
   - Updates and returns an existing Entity with the given attributes
 
-- `delete(string $id) : bool`
+- `delete(string $id) : ` bool
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
 
-- `first($default = null)` : Entity|null|mixed
+- `first($default = null)` : [Entity](#entity)|null|mixed
   - Returns the first index of the collection or `$default` is empty
 
 - `count()` : int
