@@ -81,16 +81,16 @@ None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null) : ` [Entity](#entity)|null
+- `find(string $id, $default = null)` : [Entity](#entity) | `null`
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-- `create(array $attributes) : ` [Entity](#entity)
+- `create(array $attributes)` : [Entity](#entity)
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes) : ` [Entity](#entity)
+- `update(string $id, array $attributes)` : [Entity](#entity)
   - Updates and returns an existing Entity with the given attributes
 
-- `delete(string $id) : ` bool
+- `delete(string $id)` : bool
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
 
 - `first($default = null)` : [Entity](#entity)|null|mixed
