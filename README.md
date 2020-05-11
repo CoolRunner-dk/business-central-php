@@ -74,10 +74,10 @@ $companies = $sdk->companies();
 
 ### EntityCollection
 
-#### Properties
+#### EntityCollection Properties
 None
 
-#### Methods
+#### EntityCollection Methods
 
 - `find(string $id, $default = null) : Entity|null`
   - Finds and returns an entity from the collection with the given id or `$default` on failure
@@ -90,3 +90,9 @@ None
 
 - `delete(string $id) : bool`
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
+
+- `first($default = null)` : Entity|null|mixed
+  - Returns the first index of the collection or `$default` is empty
+
+- `count()` : int
+  - Returns the amount of entities in the collection
