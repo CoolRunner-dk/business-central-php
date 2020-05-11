@@ -33,12 +33,14 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     protected $type;
     protected $total_count;
-    protected $collection = [];
+    protected $collection    = [];
+    protected $auto_paginate = false;
 
     public function __construct(Builder $query, EntitySet $type = null, array $items = [])
     {
-        $this->query = $query;
-        $this->type  = $type;
+        $this->query         = $query;
+        $this->type          = $type;
+        $this->auto_paginate = $query->getSDK()->option('auto_paginate', false);
 
         if ($type) {
             foreach ($items as $item) {
@@ -52,14 +54,12 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     protected function insert($item)
     {
-        try {
-            $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? null);
-            $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
-        } catch (\Throwable $exception) {
-            dd($item);
-        }
+        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? null);
+        $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
 
         $this->collection[$entity['id']] = $entity;
+
+        return $entity;
     }
 
     protected function propagate()
@@ -74,7 +74,9 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
                 $this->insert($item);
             }
         } else {
-            $this->type        = $this->query->getEntitySet($response['@odata.context']);
+            $this->type = $this->query->getEntitySetByType($response['@odata.context']) ??
+                          $this->query->getEntitySet($response['@odata.context']);
+
             $this->total_count = 1;
             $this->insert($response);
         }
@@ -86,6 +88,14 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
         return $this->total_count;
     }
 
+    /**
+     * Return the first index of the collection
+     *
+     * @param null $default
+     *
+     * @return Entity|null|mixed
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function first($default = null)
     {
         return Arr::first($this->collection) ?? $default;
@@ -117,7 +127,6 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
      *
      * @return Entity
      * @throws ValidationException If entity validation failed
-     * @throws MethodNotAllowedException If the current collection doesn't support inserts
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
     public function create(array $attributes)
@@ -187,7 +196,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     public function toJson($options = 0)
     {
-        return json_encode($this, $options);
+        return json_encode($this->jsonSerialize(), $options);
     }
 
     // endregion
@@ -202,9 +211,8 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     public function next()
     {
         $exists = next($this->collection);
-        if ( ! $exists) {
-            $this->query->nextPage();
-            $this->propagate();
+        if ( ! $exists && $this->auto_paginate) {
+            $this->nextPage();
         }
     }
 
@@ -241,5 +249,18 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     public function offsetUnset($offset)
     {
         // TODO: Implement offsetUnset() method.
+    }
+
+    public function autoPaginate(bool $state)
+    {
+        $this->auto_paginate = $state;
+
+        return $this;
+    }
+
+    public function nextPage()
+    {
+        $this->query->nextPage();
+        $this->propagate();
     }
 }

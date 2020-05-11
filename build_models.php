@@ -57,7 +57,8 @@ readline("Press enter to continue");
 $sdk = SDK::instance($credentials['tenant'], $credentials);
 $now = (new DateTime())->format('Y-m-d H:i:s');
 
-$map = [];
+$map  = [];
+$docs = [];
 
 $stub  = file_get_contents('stubs/model.stub');
 $types = $sdk->schema->getEntityTypes()->sortKeys();
@@ -67,22 +68,36 @@ foreach ($types as $type) {
     $schema_type = $type->name;
     $path        = "src/Models/$class_name.php";
 
-    $fillable = [];
     foreach ($type->properties() as $property) {
-        if ( ! $property->read_only) {
-            $fillable[] = "        '$property->name',";
+        $docs["\BusinessCentral\Models\\$class_name"]['properties'][] = $property;
+    }
+
+    foreach ($type->relations() as $property) {
+        $docs["\BusinessCentral\Models\\$class_name"]['relations'][] = $property;
+    }
+
+    $fillable = [];
+    $guarded  = [];
+    foreach ($type->properties() as $property) {
+        if ($property->fillable) {
+            $fillable[]                                                 = "        '$property->name',";
+        } else {
+            $guarded[]                                                 = "        '$property->name',";
         }
     }
     $fillable = implode("\n", $fillable);
+    $guarded  = implode("\n", $guarded);
 
     $contents = str_replace([
         '{CLASS_NAME}',
         '{SCHEMA_TYPE}',
         '{FILLABLE}',
+        '{GUARDED}',
     ], [
         $class_name,
         $schema_type,
         $fillable,
+        $guarded,
     ], $stub);
 
     if ( ! file_exists($path) || in_array('--reset', $argv)) {
@@ -109,6 +124,36 @@ preg_match('/protected static \$map \= \[[\r\n]+(.+)\]/s', $map_contents, $match
 $map_contents = str_replace($matches[1], implode($map_lines), $map_contents);
 
 file_put_contents('src/ClassMap.php', $map_contents);
+
+$doc_contents = '';
+foreach ($docs as $class => $doc) {
+    $doc_contents .= sprintf("# %s\n", class_basename($class));
+    $doc_contents .= "## Properties\n";
+    $doc_contents .= "| Name | Type | Read Only |\n";
+    $doc_contents .= "| --- | --- | --- |\n";
+    foreach ($doc['properties'] as $item) {
+        $doc_type = $item->getDocType();
+        if ($doc_type instanceof ComplexType) {
+            $doc_type = $doc_type->name;
+        }
+        $doc_contents .= sprintf("| %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'Yes' : 'No');
+    }
+    $doc_contents .= "\n";
+
+    if(!empty($doc['relations'] ?? [])) {
+        $doc_contents .= "## Relations\n";
+        $doc_contents .= "| Name | Type |\n";
+        $doc_contents .= "| --- | --- |\n";
+        /** @var \BusinessCentral\Schema\NavigationProperty $item */
+        foreach ($doc['relations'] ?? [] as $item) {
+            $doc_contents .= sprintf("| %s | %s |\n", $item->name, class_basename(ClassMap::map($item->getEntityType())));
+        }
+        $doc_contents .= "\n";
+    }
+
+}
+
+file_put_contents('entities.md',$doc_contents);
 
 function __generate_doc(string $class, EntityType $type)
 {

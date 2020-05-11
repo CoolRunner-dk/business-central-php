@@ -34,10 +34,11 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 {
     use HasQueryBuilder;
 
-    protected $guarded  = [
+    protected $guarded = [
         'id',
         'lastModifiedDateTime',
     ];
+
     protected $fillable = [];
 
     protected $attributes = [];
@@ -210,6 +211,9 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
             }
 
             $this->query->delete($this->etag);
+
+            $this->attributes['id'] = $this->original['id'] = null;
+            $this->query->navigateTo($this->getEntityType()->getEntitySet()->name, null);
         }
 
         return true;

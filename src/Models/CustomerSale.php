@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CustomerSale
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $customerId
  * @property string $customerNumber
@@ -26,5 +26,9 @@ class CustomerSale extends Entity
         'name',
         'totalSalesAmount',
         'dateFilter_FilterOnly',
+    ];
+
+    protected $guarded  = [
+
     ];
 }

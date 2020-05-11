@@ -1,7 +1,31 @@
 {
-    "customer" : {
-        "taxAreaDisplayName" : {
-            "readOnly" : true
+    "customer"  : {
+        "properties" : {
+            "taxAreaDisplayName" : {
+                "readOnly" : true
+            }
+        },
+        "fillable"   : [],
+        "guarded"    : []
+    },
+    "__example" : {
+        "properties" : {
+            "property" : {
+                "readOnly" : true,
+                "guarded"  : true
+            }
+        },
+        "fillable"   : [],
+        "guarded"    : []
+    },
+    "__always"  : {
+        "properties" : {
+            "id"                   : {
+                "readOnly" : true
+            },
+            "lastModifiedDateTime" : {
+                "readOnly" : true
+            }
         }
     }
 }

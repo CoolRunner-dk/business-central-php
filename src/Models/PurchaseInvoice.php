@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PurchaseInvoice
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $number
@@ -52,7 +52,6 @@ class PurchaseInvoice extends Entity
     protected static $schema_type = 'purchaseInvoice';
 
     protected $fillable = [
-        'id',
         'number',
         'invoiceDate',
         'postingDate',
@@ -79,6 +78,10 @@ class PurchaseInvoice extends Entity
         'totalTaxAmount',
         'totalAmountIncludingTax',
         'status',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

@@ -11,4 +11,8 @@ class {CLASS_NAME} extends Entity
     protected $fillable = [
 {FILLABLE}
     ];
+
+    protected $guarded  = [
+{GUARDED}
+    ];
 }

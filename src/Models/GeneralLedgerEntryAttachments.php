@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class GeneralLedgerEntryAttachments
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property int $generalLedgerEntryNumber
  * @property-read string $id
@@ -25,10 +25,13 @@ class GeneralLedgerEntryAttachments extends Entity
 
     protected $fillable = [
         'generalLedgerEntryNumber',
-        'id',
         'fileName',
         'byteSize',
         'content',
         'createdDateTime',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

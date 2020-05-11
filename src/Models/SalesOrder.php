@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesOrder
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $number
@@ -61,7 +61,6 @@ class SalesOrder extends Entity
     protected static $schema_type = 'salesOrder';
 
     protected $fillable = [
-        'id',
         'number',
         'externalDocumentNumber',
         'orderDate',
@@ -93,8 +92,12 @@ class SalesOrder extends Entity
         'totalAmountIncludingTax',
         'fullyShipped',
         'status',
-        'lastModifiedDateTime',
         'phoneNumber',
         'email',
+    ];
+
+    protected $guarded  = [
+        'id',
+        'lastModifiedDateTime',
     ];
 }

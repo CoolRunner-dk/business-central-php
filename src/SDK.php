@@ -56,6 +56,7 @@ class SDK
 
         // Defaults
         'default_collection_size' => 20,
+        'auto_paginate'           => false,
     ];
 
     protected function __construct($tenant, $options)

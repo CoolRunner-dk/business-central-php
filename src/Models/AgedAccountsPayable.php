@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class AgedAccountsPayable
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $vendorId
  * @property string $vendorNumber
@@ -38,5 +38,9 @@ class AgedAccountsPayable extends Entity
         'period3Amount',
         'agedAsOfDate',
         'periodLengthFilter',
+    ];
+
+    protected $guarded  = [
+
     ];
 }

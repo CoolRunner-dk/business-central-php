@@ -14,12 +14,14 @@ use Throwable;
 class OperationNotAllowedException extends Exception
 {
     protected $entity;
-    protected $capability;
+    protected $operation;
 
     public function __construct(Entity $entity, string $operation, Throwable $previous = null)
     {
-        $this->entity = $entity;
-        $message      = "Operation '$operation' not allowed on Entity of type '{$this->entity->getEntityType()->name}'";
+        $this->entity    = $entity;
+        $this->operation = $operation;
+        
+        $message = "Operation '$operation' not allowed on Entity of type '{$this->entity->getEntityType()->name}'";
 
         parent::__construct($message, $code = 0, $previous);
     }

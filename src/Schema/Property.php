@@ -17,6 +17,7 @@ use Carbon\Carbon;
  * @property string $name
  * @property string $type
  * @property bool   $read_only
+ * @property bool   $fillable
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -31,6 +32,8 @@ class Property
     protected $validation = [];
 
     protected $read_only = false;
+    protected $guarded   = false;
+    protected $fillable  = false;
 
     public function __construct($property, Schema $schema, EntityType $entity_type)
     {
@@ -38,7 +41,9 @@ class Property
         $this->name   = $property['@attributes']['Name'];
         $this->type   = $property['@attributes']['Type'];
 
-        $this->read_only = $this->schema->getOverrides($entity_type->name, $this->name)['readOnly'] ?? false;
+        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->name, $this->name);
+        $this->fillable  = $this->schema->propertyIsFillable($entity_type->name, $this->name);
+
 
         $this->validation = [
             'nullable'   => filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN),
@@ -171,6 +176,8 @@ class Property
             case 'name':
             case 'type':
             case 'read_only':
+            case 'guarded':
+            case 'fillable':
                 return $this->{$name};
         }
     }

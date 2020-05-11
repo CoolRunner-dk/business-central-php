@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Company
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $systemVersion
@@ -123,10 +123,13 @@ class Company extends Entity
     protected static $schema_type = 'company';
 
     protected $fillable = [
-        'id',
         'systemVersion',
         'name',
         'displayName',
         'businessProfileId',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

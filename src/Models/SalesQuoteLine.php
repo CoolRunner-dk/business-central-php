@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesQuoteLine
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $documentId
@@ -43,7 +43,6 @@ class SalesQuoteLine extends Entity
     protected static $schema_type = 'salesQuoteLine';
 
     protected $fillable = [
-        'id',
         'documentId',
         'sequence',
         'itemId',
@@ -66,5 +65,9 @@ class SalesQuoteLine extends Entity
         'netAmount',
         'netTaxAmount',
         'netAmountIncludingTax',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

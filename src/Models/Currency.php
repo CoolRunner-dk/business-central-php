@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Currency
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $code
@@ -23,12 +23,15 @@ class Currency extends Entity
     protected static $schema_type = 'currency';
 
     protected $fillable = [
-        'id',
         'code',
         'displayName',
         'symbol',
         'amountDecimalPlaces',
         'amountRoundingPrecision',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

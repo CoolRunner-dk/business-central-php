@@ -156,4 +156,25 @@ class Schema
     {
         return $this->overrides[$type][$property] ?? [];
     }
+
+    public function propertyIs(string $model, string $property, string $attribute)
+    {
+        return $this->overrides[$model]["properties"][$property][$attribute] ??
+               $this->overrides['__always']["properties"][$property][$attribute] ?? false;
+    }
+
+    public function propertyIsGuarded(string $model, string $property)
+    {
+        return $this->propertyIs($model, $property, 'guarded');
+    }
+
+    public function propertyIsReadOnly(string $model, string $property)
+    {
+        return $this->propertyIs($model, $property, 'readOnly');
+    }
+
+    public function propertyIsFillable(string $model, string $property)
+    {
+        return ! $this->propertyIs($model, $property, 'readOnly');
+    }
 }

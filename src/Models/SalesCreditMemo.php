@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesCreditMemo
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $number
@@ -60,7 +60,6 @@ class SalesCreditMemo extends Entity
     protected static $schema_type = 'salesCreditMemo';
 
     protected $fillable = [
-        'id',
         'number',
         'externalDocumentNumber',
         'creditMemoDate',
@@ -87,10 +86,14 @@ class SalesCreditMemo extends Entity
         'totalTaxAmount',
         'totalAmountIncludingTax',
         'status',
-        'lastModifiedDateTime',
         'invoiceId',
         'invoiceNumber',
         'phoneNumber',
         'email',
+    ];
+
+    protected $guarded  = [
+        'id',
+        'lastModifiedDateTime',
     ];
 }

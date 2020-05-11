@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DefaultDimensions
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $parentId
  * @property string $dimensionId
@@ -34,5 +34,9 @@ class DefaultDimensions extends Entity
         'dimensionValueId',
         'dimensionValueCode',
         'postingValidation',
+    ];
+
+    protected $guarded  = [
+
     ];
 }

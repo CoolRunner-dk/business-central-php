@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Item
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $number
@@ -39,7 +39,6 @@ class Item extends Entity
     protected static $schema_type = 'item';
 
     protected $fillable = [
-        'id',
         'number',
         'displayName',
         'type',
@@ -55,6 +54,10 @@ class Item extends Entity
         'unitCost',
         'taxGroupId',
         'taxGroupCode',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

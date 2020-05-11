@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class Subscriptions
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $subscriptionId
  * @property string $notificationUrl
@@ -27,8 +27,11 @@ class Subscriptions extends Entity
         'notificationUrl',
         'resource',
         'userId',
-        'lastModifiedDateTime',
         'clientState',
         'expirationDateTime',
+    ];
+
+    protected $guarded  = [
+        'lastModifiedDateTime',
     ];
 }

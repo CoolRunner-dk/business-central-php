@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class GeneralLedgerEntry
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read int $id
  * @property string $postingDate
@@ -29,7 +29,6 @@ class GeneralLedgerEntry extends Entity
     protected static $schema_type = 'generalLedgerEntry';
 
     protected $fillable = [
-        'id',
         'postingDate',
         'documentNumber',
         'documentType',
@@ -39,6 +38,10 @@ class GeneralLedgerEntry extends Entity
         'debitAmount',
         'creditAmount',
         'dimensions',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

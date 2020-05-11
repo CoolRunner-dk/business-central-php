@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesOrderLine
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $documentId
@@ -49,7 +49,6 @@ class SalesOrderLine extends Entity
     protected static $schema_type = 'salesOrderLine';
 
     protected $fillable = [
-        'id',
         'documentId',
         'sequence',
         'itemId',
@@ -78,5 +77,9 @@ class SalesOrderLine extends Entity
         'invoicedQuantity',
         'invoiceQuantity',
         'shipQuantity',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

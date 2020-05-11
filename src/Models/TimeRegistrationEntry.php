@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TimeRegistrationEntry
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $employeeId
@@ -32,7 +32,6 @@ class TimeRegistrationEntry extends Entity
     protected static $schema_type = 'timeRegistrationEntry';
 
     protected $fillable = [
-        'id',
         'employeeId',
         'employeeNumber',
         'jobId',
@@ -46,5 +45,9 @@ class TimeRegistrationEntry extends Entity
         'unitOfMeasure',
         'dimensions',
         'lastModfiedDateTime',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

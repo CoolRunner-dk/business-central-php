@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TrialBalance
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $number
  * @property string $accountId
@@ -36,5 +36,9 @@ class TrialBalance extends Entity
         'balanceAtDateDebit',
         'balanceAtDateCredit',
         'dateFilter',
+    ];
+
+    protected $guarded  = [
+
     ];
 }

@@ -8,7 +8,6 @@
 namespace BusinessCentral\Exceptions;
 
 
-use BusinessCentral\Exceptions\Query\InvalidColumnException;
 use BusinessCentral\Query\Builder;
 use Throwable;
 

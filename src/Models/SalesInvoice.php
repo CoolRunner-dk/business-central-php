@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesInvoice
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $number
@@ -65,7 +65,6 @@ class SalesInvoice extends Entity
     protected static $schema_type = 'salesInvoice';
 
     protected $fillable = [
-        'id',
         'number',
         'externalDocumentNumber',
         'invoiceDate',
@@ -99,8 +98,12 @@ class SalesInvoice extends Entity
         'totalTaxAmount',
         'totalAmountIncludingTax',
         'status',
-        'lastModifiedDateTime',
         'phoneNumber',
         'email',
+    ];
+
+    protected $guarded  = [
+        'id',
+        'lastModifiedDateTime',
     ];
 }

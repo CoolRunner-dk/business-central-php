@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CompanyInformation
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $displayName
@@ -29,7 +29,6 @@ class CompanyInformation extends Entity
     protected static $schema_type = 'companyInformation';
 
     protected $fillable = [
-        'id',
         'displayName',
         'address',
         'phoneNumber',
@@ -41,6 +40,10 @@ class CompanyInformation extends Entity
         'currentFiscalYearStartDate',
         'industry',
         'picture',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class JournalLine
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $journalDisplayName
@@ -34,7 +34,6 @@ class JournalLine extends Entity
     protected static $schema_type = 'journalLine';
 
     protected $fillable = [
-        'id',
         'journalDisplayName',
         'lineNumber',
         'accountType',
@@ -47,6 +46,10 @@ class JournalLine extends Entity
         'description',
         'comment',
         'dimensions',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

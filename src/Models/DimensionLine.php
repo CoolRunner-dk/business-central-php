@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DimensionLine
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $parentId
  * @property-read string $id
@@ -26,11 +26,14 @@ class DimensionLine extends Entity
 
     protected $fillable = [
         'parentId',
-        'id',
         'code',
         'displayName',
         'valueId',
         'valueCode',
         'valueDisplayName',
+    ];
+
+    protected $guarded  = [
+        'id',
     ];
 }

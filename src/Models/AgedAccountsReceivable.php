@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class AgedAccountsReceivable
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property string $customerId
  * @property string $customerNumber
@@ -38,5 +38,9 @@ class AgedAccountsReceivable extends Entity
         'period3Amount',
         'agedAsOfDate',
         'periodLengthFilter',
+    ];
+
+    protected $guarded  = [
+
     ];
 }

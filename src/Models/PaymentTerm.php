@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PaymentTerm
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $code
@@ -24,13 +24,16 @@ class PaymentTerm extends Entity
     protected static $schema_type = 'paymentTerm';
 
     protected $fillable = [
-        'id',
         'code',
         'displayName',
         'dueDateCalculation',
         'discountDateCalculation',
         'discountPercent',
         'calculateDiscountOnCreditMemos',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }

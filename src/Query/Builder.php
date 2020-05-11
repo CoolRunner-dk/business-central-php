@@ -21,6 +21,8 @@ use GuzzleHttp\RequestOptions;
 /**
  * Class Builder
  *
+ * @method $this to(string $component, string $id = null)
+ *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Query
  *
@@ -133,7 +135,7 @@ class Builder
 
     public function getEntityType(string $odata_context)
     {
-        return $this->sdk->schema->getEntitySet($this->getContext($odata_context));
+        return $this->sdk->schema->getEntityType($this->getContext($odata_context));
     }
 
     public function getUri()
@@ -167,7 +169,7 @@ class Builder
         return array_filter($query_string);
     }
 
-    public function navigateTo($component, $id = null)
+    public function navigateTo(string $component, string $id = null)
     {
         $this->components[$component] = array_filter(['component' => $component, 'id' => $id]);
 
@@ -217,8 +219,17 @@ class Builder
         return $clone;
     }
 
+    public function getSDK()
+    {
+        return $this->sdk;
+    }
+
     public function __call($name, $arguments)
     {
+        if ($name === 'to') {
+            return $this->navigateTo(...$arguments);
+        }
+
         if (method_exists(EntityCollection::class, $name)) {
             return $this->fetch()->{$name}(...$arguments);
         }

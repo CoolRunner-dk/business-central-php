@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class TaxArea
- * Auto-generated on: 2020-05-07 09:06:12
+ * Auto-generated on: 2020-05-11 13:38:48
  *
  * @property-read string $id
  * @property string $code
@@ -21,10 +21,13 @@ class TaxArea extends Entity
     protected static $schema_type = 'taxArea';
 
     protected $fillable = [
-        'id',
         'code',
         'displayName',
         'taxType',
+    ];
+
+    protected $guarded  = [
+        'id',
         'lastModifiedDateTime',
     ];
 }
