@@ -2,19 +2,19 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 | category | string | No |
 | subCategory | string | No |
 | blocked | bool | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # AgedAccountsPayable
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| vendorId | string | No |
+| vendorId | guid | No |
 | vendorNumber | string | No |
 | name | string | No |
 | currencyCode | string | No |
@@ -23,14 +23,14 @@
 | period1Amount | float | No |
 | period2Amount | float | No |
 | period3Amount | float | No |
-| agedAsOfDate | string | No |
+| agedAsOfDate |  | No |
 | periodLengthFilter | string | No |
 
 # AgedAccountsReceivable
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| customerId | string | No |
+| customerId | guid | No |
 | customerNumber | string | No |
 | name | string | No |
 | currencyCode | string | No |
@@ -39,19 +39,19 @@
 | period1Amount | float | No |
 | period2Amount | float | No |
 | period3Amount | float | No |
-| agedAsOfDate | string | No |
+| agedAsOfDate |  | No |
 | periodLengthFilter | string | No |
 
 # Attachments
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| parentId | string | No |
-| id | string | Yes |
+| parentId | guid | No |
+| id | guid | Yes |
 | fileName | string | No |
 | byteSize | int | No |
 | content | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # BalanceSheet
 ## Properties
@@ -62,13 +62,13 @@
 | balance | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter | string | No |
+| dateFilter |  | No |
 
 # BankAccount
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 
@@ -81,13 +81,13 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter | string | No |
+| dateFilter |  | No |
 
 # Company
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | systemVersion | string | No |
 | name | string | No |
 | displayName | string | No |
@@ -152,7 +152,7 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | displayName | string | No |
 | address | postalAddressType | No |
 | phoneNumber | string | No |
@@ -161,38 +161,38 @@
 | website | string | No |
 | taxRegistrationNumber | string | No |
 | currencyCode | string | No |
-| currentFiscalYearStartDate | string | No |
+| currentFiscalYearStartDate |  | No |
 | industry | string | No |
 | picture | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # CountryRegion
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | addressFormat | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Currency
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | symbol | string | No |
 | amountDecimalPlaces | string | No |
 | amountRoundingPrecision | float | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Customer
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 | type | string | No |
@@ -201,16 +201,16 @@
 | email | string | No |
 | website | string | No |
 | taxLiable | bool | No |
-| taxAreaId | string | No |
+| taxAreaId | guid | No |
 | taxAreaDisplayName | string | Yes |
 | taxRegistrationNumber | string | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
-| paymentTermsId | string | No |
-| shipmentMethodId | string | No |
-| paymentMethodId | string | No |
+| paymentTermsId | guid | No |
+| shipmentMethodId | guid | No |
+| paymentMethodId | guid | No |
 | blocked | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -227,7 +227,7 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | balance | float | No |
 | totalSalesExcludingTax | float | No |
@@ -237,22 +237,22 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | journalDisplayName | string | No |
 | lineNumber | int | No |
-| customerId | string | No |
+| customerId | guid | No |
 | customerNumber | string | No |
 | contactId | string | No |
-| postingDate | string | No |
+| postingDate |  | No |
 | documentNumber | string | No |
 | externalDocumentNumber | string | No |
 | amount | float | No |
-| appliesToInvoiceId | string | No |
+| appliesToInvoiceId | guid | No |
 | appliesToInvoiceNumber | string | No |
 | description | string | No |
 | comment | string | No |
 | dimensions | dimensionType | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -263,11 +263,11 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
-| balancingAccountId | string | No |
+| lastModifiedDateTime | date | Yes |
+| balancingAccountId | guid | No |
 | balancingAccountNumber | string | No |
 
 ## Relations
@@ -280,20 +280,20 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| customerId | string | No |
+| customerId | guid | No |
 | customerNumber | string | No |
 | name | string | No |
 | totalSalesAmount | float | No |
-| dateFilter_FilterOnly | string | No |
+| dateFilter_FilterOnly |  | No |
 
 # DefaultDimensions
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| parentId | string | No |
-| dimensionId | string | No |
+| parentId | guid | No |
+| dimensionId | guid | No |
 | dimensionCode | string | No |
-| dimensionValueId | string | No |
+| dimensionValueId | guid | No |
 | dimensionValueCode | string | No |
 | postingValidation | string | No |
 
@@ -308,10 +308,10 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -322,11 +322,11 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| parentId | string | No |
-| id | string | Yes |
+| parentId | guid | No |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| valueId | string | No |
+| valueId | guid | No |
 | valueCode | string | No |
 | valueDisplayName | string | No |
 
@@ -339,16 +339,16 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Employee
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 | givenName | string | No |
@@ -360,12 +360,12 @@
 | mobilePhone | string | No |
 | email | string | No |
 | personalEmail | string | No |
-| employmentDate | string | No |
-| terminationDate | string | No |
+| employmentDate |  | No |
+| terminationDate |  | No |
 | status | string | No |
-| birthDate | string | No |
+| birthDate |  | No |
 | statisticsGroupCode | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -379,16 +379,16 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | int | Yes |
-| postingDate | string | No |
+| postingDate |  | No |
 | documentNumber | string | No |
 | documentType | string | No |
-| accountId | string | No |
+| accountId | guid | No |
 | accountNumber | string | No |
 | description | string | No |
 | debitAmount | float | No |
 | creditAmount | float | No |
 | dimensions | dimensionType | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -400,11 +400,11 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | generalLedgerEntryNumber | int | No |
-| id | string | Yes |
+| id | guid | Yes |
 | fileName | string | No |
 | byteSize | int | No |
 | content | string | No |
-| createdDateTime | string | No |
+| createdDateTime | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -420,29 +420,29 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter | string | No |
+| dateFilter |  | No |
 
 # Item
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 | type | string | No |
-| itemCategoryId | string | No |
+| itemCategoryId | guid | No |
 | itemCategoryCode | string | No |
 | blocked | bool | No |
-| baseUnitOfMeasureId | string | No |
+| baseUnitOfMeasureId | guid | No |
 | baseUnitOfMeasure | unitOfMeasureType | No |
 | gtin | string | No |
 | inventory | float | No |
 | unitPrice | float | No |
 | priceIncludesTax | bool | No |
 | unitCost | float | No |
-| taxGroupId | string | No |
+| taxGroupId | guid | No |
 | taxGroupCode | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -455,20 +455,20 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Journal
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
-| balancingAccountId | string | No |
+| lastModifiedDateTime | date | Yes |
+| balancingAccountId | guid | No |
 | balancingAccountNumber | string | No |
 
 ## Relations
@@ -481,20 +481,20 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | journalDisplayName | string | No |
 | lineNumber | int | No |
 | accountType | string | No |
-| accountId | string | No |
+| accountId | guid | No |
 | accountNumber | string | No |
-| postingDate | string | No |
+| postingDate |  | No |
 | documentNumber | string | No |
 | externalDocumentNumber | string | No |
 | amount | float | No |
 | description | string | No |
 | comment | string | No |
 | dimensions | dimensionType | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -506,36 +506,36 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # PaymentTerm
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | dueDateCalculation | string | No |
 | discountDateCalculation | string | No |
 | discountPercent | float | No |
 | calculateDiscountOnCreditMemos | bool | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # PdfDocument
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | content | string | No |
 
 # Picture
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | width | int | No |
 | height | int | No |
 | contentType | string | No |
@@ -545,7 +545,7 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 
@@ -553,25 +553,25 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
-| invoiceDate | string | No |
-| postingDate | string | No |
-| dueDate | string | No |
+| invoiceDate |  | No |
+| postingDate |  | No |
+| dueDate |  | No |
 | vendorInvoiceNumber | string | No |
-| vendorId | string | No |
+| vendorId | guid | No |
 | vendorNumber | string | No |
 | vendorName | string | No |
 | payToName | string | No |
 | payToContact | string | No |
-| payToVendorId | string | No |
+| payToVendorId | guid | No |
 | payToVendorNumber | string | No |
 | shipToName | string | No |
 | shipToContact | string | No |
 | buyFromAddress | postalAddressType | No |
 | payToAddress | postalAddressType | No |
 | shipToAddress | postalAddressType | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
 | pricesIncludeTax | bool | No |
 | discountAmount | float | No |
@@ -580,7 +580,7 @@
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | status | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -595,10 +595,10 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | string | Yes |
-| documentId | string | No |
+| documentId | guid | No |
 | sequence | int | No |
-| itemId | string | No |
-| accountId | string | No |
+| itemId | guid | No |
+| accountId | guid | No |
 | lineType | string | No |
 | lineDetails | documentLineObjectDetailsType | No |
 | description | string | No |
@@ -617,7 +617,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| expectedReceiptDate | string | No |
+| expectedReceiptDate |  | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -634,31 +634,31 @@
 | netChange | float | No |
 | lineType | string | No |
 | indentation | int | No |
-| dateFilter | string | No |
+| dateFilter |  | No |
 
 # SalesCreditMemo
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| creditMemoDate | string | No |
-| postingDate | string | No |
-| dueDate | string | No |
-| customerId | string | No |
+| creditMemoDate |  | No |
+| postingDate |  | No |
+| dueDate |  | No |
+| customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
 | customerName | string | No |
 | billToName | string | No |
-| billToCustomerId | string | No |
+| billToCustomerId | guid | No |
 | billToCustomerNumber | string | No |
 | sellingPostalAddress | postalAddressType | No |
 | billingPostalAddress | postalAddressType | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
-| paymentTermsId | string | No |
-| shipmentMethodId | string | No |
+| paymentTermsId | guid | No |
+| shipmentMethodId | guid | No |
 | salesperson | string | No |
 | pricesIncludeTax | bool | No |
 | discountAmount | float | No |
@@ -667,8 +667,8 @@
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | status | string | No |
-| lastModifiedDateTime | string | Yes |
-| invoiceId | string | No |
+| lastModifiedDateTime | date | Yes |
+| invoiceId | guid | No |
 | invoiceNumber | string | No |
 | phoneNumber | string | No |
 | email | string | No |
@@ -688,14 +688,14 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | string | Yes |
-| documentId | string | No |
+| documentId | guid | No |
 | sequence | int | No |
-| itemId | string | No |
-| accountId | string | No |
+| itemId | guid | No |
+| accountId | guid | No |
 | lineType | string | No |
 | lineDetails | documentLineObjectDetailsType | No |
 | description | string | No |
-| unitOfMeasureId | string | No |
+| unitOfMeasureId | guid | No |
 | unitOfMeasure | unitOfMeasureType | No |
 | unitPrice | float | No |
 | quantity | float | No |
@@ -711,7 +711,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate | string | No |
+| shipmentDate |  | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -723,31 +723,31 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| invoiceDate | string | No |
-| postingDate | string | No |
-| dueDate | string | No |
+| invoiceDate |  | No |
+| postingDate |  | No |
+| dueDate |  | No |
 | customerPurchaseOrderReference | string | No |
-| customerId | string | No |
+| customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
 | customerName | string | No |
 | billToName | string | No |
-| billToCustomerId | string | No |
+| billToCustomerId | guid | No |
 | billToCustomerNumber | string | No |
 | shipToName | string | No |
 | shipToContact | string | No |
 | sellingPostalAddress | postalAddressType | No |
 | billingPostalAddress | postalAddressType | No |
 | shippingPostalAddress | postalAddressType | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
-| orderId | string | No |
+| orderId | guid | No |
 | orderNumber | string | No |
-| paymentTermsId | string | No |
-| shipmentMethodId | string | No |
+| paymentTermsId | guid | No |
+| shipmentMethodId | guid | No |
 | salesperson | string | No |
 | pricesIncludeTax | bool | No |
 | remainingAmount | float | No |
@@ -757,7 +757,7 @@
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | status | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 | phoneNumber | string | No |
 | email | string | No |
 
@@ -776,14 +776,14 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | string | Yes |
-| documentId | string | No |
+| documentId | guid | No |
 | sequence | int | No |
-| itemId | string | No |
-| accountId | string | No |
+| itemId | guid | No |
+| accountId | guid | No |
 | lineType | string | No |
 | lineDetails | documentLineObjectDetailsType | No |
 | description | string | No |
-| unitOfMeasureId | string | No |
+| unitOfMeasureId | guid | No |
 | unitOfMeasure | unitOfMeasureType | No |
 | unitPrice | float | No |
 | quantity | float | No |
@@ -799,7 +799,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate | string | No |
+| shipmentDate |  | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -811,31 +811,31 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| orderDate | string | No |
-| postingDate | string | No |
-| customerId | string | No |
+| orderDate |  | No |
+| postingDate |  | No |
+| customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
 | customerName | string | No |
 | billToName | string | No |
-| billToCustomerId | string | No |
+| billToCustomerId | guid | No |
 | billToCustomerNumber | string | No |
 | shipToName | string | No |
 | shipToContact | string | No |
 | sellingPostalAddress | postalAddressType | No |
 | billingPostalAddress | postalAddressType | No |
 | shippingPostalAddress | postalAddressType | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
 | pricesIncludeTax | bool | No |
-| paymentTermsId | string | No |
-| shipmentMethodId | string | No |
+| paymentTermsId | guid | No |
+| shipmentMethodId | guid | No |
 | salesperson | string | No |
 | partialShipping | bool | No |
-| requestedDeliveryDate | string | No |
+| requestedDeliveryDate |  | No |
 | discountAmount | float | No |
 | discountAppliedBeforeTax | bool | No |
 | totalAmountExcludingTax | float | No |
@@ -843,7 +843,7 @@
 | totalAmountIncludingTax | float | No |
 | fullyShipped | bool | No |
 | status | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 | phoneNumber | string | No |
 | email | string | No |
 
@@ -861,14 +861,14 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | string | Yes |
-| documentId | string | No |
+| documentId | guid | No |
 | sequence | int | No |
-| itemId | string | No |
-| accountId | string | No |
+| itemId | guid | No |
+| accountId | guid | No |
 | lineType | string | No |
 | lineDetails | documentLineObjectDetailsType | No |
 | description | string | No |
-| unitOfMeasureId | string | No |
+| unitOfMeasureId | guid | No |
 | unitOfMeasure | unitOfMeasureType | No |
 | quantity | float | No |
 | unitPrice | float | No |
@@ -884,7 +884,7 @@
 | netAmount | float | No |
 | netTaxAmount | float | No |
 | netAmountIncludingTax | float | No |
-| shipmentDate | string | No |
+| shipmentDate |  | No |
 | shippedQuantity | float | No |
 | invoicedQuantity | float | No |
 | invoiceQuantity | float | No |
@@ -900,38 +900,38 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | externalDocumentNumber | string | No |
-| documentDate | string | No |
-| postingDate | string | No |
-| dueDate | string | No |
-| customerId | string | No |
+| documentDate |  | No |
+| postingDate |  | No |
+| dueDate |  | No |
+| customerId | guid | No |
 | contactId | string | No |
 | customerNumber | string | No |
 | customerName | string | No |
 | billToName | string | No |
-| billToCustomerId | string | No |
+| billToCustomerId | guid | No |
 | billToCustomerNumber | string | No |
 | shipToName | string | No |
 | shipToContact | string | No |
 | sellingPostalAddress | postalAddressType | No |
 | billingPostalAddress | postalAddressType | No |
 | shippingPostalAddress | postalAddressType | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
-| paymentTermsId | string | No |
-| shipmentMethodId | string | No |
+| paymentTermsId | guid | No |
+| shipmentMethodId | guid | No |
 | salesperson | string | No |
 | discountAmount | float | No |
 | totalAmountExcludingTax | float | No |
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | status | string | No |
-| sentDate | string | No |
-| validUntilDate | string | No |
-| acceptedDate | string | No |
-| lastModifiedDateTime | string | Yes |
+| sentDate | date | No |
+| validUntilDate |  | No |
+| acceptedDate |  | No |
+| lastModifiedDateTime | date | Yes |
 | phoneNumber | string | No |
 | email | string | No |
 
@@ -950,14 +950,14 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | id | string | Yes |
-| documentId | string | No |
+| documentId | guid | No |
 | sequence | int | No |
-| itemId | string | No |
-| accountId | string | No |
+| itemId | guid | No |
+| accountId | guid | No |
 | lineType | string | No |
 | lineDetails | documentLineObjectDetailsType | No |
 | description | string | No |
-| unitOfMeasureId | string | No |
+| unitOfMeasureId | guid | No |
 | unitOfMeasure | unitOfMeasureType | No |
 | unitPrice | float | No |
 | quantity | float | No |
@@ -983,10 +983,10 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Subscriptions
 ## Properties
@@ -995,49 +995,49 @@
 | subscriptionId | string | No |
 | notificationUrl | string | No |
 | resource | string | No |
-| userId | string | No |
-| lastModifiedDateTime | string | Yes |
+| userId | guid | No |
+| lastModifiedDateTime | date | Yes |
 | clientState | string | No |
-| expirationDateTime | string | No |
+| expirationDateTime | date | No |
 
 # TaxArea
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | taxType | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # TaxGroup
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | taxType | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # TimeRegistrationEntry
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
-| employeeId | string | No |
+| id | guid | Yes |
+| employeeId | guid | No |
 | employeeNumber | string | No |
-| jobId | string | No |
+| jobId | guid | No |
 | jobNumber | string | No |
 | absence | string | No |
 | lineNumber | int | No |
-| date | string | No |
+| date |  | No |
 | quantity | float | No |
 | status | string | No |
-| unitOfMeasureId | string | No |
+| unitOfMeasureId | guid | No |
 | unitOfMeasure | unitOfMeasureType | No |
 | dimensions | dimensionType | No |
-| lastModfiedDateTime | string | No |
+| lastModfiedDateTime | date | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -1049,14 +1049,14 @@
 | Name | Type | Read Only |
 | --- | --- | :-: |
 | number | string | No |
-| accountId | string | No |
+| accountId | guid | No |
 | accountType | string | No |
 | display | string | No |
 | totalDebit | string | No |
 | totalCredit | string | No |
 | balanceAtDateDebit | string | No |
 | balanceAtDateCredit | string | No |
-| dateFilter | string | No |
+| dateFilter |  | No |
 
 ## Relations
 | Name | Type | Collection |
@@ -1067,17 +1067,17 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | code | string | No |
 | displayName | string | No |
 | internationalStandardCode | string | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 # Vendor
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| id | string | Yes |
+| id | guid | Yes |
 | number | string | No |
 | displayName | string | No |
 | address | postalAddressType | No |
@@ -1085,15 +1085,15 @@
 | email | string | No |
 | website | string | No |
 | taxRegistrationNumber | string | No |
-| currencyId | string | No |
+| currencyId | guid | No |
 | currencyCode | string | No |
 | irs1099Code | string | No |
-| paymentTermsId | string | No |
-| paymentMethodId | string | No |
+| paymentTermsId | guid | No |
+| paymentMethodId | guid | No |
 | taxLiable | bool | No |
 | blocked | string | No |
 | balance | float | No |
-| lastModifiedDateTime | string | Yes |
+| lastModifiedDateTime | date | Yes |
 
 ## Relations
 | Name | Type | Collection |
@@ -1108,12 +1108,12 @@
 ## Properties
 | Name | Type | Read Only |
 | --- | --- | :-: |
-| vendorId | string | No |
+| vendorId | guid | No |
 | vendorNumber | string | No |
 | name | string | No |
 | totalPurchaseAmount | float | No |
-| dateFilter_FilterOnly | string | No |
+| dateFilter_FilterOnly |  | No |
 
 
 ---
-Generated on 2020-05-11 13:56:11
+Generated on 2020-05-11 14:08:26

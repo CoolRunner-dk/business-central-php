@@ -263,4 +263,9 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
         $this->query->nextPage();
         $this->propagate();
     }
+
+    public function all()
+    {
+        return array_values($this->collection);
+    }
 }

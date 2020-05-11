@@ -132,7 +132,7 @@ foreach ($docs as $class => $doc) {
     $doc_contents .= "| Name | Type | Read Only |\n";
     $doc_contents .= "| --- | --- | :-: |\n";
     foreach ($doc['properties'] as $item) {
-        $doc_type = $item->getDocType();
+        $doc_type = $item->getValidationType();
         if ($doc_type instanceof ComplexType) {
             $doc_type = $doc_type->name;
         }
