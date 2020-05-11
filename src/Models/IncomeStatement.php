@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class IncomeStatement
- * Auto-generated on: 2020-05-11 13:50:37
+ * Auto-generated on: 2020-05-11 13:51:49
  *
  * @property int $lineNumber
  * @property string $display

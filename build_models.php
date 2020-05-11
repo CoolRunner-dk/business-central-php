@@ -150,8 +150,8 @@ foreach ($docs as $class => $doc) {
             $doc_contents .= sprintf(
                 "| %s | [%s](#%s) | %s |\n",
                 $item->name,
-                strtolower($class),
                 $class,
+                strtolower($class),
                 $item->isCollection() ? 'Yes' : 'No'
             );
         }

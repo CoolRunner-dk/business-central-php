@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class GeneralLedgerEntry
- * Auto-generated on: 2020-05-11 13:50:37
+ * Auto-generated on: 2020-05-11 13:51:49
  *
  * @property-read int $id
  * @property string $postingDate
