@@ -299,6 +299,18 @@ Operators:
 
 ---
 
+## Extending Entity Models
+
+The SDK has a range of pre-generated Models it uses to contain and assist the user while using the SDK.  
+You can replace the class used as the container if you want to - Only requirement is that the model _must_ extend `\BusinessCentral\Entity`.
+
+Example:
+```php
+ClassMap::extend('customer', MyTotallyNewAwesomeCustomerModelReplacementOfAbsoluteDoom::class)
+```
+
+This overrides the model class used for all entities of type `customer` in the entire application.
+
 # Contribution
 
 This SDK is not a finished product.  
