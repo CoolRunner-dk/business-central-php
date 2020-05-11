@@ -107,6 +107,7 @@ class Property
             case 'Edm.Int64':
                 return 'int';
             case 'Edm.DateTimeOffset':
+            case 'Edm.Date':
                 return 'date';
             default:
                 if (strpos($this->type, 'Microsoft.NAV.') !== false) {
