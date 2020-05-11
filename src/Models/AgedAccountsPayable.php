@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class AgedAccountsPayable
- * Auto-generated on: 2020-05-11 13:48:14
+ * Auto-generated on: 2020-05-11 13:50:37
  *
  * @property string $vendorId
  * @property string $vendorNumber

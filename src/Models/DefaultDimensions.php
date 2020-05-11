@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class DefaultDimensions
- * Auto-generated on: 2020-05-11 13:48:14
+ * Auto-generated on: 2020-05-11 13:50:37
  *
  * @property string $parentId
  * @property string $dimensionId

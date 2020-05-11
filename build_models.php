@@ -149,9 +149,9 @@ foreach ($docs as $class => $doc) {
             $class        = class_basename(ClassMap::map($item->getEntityType()));
             $doc_contents .= sprintf(
                 "| %s | [%s](#%s) | %s |\n",
-                $class,
-                strtolower($class),
                 $item->name,
+                strtolower($class),
+                $class,
                 $item->isCollection() ? 'Yes' : 'No'
             );
         }

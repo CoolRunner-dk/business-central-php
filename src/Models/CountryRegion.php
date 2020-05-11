@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CountryRegion
- * Auto-generated on: 2020-05-11 13:48:14
+ * Auto-generated on: 2020-05-11 13:50:37
  *
  * @property-read string $id
  * @property string $code
