@@ -11,7 +11,6 @@ License: MIT
    - The SDK uses Basic Authentication
  - Install the library into your application
  - Load the SDK
-<a id="testanchor"></a>
 #### Connecting to Business Central
 
 Business Central for PHP uses a singleton pattern for SDK instances.
@@ -73,28 +72,30 @@ $companies = $sdk->companies();
 ## Class Reference
 
 ### Entity
+<a id="class-entity"></a>
 
 ### EntityCollection
+<a id="class-entitycollection"></a>
 
 #### EntityCollection Properties
 None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null)` : [Entity](#entity) | `null`
+- `find(string $id, $default = null)` : [Entity](#class-entity) | `null` <a id="class-entitycollection-find"></a>
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
-- `create(array $attributes)` : [Entity](#entity)
+- `create(array $attributes)` : [Entity](#class-entity) <a id="class-entitycollection-create"></a>
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes)` : [Entity](#entity)
+- `update(string $id, array $attributes)` : [Entity](#class-entity) <a id="class-entitycollection-update"></a>
   - Updates and returns an existing Entity with the given attributes
 
-- `delete(string $id)` : `bool`
+- `delete(string $id)` : `bool` <a id="class-entitycollection-delete"></a>
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
 
-- `first($default = null)` : [Entity](#entity) | `null` | `mixed`
+- `first($default = null)` : [Entity](#class-entity) | `null` | `mixed` <a id="class-entitycollection-first"></a>
   - Returns the first index of the collection or `$default` is empty
 
-- `count()` : int
+- `count()` : int <a id="class-entitycollection-count"></a>
   - Returns the amount of entities in the collection
