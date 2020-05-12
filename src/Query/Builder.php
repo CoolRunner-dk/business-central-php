@@ -50,12 +50,16 @@ class Builder
         try {
             $uri = $this->getUri();
 
-            $response = $this->sdk->client->request($method, $uri, array_filter([
+            $time = microtime(true);
+
+            $request_options = array_filter([
                 RequestOptions::JSON    => $data,
                 RequestOptions::HEADERS => $headers,
-            ]));
+            ]);
 
-            $this->sdk->logRequest($uri);
+            $response = $this->sdk->client->request($method, $uri, $request_options);
+
+            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options);
 
             return json_decode($response->getBody()->getContents(), true);
 
