@@ -454,7 +454,7 @@ trait Filters
         if (is_string($value)) {
             if (preg_match(Schema::GUID_FORMAT, $value)) {
                 return $value; // Edm.Guid
-            } elseif (is_numeric($value)) {
+            } elseif (is_int($value) || is_float($value) || is_double($value)) {
                 return $value;
             } else {
                 return sprintf("'%s'", urlencode($value));
