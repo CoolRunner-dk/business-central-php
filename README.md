@@ -274,7 +274,8 @@ The `$before` argument is the boolean operator prepended to the query before eve
   - Where property starts with the value - Same SQL `\`column\` like '%value'`
   
 - `whereGroup(Closure $callback, string $before = 'and')` : `self`
-  - Grouped where clause - Example `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
+  - Grouped where clause - Example:  
+    `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
   - This functionality can be shorthanded as `where(function(Builder $query) { ... })`
   
 Operators:  
