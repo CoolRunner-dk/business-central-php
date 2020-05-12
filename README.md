@@ -265,16 +265,17 @@ The `$before` argument is the boolean operator prepended to the query before eve
   - Where property is a datetime (`Y-m-d\TH:i:s.v\Z`)
 
 - `whereContains(string $property, $value, string $before = 'and')` : `self`
-  - Where property contains the value - Same SQL `\`column\` like '%value%'`
+  - Where property contains the value - Same as SQL `´column´ like '%value%'`
 
 - `whereStartsWith(string $property, $value, string $before = 'and')` : `self`
-  - Where property starts with the value - Same SQL `\`column\` like 'value%'`
+  - Where property starts with the value - Same as SQL `´column´ like 'value%'`
 
 - `whereEndsWith(string $property, $value, string $before = 'and')` : `self`
-  - Where property starts with the value - Same SQL `\`column\` like '%value'`
+  - Where property ends with the value - Same as SQL `´column´ like '%value'`
   
 - `whereGroup(Closure $callback, string $before = 'and')` : `self`
-  - Grouped where clause - Example `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
+  - Grouped where clause - Example:  
+    `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
   - This functionality can be shorthanded as `where(function(Builder $query) { ... })`
   
 Operators:  
@@ -298,6 +299,18 @@ Operators:
   - Clone the current Builder instance without extentions (filters, expands, sorting etc.)
 
 ---
+
+## Extending Entity Models
+
+The SDK has a range of pre-generated Models it uses to contain and assist the user while using the SDK.  
+You can replace the class used as the container if you want to - Only requirement is that the model _must_ extend `\BusinessCentral\Entity`.
+
+Example:
+```php
+ClassMap::extend('customer', MyTotallyNewAwesomeCustomerModelReplacementOfAbsoluteDoom::class)
+```
+
+This overrides the model class used for all entities of type `customer` in the entire application.
 
 # Contribution
 
