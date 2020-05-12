@@ -271,7 +271,7 @@ The `$before` argument is the boolean operator prepended to the query before eve
   - Where property starts with the value - Same as SQL `´column´ like 'value%'`
 
 - `whereEndsWith(string $property, $value, string $before = 'and')` : `self`
-  - Where property starts with the value - Same as SQL `´column´ like '%value'`
+  - Where property ends with the value - Same as SQL `´column´ like '%value'`
   
 - `whereGroup(Closure $callback, string $before = 'and')` : `self`
   - Grouped where clause - Example:  
