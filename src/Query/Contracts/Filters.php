@@ -457,7 +457,7 @@ trait Filters
             } elseif (is_numeric($value)) {
                 return $value;
             } else {
-                return "'$value'";
+                return sprintf("'%s'", urlencode($value));
             }
         }
 
