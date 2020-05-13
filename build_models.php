@@ -78,6 +78,10 @@ foreach ($types as $type) {
         $docs["\BusinessCentral\Models\\$class_name"]['relations'][] = $property;
     }
 
+    foreach ($type->actions() as $action) {
+        $docs["\BusinessCentral\Models\\$class_name"]['actions'][] = $action;
+    }
+
     $fillable = [];
     $guarded  = [];
     foreach ($type->properties() as $property) {
@@ -157,7 +161,17 @@ foreach ($docs as $class => $doc) {
                 $item->isCollection() ? 'Yes' : 'No'
             );
         }
+    }
+
+    if ( ! empty($doc['actions'])) {
+        $doc_contents .= "## Actions\n";
         $doc_contents .= "\n";
+        $doc_contents .= "| Name |\n";
+        $doc_contents .= "| --- | --- | :-: |\n";
+        /** @var \BusinessCentral\Schema\Action $item */
+        foreach ($doc['relations'] ?? [] as $item) {
+            $doc_contents .= "| $item->name |\n";
+        }
     }
 }
 
@@ -194,13 +208,24 @@ function __generate_doc(string $class, EntityType $type)
         $is_collection = $property->isCollection();
 
         $doc_prop = [
-            'name'      => $property->name,
-            'type'      => '\\' . $base_type . ($is_collection ? '[]|\\' . EntityCollection::class . '' : ''),
-            'read_only' => true,
+            'name'        => $property->name,
+            'type'        => '\\' . $base_type . ($is_collection ? '[]|\\' . EntityCollection::class . '' : ''),
+            'method_type' => "\BusinessCentral\Query\Builder",
+            'read_only'   => true,
         ];
 
         $properties[] = $doc_prop;
         $methods[]    = $doc_prop;
+    }
+
+    foreach ($type->actions() as $action) {
+        $doc_prop = [
+            'name'        => $action->name,
+            'method_type' => 'bool|true|false',
+            'read_only'   => true,
+        ];
+
+        $methods[] = $doc_prop;
     }
 
     $lines = [
@@ -214,8 +239,9 @@ function __generate_doc(string $class, EntityType $type)
         $prefix  = $property['read_only'] ? '@property-read' : '@property';
         $lines[] = " * $prefix $property[type] \$$property[name]";
     }
+
     foreach ($methods as $method) {
-        $lines[] = " * @method \BusinessCentral\Query\Builder $method[name]()";
+        $lines[] = " * @method $method[method_type] $method[name]()";
     }
 
     $lines[] = ' *';

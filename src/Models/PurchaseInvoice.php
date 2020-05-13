@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class PurchaseInvoice
- * Auto-generated on: 2020-05-11 17:35:34
+ * Auto-generated on: 2020-05-13 10:59:54
  *
  * @property-read string $id
  * @property string $number
@@ -45,6 +45,7 @@ use BusinessCentral\Entity;
  * @method \BusinessCentral\Query\Builder pdfDocument()
  * @method \BusinessCentral\Query\Builder vendor()
  * @method \BusinessCentral\Query\Builder currency()
+ * @method bool|true|false post()
  *
  */
 class PurchaseInvoice extends Entity

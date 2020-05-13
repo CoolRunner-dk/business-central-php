@@ -7,7 +7,7 @@ use BusinessCentral\Entity;
 /**
  *
  * Class SalesOrder
- * Auto-generated on: 2020-05-11 17:35:34
+ * Auto-generated on: 2020-05-13 10:59:54
  *
  * @property-read string $id
  * @property string $number
@@ -54,6 +54,7 @@ use BusinessCentral\Entity;
  * @method \BusinessCentral\Query\Builder currency()
  * @method \BusinessCentral\Query\Builder paymentTerm()
  * @method \BusinessCentral\Query\Builder shipmentMethod()
+ * @method bool|true|false shipAndInvoice()
  *
  */
 class SalesOrder extends Entity

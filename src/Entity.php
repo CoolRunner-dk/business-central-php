@@ -281,6 +281,19 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         return null;
     }
 
+    public function doAction(string $name)
+    {
+        $action = $this->getEntityType()->getAction($name);
+
+        $result = $this->query->cloneWithoutExtensions()->to($action->fqn)->post([], ['no_ext' => true]);
+
+        if($result === null) {
+            return true;
+        }
+
+        return $result;
+    }
+
     // region Interfaces
 
     public function offsetGet($offset)
@@ -342,9 +355,9 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function __call($name, $arguments)
     {
         if ($this->getEntityType()->relationExists($name)) {
-            $query = $this->query->clone()->navigateTo($name);
-
-            return $query;
+            return $this->query->clone()->navigateTo($name);
+        } elseif ($this->getEntityType()->actionExists($name)) {
+            return $this->doAction($name);
         }
         // TODO: Implement __call() method.
     }

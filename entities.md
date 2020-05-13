@@ -147,7 +147,6 @@
 | bankAccounts | [BankAccount[]](#bankaccount) | Yes |
 | customerSales | [CustomerSale[]](#customersale) | Yes |
 | vendorPurchases | [VendorPurchase[]](#vendorpurchase) | Yes |
-
 # CompanyInformation
 ## Properties
 | Name | Type | Read Only |
@@ -222,7 +221,6 @@
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
 | paymentMethod | [PaymentMethod](#paymentmethod) | No |
-
 # CustomerFinancialDetail
 ## Properties
 | Name | Type | Read Only |
@@ -258,7 +256,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | customer | [Customer](#customer) | No |
-
 # CustomerPaymentJournal
 ## Properties
 | Name | Type | Read Only |
@@ -275,7 +272,6 @@
 | --- | --- | :-: |
 | customerPayments | [CustomerPayment[]](#customerpayment) | Yes |
 | account | [Account](#account) | No |
-
 # CustomerSale
 ## Properties
 | Name | Type | Read Only |
@@ -303,7 +299,6 @@
 | account | [Account](#account) | No |
 | dimension | [Dimension](#dimension) | No |
 | dimensionValue | [DimensionValue](#dimensionvalue) | No |
-
 # Dimension
 ## Properties
 | Name | Type | Read Only |
@@ -317,7 +312,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | dimensionValues | [DimensionValue[]](#dimensionvalue) | Yes |
-
 # DimensionLine
 ## Properties
 | Name | Type | Read Only |
@@ -334,7 +328,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | dimension | [Dimension](#dimension) | No |
-
 # DimensionValue
 ## Properties
 | Name | Type | Read Only |
@@ -373,7 +366,6 @@
 | picture | [Picture[]](#picture) | Yes |
 | defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
 | timeRegistrationEntries | [TimeRegistrationEntry[]](#timeregistrationentry) | Yes |
-
 # GeneralLedgerEntry
 ## Properties
 | Name | Type | Read Only |
@@ -394,7 +386,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | account | [Account](#account) | No |
-
 # GeneralLedgerEntryAttachments
 ## Properties
 | Name | Type | Read Only |
@@ -410,7 +401,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | generalLedgerEntry | [GeneralLedgerEntry](#generalledgerentry) | No |
-
 # IncomeStatement
 ## Properties
 | Name | Type | Read Only |
@@ -450,7 +440,6 @@
 | picture | [Picture[]](#picture) | Yes |
 | defaultDimensions | [DefaultDimensions[]](#defaultdimensions) | Yes |
 | itemCategory | [ItemCategory](#itemcategory) | No |
-
 # ItemCategory
 ## Properties
 | Name | Type | Read Only |
@@ -476,7 +465,12 @@
 | --- | --- | :-: |
 | journalLines | [JournalLine[]](#journalline) | Yes |
 | account | [Account](#account) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| journalLines |
+| account |
 # JournalLine
 ## Properties
 | Name | Type | Read Only |
@@ -501,7 +495,6 @@
 | --- | --- | :-: |
 | attachments | [Attachments[]](#attachments) | Yes |
 | account | [Account](#account) | No |
-
 # PaymentMethod
 ## Properties
 | Name | Type | Read Only |
@@ -589,7 +582,14 @@
 | pdfDocument | [PdfDocument[]](#pdfdocument) | Yes |
 | vendor | [Vendor](#vendor) | No |
 | currency | [Currency](#currency) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| purchaseInvoiceLines |
+| pdfDocument |
+| vendor |
+| currency |
 # PurchaseInvoiceLine
 ## Properties
 | Name | Type | Read Only |
@@ -624,7 +624,6 @@
 | --- | --- | :-: |
 | item | [Item](#item) | No |
 | account | [Account](#account) | No |
-
 # RetainedEarningsStatement
 ## Properties
 | Name | Type | Read Only |
@@ -682,7 +681,16 @@
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| salesCreditMemoLines |
+| pdfDocument |
+| customer |
+| currency |
+| paymentTerm |
+| shipmentMethod |
 # SalesCreditMemoLine
 ## Properties
 | Name | Type | Read Only |
@@ -718,7 +726,6 @@
 | --- | --- | :-: |
 | item | [Item](#item) | No |
 | account | [Account](#account) | No |
-
 # SalesInvoice
 ## Properties
 | Name | Type | Read Only |
@@ -770,7 +777,16 @@
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| salesInvoiceLines |
+| pdfDocument |
+| customer |
+| currency |
+| paymentTerm |
+| shipmentMethod |
 # SalesInvoiceLine
 ## Properties
 | Name | Type | Read Only |
@@ -806,7 +822,6 @@
 | --- | --- | :-: |
 | item | [Item](#item) | No |
 | account | [Account](#account) | No |
-
 # SalesOrder
 ## Properties
 | Name | Type | Read Only |
@@ -855,7 +870,15 @@
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| salesOrderLines |
+| customer |
+| currency |
+| paymentTerm |
+| shipmentMethod |
 # SalesOrderLine
 ## Properties
 | Name | Type | Read Only |
@@ -895,7 +918,6 @@
 | --- | --- | :-: |
 | item | [Item](#item) | No |
 | account | [Account](#account) | No |
-
 # SalesQuote
 ## Properties
 | Name | Type | Read Only |
@@ -944,7 +966,16 @@
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | shipmentMethod | [ShipmentMethod](#shipmentmethod) | No |
+## Actions
 
+| Name |
+| --- | --- | :-: |
+| salesQuoteLines |
+| pdfDocument |
+| customer |
+| currency |
+| paymentTerm |
+| shipmentMethod |
 # SalesQuoteLine
 ## Properties
 | Name | Type | Read Only |
@@ -978,7 +1009,6 @@
 | --- | --- | :-: |
 | item | [Item](#item) | No |
 | account | [Account](#account) | No |
-
 # ShipmentMethod
 ## Properties
 | Name | Type | Read Only |
@@ -1043,7 +1073,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | project | [Project](#project) | No |
-
 # TrialBalance
 ## Properties
 | Name | Type | Read Only |
@@ -1062,7 +1091,6 @@
 | Name | Type | Collection |
 | --- | --- | :-: |
 | account | [Account](#account) | No |
-
 # UnitOfMeasure
 ## Properties
 | Name | Type | Read Only |
@@ -1103,7 +1131,6 @@
 | currency | [Currency](#currency) | No |
 | paymentTerm | [PaymentTerm](#paymentterm) | No |
 | paymentMethod | [PaymentMethod](#paymentmethod) | No |
-
 # VendorPurchase
 ## Properties
 | Name | Type | Read Only |
@@ -1116,4 +1143,4 @@
 
 
 ---
-Generated on 2020-05-11 17:35:34
+Generated on 2020-05-13 10:59:54

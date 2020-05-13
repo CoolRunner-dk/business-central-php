@@ -30,6 +30,8 @@ class EntityType
     protected $properties = [];
     /** @var array|NavigationProperty[] */
     protected $navigation_properties = [];
+    /** @var array|Action[] */
+    protected $actions = [];
 
     public function __construct($entity_type, Schema $schema)
     {
@@ -99,6 +101,16 @@ class EntityType
         return isset($this->navigation_properties[$key]);
     }
 
+    public function getAction(string $name)
+    {
+        return $this->actions[$name] ?? null;
+    }
+
+    public function actionExists(string $name)
+    {
+        return isset($this->actions[$name]);
+    }
+
     public function properties()
     {
         return $this->properties;
@@ -107,6 +119,11 @@ class EntityType
     public function relations()
     {
         return $this->navigation_properties;
+    }
+
+    public function actions()
+    {
+        return $this->actions;
     }
 
     public function __get($name)
@@ -131,5 +148,10 @@ class EntityType
     public function getEntitySet()
     {
         return $this->schema->getEntitySetByType($this->name);
+    }
+
+    public function addAction(Action $action)
+    {
+        $this->actions[$action->name] = $action;
     }
 }

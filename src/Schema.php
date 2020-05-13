@@ -8,6 +8,7 @@
 namespace BusinessCentral;
 
 
+use BusinessCentral\Schema\Action;
 use BusinessCentral\Schema\ComplexType;
 use BusinessCentral\Schema\EntitySet;
 use BusinessCentral\Schema\EntityType;
@@ -23,8 +24,10 @@ class Schema
     protected $entity_types;
     /** @var Collection|EntitySet[] */
     protected $entity_sets;
-    /** @var Collection|ComplexType */
+    /** @var Collection|ComplexType[] */
     protected $complex_types;
+    /** @var Collection|Action[] */
+    protected $actions;
 
     /** @var array */
     protected $raw, $overrides;
@@ -37,6 +40,7 @@ class Schema
         $this->entity_types  = new Collection();
         $this->entity_sets   = new Collection();
         $this->complex_types = new Collection();
+        $this->actions       = new Collection();
 
         $this->loadOverrides();
 
@@ -55,6 +59,10 @@ class Schema
 
         foreach ($this->raw['DataServices']['Schema']['EntityContainer']['EntitySet'] as $set) {
             $this->entity_sets[$set['@attributes']['Name']] = new EntitySet($set, $this);
+        }
+
+        foreach ($this->raw['DataServices']['Schema']['Action'] as $action) {
+            $this->actions[$action['@attributes']['Name']] = new Action($action, $this);
         }
     }
 

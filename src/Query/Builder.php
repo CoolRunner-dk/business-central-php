@@ -45,10 +45,10 @@ class Builder
         $this->limit = $sdk->option('default_collection_size', 20);
     }
 
-    public function sendRequest(string $method, array $data = null, array $headers = [])
+    public function sendRequest(string $method, array $data = null, array $headers = [], array $options = [])
     {
         try {
-            $uri = $this->getUri();
+            $uri = $this->getUri($options['no_ext'] ?? false);
 
             $time = microtime(true);
 
@@ -94,17 +94,23 @@ class Builder
     }
 
     /**
+     * @param array $attributes
+     * @param array $options
+     *
      * @return mixed
      * @throws QueryException
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      * @internal
      */
-    public function post(array $attributes)
+    public function post(array $attributes, array $options = [])
     {
-        return $this->sendRequest('POST', $attributes);
+        return $this->sendRequest('POST', $attributes, [], $options);
     }
 
     /**
+     * @param array  $attributes
+     * @param string $etag
+     *
      * @return mixed
      * @throws QueryException
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -201,13 +207,16 @@ class Builder
         return $this->sdk->schema->getEntityType($this->getContext($odata_context));
     }
 
-    public function getUri()
+    public function getUri(bool $without_extensions = false)
     {
         $uri = $this->compileComponents();
 
-        $query_string = implode('&', $this->getQueryOptions());
+        if ( ! $without_extensions) {
+            $query_string = implode('&', $this->getQueryOptions());
 
-        $uri .= $query_string ? "?$query_string" : null;
+            $uri .= $query_string ? "?$query_string" : null;
+        }
+
 
         return $uri;
     }

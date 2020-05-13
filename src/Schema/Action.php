@@ -1,0 +1,49 @@
+<?php
+/**
+ * @package   business-central-sdk
+ * @author    Morten Harders 🐢
+ * @copyright 2020
+ */
+
+namespace BusinessCentral\Schema;
+
+
+use BusinessCentral\Schema;
+
+/**
+ * Class Action
+ *
+ * @property-read $name
+ * @property-read $fqn
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Schema
+ */
+class Action
+{
+    protected $schema;
+    protected $name;
+    protected $entity_type;
+
+    public function __construct($action, Schema $schema)
+    {
+        $this->schema = $schema;
+        $this->name   = $action['@attributes']['Name'];
+
+        $type = $action['Parameter']['@attributes']['Type'];
+
+        $this->entity_type = $this->schema->getEntityType($type);
+
+        $this->entity_type->addAction($this);
+    }
+
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'name':
+                return $this->{$name};
+            case 'fqn':
+                return "Microsoft.NAV.$this->name";
+        }
+    }
+}
