@@ -51,9 +51,6 @@ class Validator
 
         $rules = $this->type->getValidationRules();
 
-        if($this->type->name === 'salesOrderLine') {
-            dd($rules);
-        }
         $errors = [];
         foreach ($rules as $key => $rule) {
             $steps = explode('.', $key);
