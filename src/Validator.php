@@ -51,6 +51,9 @@ class Validator
 
         $rules = $this->type->getValidationRules();
 
+        if($this->type->name === 'salesOrderLine') {
+            dd($rules);
+        }
         $errors = [];
         foreach ($rules as $key => $rule) {
             $steps = explode('.', $key);
@@ -105,7 +108,7 @@ class Validator
                         return is_int($value);
                     case 'float':
                     case 'double':
-                        return is_double($value) || is_float($value);
+                        return is_int($value) || is_double($value) || is_float($value);
                 }
 
                 return true;
@@ -145,7 +148,7 @@ class Validator
                 return "'$key' must be of type string";
             },
             'int'      => "':attr' must be of type integer",
-            'float'    => "':attr' must be of type integer",
+            'float'    => "':attr' must be of type float",
             'guid'     => ":attr must be in a valid GUID format",
         ];
     }
