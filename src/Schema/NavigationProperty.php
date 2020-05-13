@@ -56,11 +56,11 @@ class NavigationProperty
 
             $expands = $query->getExpands()[$entity_set->name] ?? null;
             if ($expands instanceof Builder) {
-                $expands->getExpands();
+                $expands = $expands->getExpands();
             }
 
             $query->navigateTo($this->name)
-                  ->setExpands($expands);
+                  ->setExpands($expands ?? []);
 
             return new EntityCollection($query, $entity_set, $value);
         } else {
