@@ -135,6 +135,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
         $entity       = Entity::make([], $entity_query, $this->getEntitySet()->getEntityType())->fill($attributes)->save();
 
         $this->collection[$entity->id] = $entity;
+        $this->total_count++;
 
         return $entity;
     }
@@ -161,6 +162,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
             if ($deleted) {
                 $this->offsetUnset($id);
+                $this->total_count--;
 
                 return true;
             }
