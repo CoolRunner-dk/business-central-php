@@ -9,13 +9,16 @@ namespace BusinessCentral\Query;
 
 
 use BusinessCentral\EntityCollection;
+use BusinessCentral\Exceptions\Exception;
 use BusinessCentral\Exceptions\QueryException;
 use BusinessCentral\Query\Contracts\Expands;
 use BusinessCentral\Query\Contracts\Filters;
 use BusinessCentral\Query\Contracts\Pagination;
 use BusinessCentral\Query\Contracts\Sorting;
 use BusinessCentral\SDK;
+use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
 
 /**
@@ -47,27 +50,34 @@ class Builder
 
     public function sendRequest(string $method, array $data = null, array $headers = [], array $options = [])
     {
+        $uri  = $this->getUri($options['no_ext'] ?? false);
+        $time = microtime(true);
+
+        $request_options = array_filter([
+            RequestOptions::JSON    => $data,
+            RequestOptions::HEADERS => $headers,
+        ]);
+
         try {
-            $uri = $this->getUri($options['no_ext'] ?? false);
-
-            $time = microtime(true);
-
-            $request_options = array_filter([
-                RequestOptions::JSON    => $data,
-                RequestOptions::HEADERS => $headers,
-            ]);
-
             $response = $this->sdk->client->request($method, $uri, $request_options);
 
-            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options);
+            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode());
 
             return json_decode($response->getBody()->getContents(), true);
 
-        } catch (RequestException $exception) {
-            $response      = $exception->getResponse();
-            $response_data = json_decode($response->getBody()->getContents(), true);
+        } catch (ClientException $exception) {
+            $response = $exception->getResponse();
 
+            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode());
+
+            $response_data = json_decode($response->getBody()->getContents(), true);
             throw new QueryException($this, $response_data, $exception);
+        } catch (ServerException $exception) {
+            $response = $exception->getResponse();
+
+            $message = "Business Central responded with [{$response->getStatusCode()} - {$response->getReasonPhrase()}] - {$response->getBody()->getContents()}";
+
+            throw new Exception($message, 0, $exception);
         }
     }
 

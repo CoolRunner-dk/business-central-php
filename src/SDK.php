@@ -85,12 +85,13 @@ class SDK
         $this->mapEntities();
     }
 
-    public function logRequest($method, $uri, $time, $request_options)
+    public function logRequest($method, $uri, $time, $request_options, $code)
     {
         $this->request_log[] = [
             'method'  => $method,
+            'code'    => $code,
             'uri'     => $uri,
-            'time'    => $time,
+            'time'    => $time * 1000,
             'options' => $request_options,
         ];
     }

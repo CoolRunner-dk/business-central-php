@@ -53,14 +53,16 @@ class Validator
 
         $errors = [];
         foreach ($rules as $key => $rule) {
-            $steps = explode('.', $key);
-            $value = $this->entity[array_shift($steps)] ?? null;
-            foreach ($steps as $step) {
-                if (is_null($value)) {
-                    break;
-                }
+            $parent_key = $this->getParentKey($key);
+            $value      = $this->getValue($key);
 
-                $value = $value[$step] ?? null;
+            if ($parent_key && $rules[$parent_key] ?? false) {
+                $parent_value = $this->getValue($parent_key);
+                $parent_rule  = $rules[$parent_key];
+
+                if (is_null($parent_value) && in_array('nullable', $parent_rule)) {
+                    continue;
+                }
             }
 
             $result = $this->processRules($key, $rule, $value);
@@ -74,6 +76,29 @@ class Validator
         $this->errors = $errors;
 
         return $this->validate();
+    }
+
+    protected function getValue(string $key)
+    {
+        $steps = explode('.', $key);
+        $value = $this->entity[array_shift($steps)] ?? null;
+
+        foreach ($steps as $step) {
+            if (is_null($value)) {
+                break;
+            }
+
+            $value = $value[$step] ?? null;
+        }
+
+        return $value;
+    }
+
+    protected function getParentKey(string $key)
+    {
+        $steps = explode('.', $key);
+
+        return implode('.', array_slice($steps, 0, count($steps) - 1)) ?: null;
     }
 
     protected function processRules($key, array $rules, $value)

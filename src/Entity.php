@@ -287,7 +287,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
         $result = $this->query->cloneWithoutExtensions()->to($action->fqn)->post([], ['no_ext' => true]);
 
-        if($result === null) {
+        if ($result === null) {
             return true;
         }
 
@@ -380,4 +380,9 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     }
 
     // endregion
+
+    public function getSdk()
+    {
+        return $this->query->getSDK();
+    }
 }
