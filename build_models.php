@@ -146,6 +146,7 @@ foreach ($docs as $class => $doc) {
     $doc_contents .= "| --- | --- | :-: | :-: | :-: |\n";
     /** @var \BusinessCentral\Schema\Property $item */
     foreach ($doc['properties'] as $item) {
+        $complex  = false;
         $doc_type = $item->getValidationType();
         if ($doc_type instanceof ComplexType) {
             $complex = $doc_type;
@@ -162,7 +163,7 @@ foreach ($docs as $class => $doc) {
             $property->required ? 'X' : ' ',
             ! $property->required ? 'X' : ' ');
 
-        if (isset($complex)) {
+        if ($complex) {
             foreach ($complex->properties() as $property) {
                 $doc_type = $property->getValidationType();
 
