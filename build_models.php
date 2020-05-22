@@ -60,8 +60,8 @@ $credentials = json_decode(file_get_contents('build_credentials.json'), true);
 
 __wl('Building models for Business Central using');
 __wl(" - Tenant:   $credentials[tenant]");
-__wl(" - Username: $credentials[tenant]");
-__wl(" - Token:    $credentials[tenant]");
+__wl(" - Username: $credentials[username]");
+__wl(" - Token:    $credentials[token]");
 
 readline("Press enter to continue");
 
@@ -163,21 +163,19 @@ foreach ($docs as $class => $doc) {
             ! $property->required ? 'X' : ' ');
 
         if (isset($complex)) {
-            if ($complex->name === 'nativeInvoicingSalesInvoiceLines') {
-                foreach ($complex->properties() as $property) {
-                    $doc_type = $property->getValidationType();
+            foreach ($complex->properties() as $property) {
+                $doc_type = $property->getValidationType();
 
-                    $name = $item->name . '.';
-                    $name .= $item->isCollection() ? '*.' : '';
-                    $name .= $property->name;
+                $name = $item->name . '.';
+                $name .= $item->isCollection() ? '*.' : '';
+                $name .= $property->name;
 
-                    $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
-                        $name,
-                        $doc_type,
-                        $property->read_only ? 'X' : ' ',
-                        $property->required ? 'X' : ' ',
-                        ! $property->required ? 'X' : ' ');
-                }
+                $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
+                    $name,
+                    $doc_type,
+                    $property->read_only ? 'X' : ' ',
+                    $property->required ? 'X' : ' ',
+                    ! $property->required ? 'X' : ' ');
             }
         }
     }
@@ -204,7 +202,7 @@ foreach ($docs as $class => $doc) {
         $doc_contents .= "## Actions\n";
         $doc_contents .= "\n";
         $doc_contents .= "| Name |\n";
-        $doc_contents .= "| --- | --- | :-: |\n";
+        $doc_contents .= "| --- |\n";
         /** @var \BusinessCentral\Schema\Action $item */
         foreach ($doc['relations'] ?? [] as $item) {
             $doc_contents .= "| $item->name |\n";
