@@ -1,7 +1,7 @@
 # AccountantPortalActivityCues
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | overduePurchInvoiceAmount | string |   |   |
 | overduePurchInvoiceStyle | string |   |   |
@@ -45,7 +45,7 @@
 # AccountantPortalFinanceCues
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | overduePurchaseDocumentsAmount | string |   |   |
 | overduePurchaseDocumentsStyle | string |   |   |
@@ -93,7 +93,7 @@
 # AccountantPortalUserTasks
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | title | string |   |   |
 | dueDateTime | date |   |   |
@@ -110,7 +110,7 @@
 # BankAccountLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | transactionNo | int |   |   |
 | bankAccountNo | string |   |   |
@@ -136,7 +136,7 @@
 # C2Graph
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | component | string |   |   |
 | type | string |   |   |
 | schema | string |   |   |
@@ -144,7 +144,7 @@
 # CsApprovalComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | tableID | int |   |   |
 | documentType | string |   |   |
@@ -156,7 +156,7 @@
 # CsApprovalDocument
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | documentType | string |   |   |
 | documentTypeInt | string |   |   |
@@ -185,7 +185,7 @@
 # CsApprovalDocumentApprovalComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | userID | string |   |   |
 | userName | string |   |   |
@@ -195,7 +195,7 @@
 # CsApprovalDocumentApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | sequenceNo | int |   |   |
 | approverID | string |   |   |
@@ -208,7 +208,7 @@
 # CsApprovalDocumentAttachedFiles
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | currentUserId | string |   |   |
 | tableID | int |   |   |
@@ -224,7 +224,7 @@
 # CsApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | tableID | int |   |   |
 | approvalCode | string |   |   |
@@ -256,7 +256,7 @@
 # CsApprovalSharing
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | ownerUserID | string |   |   |
 | sharedToUserID | string |   |   |
 | sharingType | string |   |   |
@@ -271,7 +271,7 @@
 # CsApprovers
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | userID | string |   |   |
 | salespersPurchCode | string |   |   |
 | name | string |   |   |
@@ -279,7 +279,7 @@
 # CsDeferralTemplates
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | deferralCode | string |   |   |
 | description | string |   |   |
 | deferralPct | float |   |   |
@@ -290,7 +290,7 @@
 # CsDimensionValues
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | dimCode | string |   |   |
 | code | string |   |   |
 | name | string |   |   |
@@ -299,7 +299,7 @@
 # CsEnabledReasonCodes
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | tableID | int |   |   |
 | docType | string |   |   |
 | type | string |   |   |
@@ -311,14 +311,14 @@
 # CsFixedAssets
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 
 # CsGLAccounts
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | name | string |   |   |
 | directPosting | bool |   |   |
@@ -328,21 +328,21 @@
 # CsItemCharges
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 
 # CsItems
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 
 # CsJobTasks
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | jobNo | string |   |   |
 | jobTaskNo | string |   |   |
 | description | string |   |   |
@@ -356,7 +356,7 @@
 # CsJobs
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 | billToCustomerNo | string |   |   |
@@ -367,14 +367,14 @@
 # CsLocationCodes
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | name | string |   |   |
 
 # CsPostedApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | tableID | int |   |   |
 | approvalCode | string |   |   |
@@ -401,7 +401,7 @@
 # CsPostedDocSearch
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | type | string |   |   |
 | no | string |   |   |
 | userID | string |   |   |
@@ -418,7 +418,7 @@
 # CsPostedPurchaseCrMemo
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | payToVendorNo | string |   |   |
 | payToName | string |   |   |
@@ -465,7 +465,7 @@
 # CsPostedPurchaseCrMemoApprovalComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | userID | string |   |   |
 | userName | string |   |   |
@@ -475,7 +475,7 @@
 # CsPostedPurchaseCrMemoApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | sequenceNo | int |   |   |
 | approverID | string |   |   |
@@ -488,7 +488,7 @@
 # CsPostedPurchaseCrMemoAttachedFiles
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | currentUserId | string |   |   |
 | tableID | int |   |   |
@@ -504,7 +504,7 @@
 # CsPostedPurchaseCrMemoPurchLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentNo | string |   |   |
 | lineNo | int |   |   |
 | currentUserId | string |   |   |
@@ -557,7 +557,7 @@
 # CsPostedPurchaseCrMemos
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | vendorNo | string |   |   |
 | name | string |   |   |
@@ -574,7 +574,7 @@
 # CsPostedPurchaseInvoice
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | payToVendorNo | string |   |   |
 | payToName | string |   |   |
@@ -622,7 +622,7 @@
 # CsPostedPurchaseInvoiceApprovalComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | userID | string |   |   |
 | userName | string |   |   |
@@ -632,7 +632,7 @@
 # CsPostedPurchaseInvoiceApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | sequenceNo | int |   |   |
 | approverID | string |   |   |
@@ -645,7 +645,7 @@
 # CsPostedPurchaseInvoiceAttachedFiles
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | currentUserId | string |   |   |
 | tableID | int |   |   |
@@ -661,7 +661,7 @@
 # CsPostedPurchaseInvoicePurchLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentNo | string |   |   |
 | lineNo | int |   |   |
 | currentUserId | string |   |   |
@@ -714,7 +714,7 @@
 # CsPostedPurchaseInvoices
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | vendorNo | string |   |   |
 | name | string |   |   |
@@ -731,14 +731,14 @@
 # CsProdPostGroups
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | description | string |   |   |
 
 # CsPurchaseDocument
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   |   |
 | no | string |   |   |
 | documentTypeInt | string |   |   |
@@ -796,7 +796,7 @@
 # CsPurchaseDocumentApprovalComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | userID | string |   |   |
 | userName | string |   |   |
@@ -806,7 +806,7 @@
 # CsPurchaseDocumentApprovalEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | sequenceNo | int |   |   |
 | approverID | string |   |   |
@@ -819,7 +819,7 @@
 # CsPurchaseDocumentAttachedFiles
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | currentUserId | string |   |   |
 | tableID | int |   |   |
@@ -835,7 +835,7 @@
 # CsPurchaseDocumentPurchLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   |   |
 | documentNo | string |   |   |
 | lineNo | int |   |   |
@@ -900,7 +900,7 @@
 # CsPurchaseLine
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   |   |
 | documentNo | string |   |   |
 | lineNo | int |   |   |
@@ -965,7 +965,7 @@
 # CsStdAmountDistribCodes
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | description | string |   |   |
 | enabledForPurchase | string |   |   |
@@ -977,28 +977,28 @@
 # CsStdAmountDistribCodesVendors
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | vendorNo | string |   |   |
 | amountDistributionCode | string |   |   |
 
 # CsUnitOfMeasure
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | description | string |   |   |
 
 # CsVATProdPostGroups
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | description | string |   |   |
 
 # CsVendorInfo
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | name | string |   |   |
 | name2 | string |   |   |
@@ -1029,7 +1029,7 @@
 # CsVendorInfoComments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | tableName | string |   |   |
 | no | string |   |   |
 | lineNo | int |   |   |
@@ -1040,7 +1040,7 @@
 # CsVendorInfoContacts
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | name | string |   |   |
 | phoneNo | string |   |   |
@@ -1049,7 +1049,7 @@
 # CsVendorInfoDocuments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | type | string |   |   |
 | documentType | string |   |   |
 | documentNo | string |   |   |
@@ -1066,7 +1066,7 @@
 # CsWebHelp
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | section | string |   |   |
 | lineNo | int |   |   |
 | heading | bool |   |   |
@@ -1081,7 +1081,7 @@
 # CsWebMenu
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | description | string |   |   |
 | sorting | int |   |   |
@@ -1089,7 +1089,7 @@
 # CsWebSetup
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | companyGuid | string |   |   |
 | companyName | string |   |   |
@@ -1159,7 +1159,7 @@
 # CsWebSubMenu
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | webMenuCode | string |   |   |
 | code | string |   |   |
 | description | string |   |   |
@@ -1171,7 +1171,7 @@
 # CsWebUser
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | userID | string |   |   |
 | documentSearch | string |   |   |
 | purchRespCenterFilter | string |   |   |
@@ -1183,7 +1183,7 @@
 # CsWebUserCompany
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | userId | string |   |   |
 | companyCode | string |   |   |
 | companyGuid | guid |   |   |
@@ -1194,7 +1194,7 @@
 # CsWebUserPermissions
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | continiaUserID | string |   |   |
 | type | string |   |   |
 | dimensionCode | string |   |   |
@@ -1208,7 +1208,7 @@
 # CsWebUserPmsSelection
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | permissionType | string |   |   |
 | continiaUserID | string |   |   |
 | type | string |   |   |
@@ -1224,7 +1224,7 @@
 # Company
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | name | string |   |   |
 | evaluationCompany | bool |   |   |
 | displayName | string |   |   |
@@ -1401,7 +1401,7 @@
 # CustLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | transactionNo | int |   |   |
 | customerNo | string |   |   |
@@ -1433,7 +1433,7 @@
 # DimensionSetEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | dimensionSetID | int |   |   |
 | dimensionCode | string |   |   |
 | dimensionValueCode | string |   |   |
@@ -1444,7 +1444,7 @@
 # ExcelTemplateAgedAccountsPayable
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | vendorId | guid |   |   |
 | vendorNumber | string |   |   |
 | name | string |   |   |
@@ -1460,7 +1460,7 @@
 # ExcelTemplateAgedAccountsReceivable
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | customerId | guid |   |   |
 | customerNumber | string |   |   |
 | name | string |   |   |
@@ -1476,7 +1476,7 @@
 # ExcelTemplateBalanceSheet
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | lineNumber | int |   |   |
 | display | string |   |   |
 | balance | float |   |   |
@@ -1487,7 +1487,7 @@
 # ExcelTemplateCashFlowStatement
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | lineNumber | int |   |   |
 | display | string |   |   |
 | netChange | float |   |   |
@@ -1498,7 +1498,7 @@
 # ExcelTemplateIncomeStatement
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | lineNumber | int |   |   |
 | display | string |   |   |
 | netChange | float |   |   |
@@ -1509,7 +1509,7 @@
 # ExcelTemplateRetainedEarnings
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | lineNumber | int |   |   |
 | display | string |   |   |
 | netChange | float |   |   |
@@ -1520,7 +1520,7 @@
 # ExcelTemplateTrialBalance
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | number | string |   |   |
 | accountId | guid |   |   |
 | accountType | string |   |   |
@@ -1534,7 +1534,7 @@
 # ExcelTemplateViewCompanyInformation
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | displayName | string |   |   |
 | currency | string |   |   |
@@ -1542,7 +1542,7 @@
 # FALedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | gLEntryNo | int |   |   |
 | fANo | string |   |   |
@@ -1570,7 +1570,7 @@
 # GLBudgetEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | budgetName | string |   |   |
 | gLAccountNo | string |   |   |
@@ -1582,7 +1582,7 @@
 # GLEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | transactionNo | int |   |   |
 | gLAccountNo | string |   |   |
@@ -1617,7 +1617,7 @@
 # GeneralJournals
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | journalTemplateName | string |   |   |
 | journalBatchName | string |   |   |
 | lineNo | int |   |   |
@@ -1698,7 +1698,7 @@
 # InvoiceDocument
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | invoiceId | guid |   |   |
 | base64 | string |   |   |
 | binary | string |   |   |
@@ -1706,14 +1706,14 @@
 # InvoiceReminder
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | invoiceId | guid |   |   |
 | message | string |   |   |
 
 # ItemLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | entryType | string |   |   |
 | itemNo | string |   |   |
@@ -1749,7 +1749,7 @@
 # ItemSalesAndProfit
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 | genProdPostingGroup | string |   |   |
@@ -1778,7 +1778,7 @@
 # ItemSalesByCustomer
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | documentNo | string |   |   |
 | postingDate | date |   |   |
@@ -1794,7 +1794,7 @@
 # JobLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | jobNo | string |   |   |
 | jobTaskNo | string |   |   |
@@ -1823,7 +1823,7 @@
 # JobList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 | billToCustomerNo | string |   |   |
@@ -1840,7 +1840,7 @@
 # JobPlanningLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | jobNo | string |   |   |
 | jobTaskNo | string |   |   |
 | lineNo | int |   |   |
@@ -1912,7 +1912,7 @@
 # JobTaskLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | jobNo | string |   |   |
 | jobTaskNo | string |   |   |
 | description | string |   |   |
@@ -1950,7 +1950,7 @@
 # Media
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | guid |   |   |
 | description | string |   |   |
 | content | string |   |   |
@@ -1967,7 +1967,7 @@
 # PowerBIAgedAccPayable
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | value | float |   |   |
 | periodType | string |   |   |
@@ -1978,7 +1978,7 @@
 # PowerBIAgedAccReceivable
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | value | float |   |   |
 | periodType | string |   |   |
@@ -1990,7 +1990,7 @@
 # PowerBIAgedInventoryChart
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | value | float |   |   |
 | date | string |   |   |
@@ -2000,7 +2000,7 @@
 # PowerBICustItemLedgEnt
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | itemNo | string |   |   |
 | quantity | float |   |   |
@@ -2009,7 +2009,7 @@
 # PowerBICustLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | dueDate | date |   |   |
 | open | bool |   |   |
@@ -2021,7 +2021,7 @@
 # PowerBICustomerList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | customerName | string |   |   |
 | customerNo | string |   |   |
 | creditLimit | float |   |   |
@@ -2036,7 +2036,7 @@
 # PowerBIGLAmountList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | gLAccountNo | string |   |   |
 | name | string |   |   |
 | accountType | string |   |   |
@@ -2048,7 +2048,7 @@
 # PowerBIGLBudgetedAmount
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | gLAccountNo | string |   |   |
 | name | string |   |   |
 | accountType | string |   |   |
@@ -2060,7 +2060,7 @@
 # PowerBIItemPurchaseList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | itemNo | string |   |   |
 | searchDescription | string |   |   |
 | purchasePostDate | date |   |   |
@@ -2070,7 +2070,7 @@
 # PowerBIItemSalesList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | itemNo | string |   |   |
 | searchDescription | string |   |   |
 | salesPostDate | date |   |   |
@@ -2080,7 +2080,7 @@
 # PowerBIJobActVBudgCost
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | measureNo | string |   |   |
 | measureName | string |   |   |
@@ -2089,7 +2089,7 @@
 # PowerBIJobActVBudgPrice
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | measureNo | string |   |   |
 | measureName | string |   |   |
@@ -2098,7 +2098,7 @@
 # PowerBIJobProfitability
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | measureNo | string |   |   |
 | measureName | string |   |   |
@@ -2107,7 +2107,7 @@
 # PowerBIJobsList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | jobNo | string |   |   |
 | searchDescription | string |   |   |
 | complete | bool |   |   |
@@ -2120,7 +2120,7 @@
 # PowerBIPurchaseHdrVendor
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | itemNo | string |   |   |
 | quantity | float |   |   |
@@ -2142,7 +2142,7 @@
 # PowerBIPurchaseList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentNo | string |   |   |
 | orderDate | date |   |   |
 | expectedReceiptDate | date |   |   |
@@ -2160,14 +2160,14 @@
 # PowerBIReportLabels
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | labelID | string |   |   |
 | textValue | string |   |   |
 
 # PowerBISalesHdrCust
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | itemNo | string |   |   |
 | quantity | float |   |   |
@@ -2190,7 +2190,7 @@
 # PowerBISalesList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentNo | string |   |   |
 | requestedDeliveryDate | date |   |   |
 | shipmentDate | date |   |   |
@@ -2207,7 +2207,7 @@
 # PowerBISalesPipeline
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | rowNo | string |   |   |
 | value | float |   |   |
@@ -2217,7 +2217,7 @@
 # PowerBITop5Opportunities
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | measureNo | string |   |   |
 | value | float |   |   |
@@ -2226,7 +2226,7 @@
 # PowerBITopCustOverview
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | postingDate | date |   |   |
 | customerNo | string |   |   |
@@ -2237,7 +2237,7 @@
 # PowerBIVendItemLedgEnt
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | itemNo | string |   |   |
 | quantity | float |   |   |
@@ -2246,7 +2246,7 @@
 # PowerBIVendorLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | dueDate | date |   |   |
 | open | bool |   |   |
@@ -2255,7 +2255,7 @@
 # PowerBIVendorList
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | vendorNo | string |   |   |
 | vendorName | string |   |   |
 | balanceDue | float |   |   |
@@ -2270,14 +2270,14 @@
 # PowerBIWorkDateCalc
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | number | int |   |   |
 | workDateNAV | date |   |   |
 
 # ResLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | entryType | string |   |   |
 | resourceNo | string |   |   |
@@ -2308,7 +2308,7 @@
 # SalesDashboard
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | documentNo | string |   |   |
 | postingDate | date |   |   |
@@ -2334,7 +2334,7 @@
 # SalesOpportunities
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | string |   |   |
 | description | string |   |   |
 | creationDate | date |   |   |
@@ -2355,7 +2355,7 @@
 # SalesOrdersBySalesPerson
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | itemNo | string |   |   |
 | itemDescription | string |   |   |
 | documentNo | string |   |   |
@@ -2375,7 +2375,7 @@
 # SegmentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | segmentNo | string |   |   |
 | lineNo | int |   |   |
 | contactNo | string |   |   |
@@ -2422,7 +2422,7 @@
 # TopCustomerOverview
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | name | string |   |   |
 | no | string |   |   |
 | countryRegionCode | string |   |   |
@@ -2440,7 +2440,7 @@
 # UserTaskSetComplete
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | iD | int |   |   |
 | title | string |   |   |
 | dueDateTime | date |   |   |
@@ -2461,7 +2461,7 @@
 # ValueEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | itemNo | string |   |   |
 | itemLedgerEntryNo | int |   |   |
@@ -2499,7 +2499,7 @@
 # VendorLedgerEntries
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | entryNo | int |   |   |
 | transactionNo | int |   |   |
 | vendorNo | string |   |   |
@@ -2531,7 +2531,7 @@
 # InvoicingAttachment
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | documentId | guid |   |   |
 | fileName | string |   |   |
@@ -2547,7 +2547,7 @@
 # InvoicingContact
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | number | string |   |   |
 | xrmId | guid |   |   |
 | displayName | string |   |   |
@@ -2562,7 +2562,7 @@
 # InvoicingCountryRegion
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | code | string |   |   |
 | displayName | string |   |   |
@@ -2571,7 +2571,7 @@
 # InvoicingCustomer
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | number | string |   |   |
 | graphContactId | string |   |   |
@@ -2603,7 +2603,7 @@
 # InvoicingCustomersCoupon
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | claimId | string |   |   |
 | graphContactId | string |   |   |
 | customerId | guid |   |   |
@@ -2623,7 +2623,7 @@
 # InvoicingEmailPreview
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentId | guid |   |   |
 | email | string |   |   |
 | subject | string |   |   |
@@ -2633,7 +2633,7 @@
 # InvoicingEmailSetting
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | recipientType | string |   |   |
 | eMail | string |   |   |
@@ -2641,7 +2641,7 @@
 # InvoicingExportInvoice
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   |   |
 | startDate | date |   |   |
 | endDate | date |   |   |
@@ -2650,7 +2650,7 @@
 # InvoicingGeneralSetting
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | currencySymbol | string |   |   |
 | paypalEmailAddress | string |   |   |
@@ -2684,7 +2684,7 @@
 # InvoicingItem
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | number | string |   |   |
 | displayName | string |   |   |
@@ -2706,7 +2706,7 @@
 # InvoicingKPI
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | invoicedYearToDate | float |   |   |
 | numberOfInvoicesYearToDate | int |   |   |
@@ -2721,7 +2721,7 @@
 # InvoicingLanguage
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | languageId | int |   |   |
 | languageCode | string |   |   |
 | displayName | string |   |   |
@@ -2730,7 +2730,7 @@
 # InvoicingPDF
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentId | guid |   |   |
 | fileName | string |   |   |
 | content | string |   |   |
@@ -2738,7 +2738,7 @@
 # InvoicingPaymentMethod
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | code | string |   |   |
 | displayName | string |   |   |
@@ -2748,7 +2748,7 @@
 # InvoicingPaymentTerm
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | code | string |   |   |
 | displayName | string |   |   |
@@ -2762,14 +2762,14 @@
 # InvoicingQBOSyncAuth
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | key | int |   |   |
 | authorizationUrl | string |   |   |
 
 # InvoicingSMTPMailSetup
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | primaryKey | string |   |   |
 | sMTPServer | string |   |   |
 | authentication | string |   |   |
@@ -2781,7 +2781,7 @@
 # InvoicingSalesInvoiceOverview
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | number | string |   |   |
 | customerNumber | string |   |   |
@@ -2801,7 +2801,7 @@
 # InvoicingSalesInvoice
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X |   |
 | number | string |   |   |
 | customerId | guid |   |   |
@@ -2910,7 +2910,7 @@
 # InvoicingSalesInvoicesPayment
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | appliesToInvoiceId | guid |   | X |
 | paymentNo | int |   | X |
 | customerId | guid |   | X |
@@ -2921,7 +2921,7 @@
 # InvoicingSalesQuote
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | number | string |   | X |
 | quoteDate | date |   | X |
@@ -2968,7 +2968,7 @@
 # InvoicingSalesTaxSetup
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | displayName | string |   | X |
 | default | bool |   | X |
@@ -2985,7 +2985,7 @@
 # InvoicingSyncServicesSetting
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | key | int |   | X |
 | qboSyncTitle | string |   | X |
 | qboSyncDescription | string |   | X |
@@ -3002,7 +3002,7 @@
 # InvoicingTaxArea
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | code | string |   | X |
 | displayName | string |   | X |
@@ -3012,7 +3012,7 @@
 # InvoicingTaxGroup
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | code | string |   | X |
 | displayName | string |   | X |
@@ -3022,7 +3022,7 @@
 # InvoicingTaxRate
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | taxAreaId | guid |   | X |
 | taxGroupId | guid |   | X |
 | taxRate | float |   | X |
@@ -3030,14 +3030,14 @@
 # InvoicingTestMail
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | code | string |   | X |
 | email | string |   | X |
 
 # InvoicingUnitsOfMeasure
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | code | string |   | X |
 | displayName | string |   | X |
@@ -3047,7 +3047,7 @@
 # InvoicingVATSetup
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | default | bool |   | X |
 | displayName | string |   | X |
@@ -3058,7 +3058,7 @@
 # Powerbifinance
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | no | int |   | X |
 | date | date |   | X |
 | closedPeriod | bool |   | X |
@@ -3079,7 +3079,7 @@
 # PurchaseDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -3279,7 +3279,7 @@
 # PurchaseDocuments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | documentType | string |   | X |
 | buyFromVendorNumber | string |   | X |
@@ -3436,7 +3436,7 @@
 # PurchaseDocumentsworkflowPurchaseDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -3636,7 +3636,7 @@
 # SalesDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -3823,7 +3823,7 @@
 # SalesDocuments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | documentType | string |   | X |
 | sellToCustomerNumber | string |   | X |
@@ -3996,7 +3996,7 @@
 # SalesDocumentsworkflowSalesDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -4183,7 +4183,7 @@
 # WorkflowCustomers
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | number | string |   | X |
 | name | string |   | X |
@@ -4347,7 +4347,7 @@
 # WorkflowGenJournalBatches
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | journalTemplateName | string |   | X |
 | name | string |   | X |
@@ -4369,7 +4369,7 @@
 # WorkflowGenJournalLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | journalTemplateName | string |   | X |
 | journalBatchName | string |   | X |
 | lineNumber | int |   | X |
@@ -4552,7 +4552,7 @@
 # WorkflowItems
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | number | string |   | X |
 | number2 | string |   | X |
@@ -4768,7 +4768,7 @@
 # WorkflowPurchaseDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -4968,7 +4968,7 @@
 # WorkflowPurchaseDocuments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | documentType | string |   | X |
 | buyFromVendorNumber | string |   | X |
@@ -5125,7 +5125,7 @@
 # WorkflowPurchaseDocumentsworkflowPurchaseDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -5325,7 +5325,7 @@
 # WorkflowSalesDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -5512,7 +5512,7 @@
 # WorkflowSalesDocuments
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | documentType | string |   | X |
 | sellToCustomerNumber | string |   | X |
@@ -5685,7 +5685,7 @@
 # WorkflowSalesDocumentsworkflowSalesDocumentLines
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | documentType | string |   | X |
 | documentNumber | string |   | X |
 | lineNumber | int |   | X |
@@ -5872,7 +5872,7 @@
 # WorkflowVendors
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | number | string |   | X |
 | name | string |   | X |
@@ -6010,7 +6010,7 @@
 # WorkflowWebhookSubscriptions
 ## Properties
 | Name | Type | Read Only | Required |
-| --- | --- | :-: |
+| --- | --- | :-: | :-: |
 | id | guid | X | X |
 | notificationUrl | string |   | X |
 | conditions | string |   | X |
