@@ -155,7 +155,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
      */
     public function save()
     {
-        dd($this->validate());
+        $this->validate();
 
         $entity_set = $this->getEntityType()->getEntitySet();
 
