@@ -1,5 +1,5 @@
 {
-    "customer"  : {
+    "customer"                         : {
         "properties" : {
             "taxAreaDisplayName" : {
                 "readOnly" : true
@@ -9,14 +9,42 @@
             }
         }
     },
-    "__example" : {
+    "nativeInvoicingSalesInvoiceLines" : {
+        "properties" : {
+            "lineDiscountValue"     : {
+                "nullable" : true
+            },
+            "taxable"               : {
+                "nullable" : true
+            },
+            "lineAmount"            : {
+                "nullable" : true
+            },
+            "amountExcludingTax"    : {
+                "nullable" : true
+            },
+            "amountIncludingTax"    : {
+                "nullable" : true
+            },
+            "invoiceDiscountAmount" : {
+                "nullable" : true
+            },
+            "taxPercent"            : {
+                "nullable" : true
+            },
+            "totalTaxAmount"        : {
+                "nullable" : true
+            }
+        }
+    },
+    "__example"                        : {
         "properties" : {
             "property" : {
                 "readOnly" : true
             }
         }
     },
-    "__always"  : {
+    "__always"                         : {
         "properties" : {
             "id"                   : {
                 "readOnly" : true

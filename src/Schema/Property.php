@@ -20,6 +20,7 @@ use Illuminate\Support\Str;
  * @property bool   $read_only
  * @property bool   $required
  * @property bool   $fillable
+ * @property bool   $nullable
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -33,9 +34,10 @@ class Property
 
     protected $validation = [];
 
-    protected $read_only = false;
     protected $guarded   = false;
+    protected $read_only = false;
     protected $fillable  = false;
+    protected $nullable  = false;
 
     public function __construct($property, Schema $schema, EntityType $entity_type)
     {
@@ -45,10 +47,10 @@ class Property
 
         $this->read_only = $this->schema->propertyIsReadOnly($entity_type->name, $this->name);
         $this->fillable  = $this->schema->propertyIsFillable($entity_type->name, $this->name);
-
+        $this->nullable  = $this->schema->propertyIsNullable($entity_type->name, $this->name) ||
+                           filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
         $this->validation = [
-            'nullable'   => filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN),
             'max_length' => $property['@attributes']['MaxLength'] ?? null,
         ];
     }
@@ -150,11 +152,11 @@ class Property
     public function getValidation()
     {
         $rules = [];
-        if (strtolower($this->name) === 'id') {
+        if (strtolower($this->name) === 'id' || $this->read_only) {
             return $rules;
         }
 
-        if ( ! $this->validation['nullable']) {
+        if ( ! $this->nullable) {
             $rules[$this->name][] = 'required';
         }
 
@@ -195,7 +197,7 @@ class Property
             case 'fillable':
                 return $this->{$name};
             case 'required':
-                return ! $this->validation['nullable'];
+                return ! $this->nullable;
         }
     }
 

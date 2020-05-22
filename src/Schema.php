@@ -195,4 +195,9 @@ class Schema
     {
         return ! $this->propertyIs($model, $property, 'readOnly');
     }
+
+    public function propertyIsNullable(string $model, string $property)
+    {
+        return $this->propertyIs($model, $property, 'nullable');
+    }
 }

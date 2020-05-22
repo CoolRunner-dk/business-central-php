@@ -161,7 +161,7 @@ foreach ($docs as $class => $doc) {
             $doc_type,
             $property->read_only ? 'X' : ' ',
             $property->required ? 'X' : ' ',
-            ! $property->required ? 'X' : ' ');
+            $property->nullable ? 'X' : ' ');
 
         if ($complex) {
             foreach ($complex->properties() as $property) {
@@ -176,7 +176,7 @@ foreach ($docs as $class => $doc) {
                     $doc_type,
                     $property->read_only ? 'X' : ' ',
                     $property->required ? 'X' : ' ',
-                    ! $property->required ? 'X' : ' ');
+                    $property->nullable ? 'X' : ' ');
             }
         }
     }
