@@ -201,11 +201,32 @@ foreach ($docs as $class => $doc) {
     if ( ! empty($doc['actions'])) {
         $doc_contents .= "## Actions\n";
         $doc_contents .= "\n";
-        $doc_contents .= "| Name |\n";
-        $doc_contents .= "| --- |\n";
-        /** @var \BusinessCentral\Schema\Action $item */
-        foreach ($doc['relations'] ?? [] as $item) {
-            $doc_contents .= "| $item->name |\n";
+        /** @var \BusinessCentral\Schema\Action $action */
+        foreach ($doc['actions'] as $action) {
+            $doc_contents .= "### $action->name\n";
+
+            $parameters = [];
+            foreach ($action->parameters as $key => $parameter) {
+                if ($key !== 'bindingParameter') {
+                    $parameters[$key] = $parameter['type'];
+                }
+            }
+
+            if ( ! empty($parameters)) {
+                $doc_contents .= "### Parameters\n";
+                $doc_contents .= "| Key | Type |\n";
+                $doc_contents .= "| --- | --- |\n";
+                foreach ($parameters as $key => $value) {
+                    $doc_contents .= "| $key | $value |\n";
+                }
+            } else {
+                $doc_contents .= "No parameters\n";
+            }
+
+            if ($action->return_type) {
+                $doc_contents .= "Returns: $action->return_type\n";
+            }
+
         }
     }
 }

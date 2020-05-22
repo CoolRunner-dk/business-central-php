@@ -2456,8 +2456,8 @@
 
 ## Actions
 
-| Name |
-| --- |
+### SetComplete
+No parameters
 # ValueEntries
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -2542,8 +2542,8 @@
 
 ## Actions
 
-| Name |
-| --- |
+### Copy
+No parameters
 # InvoicingContact
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -2557,8 +2557,8 @@
 
 ## Actions
 
-| Name |
-| --- |
+### MakeCustomer
+No parameters
 # InvoicingCountryRegion
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -3019,8 +3019,12 @@
 
 ## Actions
 
-| Name |
-| --- |
+### FixIntegrationRecordIDs
+No parameters
+### FixTemplates
+No parameters
+### SyncBizProfile
+No parameters
 # InvoicingItem
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -3771,9 +3775,16 @@
 | invoicingSalesInvoicesPayments | [InvoicingSalesInvoicesPayment[]](#invoicingsalesinvoicespayment) | Yes |
 ## Actions
 
-| Name |
-| --- |
-| invoicingSalesInvoicesPayments |
+### CancelAndSend
+No parameters
+### Cancel
+No parameters
+### PostAndSend
+No parameters
+### Post
+No parameters
+### Send
+No parameters
 # InvoicingSalesInvoicesPayment
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -4056,8 +4067,10 @@
 
 ## Actions
 
-| Name |
-| --- |
+### MakeInvoice
+No parameters
+### Send
+No parameters
 # InvoicingSalesTaxSetup
 ## Properties
 | Name | Type | Read Only | Required | Nullable |
@@ -4150,8 +4163,8 @@
 
 ## Actions
 
-| Name |
-| --- |
+### SendInstructionsByEmail
+No parameters
 # InvoicingTaxArea
 ## Properties
 | Name | Type | Read Only | Required | Nullable |

@@ -14,6 +14,8 @@ use BusinessCentral\Schema;
  * Class Action
  *
  * @property-read $name
+ * @property-read $parameters
+ * @property-read $return_type
  * @property-read $fqn
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -56,6 +58,8 @@ class Action
     {
         switch ($name) {
             case 'name':
+            case 'parameters':
+            case 'return_type':
                 return $this->{$name};
             case 'fqn':
                 return "Microsoft.NAV.$this->name";
