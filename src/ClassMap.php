@@ -26,7 +26,6 @@ class ClassMap
     }
 
     protected static $map = [
-        // Generated on 2020-05-22 07:30:30
         'AccountantPortalActivityCues'  => \BusinessCentral\Models\AccountantPortalActivityCues::class,
         'AccountantPortalFinanceCues'  => \BusinessCentral\Models\AccountantPortalFinanceCues::class,
         'AccountantPortalUserTasks'  => \BusinessCentral\Models\AccountantPortalUserTasks::class,

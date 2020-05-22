@@ -66,7 +66,6 @@ __wl(" - Token:    $credentials[tenant]");
 readline("Press enter to continue");
 
 $sdk = SDK::instance($credentials['tenant'], $credentials);
-$now = (new DateTime())->format('Y-m-d H:i:s');
 
 $map  = [];
 $docs = [];
@@ -128,9 +127,7 @@ foreach ($types as $type) {
 
 $map_contents = file_get_contents('src/ClassMap.php');
 
-$map_lines = [
-    "        // Generated on $now\n",
-];
+$map_lines = [];
 foreach ($map as $type => $class) {
     $map_lines[] = "        '$type'  => $class::class,\n";
 }
@@ -151,6 +148,9 @@ foreach ($docs as $class => $doc) {
         $doc_type = $item->getValidationType();
         if ($doc_type instanceof ComplexType) {
             $doc_type = $doc_type->name;
+            if($item->isCollection()) {
+                $doc_type .= '[]';
+            }
         }
         $doc_contents .= sprintf("| %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'Yes' : 'No');
     }
@@ -185,13 +185,11 @@ foreach ($docs as $class => $doc) {
     }
 }
 
-$doc_contents .= "\n---\nGenerated on $now\n";
-
 file_put_contents('entities.md', $doc_contents);
 
 function __generate_doc(string $class, EntityType $type)
 {
-    global $now, $sdk;
+    global $sdk;
 
     $rfc = new ReflectionClass($class);
     $rfp = $rfc->getProperty('guarded');
@@ -242,7 +240,6 @@ function __generate_doc(string $class, EntityType $type)
         "/**",
         ' *',
         ' * Class ' . class_basename($class),
-        ' * Auto-generated on: ' . $now,
         ' *',
     ];
     foreach ($properties as $property) {

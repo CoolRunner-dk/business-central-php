@@ -7,7 +7,6 @@ use BusinessCentral\Entity;
 /**
  *
  * Class InvoicingAttachment
- * Auto-generated on: 2020-05-22 07:30:30
  *
  * @property-read string $id
  * @property string $documentId

@@ -7,7 +7,6 @@ use BusinessCentral\Entity;
 /**
  *
  * Class ValueEntries
- * Auto-generated on: 2020-05-22 07:30:30
  *
  * @property int $entryNo
  * @property string $itemNo

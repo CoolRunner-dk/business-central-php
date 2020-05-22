@@ -2818,18 +2818,18 @@
 | billingPostalAddress | postalAddressType | No |
 | pricesIncludeTax | bool | No |
 | currencyCode | string | No |
-| lines | nativeInvoicingSalesInvoiceLines | No |
+| lines | nativeInvoicingSalesInvoiceLines[] | No |
 | subtotalAmount | float | No |
 | discountAmount | float | No |
 | discountAppliedBeforeTax | bool | No |
-| coupons | nativeInvoicingSalesDocumentCoupons | No |
+| coupons | nativeInvoicingSalesDocumentCoupons[] | No |
 | totalAmountExcludingTax | float | No |
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | noteForCustomer | string | No |
 | status | string | No |
 | lastModifiedDateTime | date | Yes |
-| attachments | nativeInvoicingDocumentAttachments | No |
+| attachments | nativeInvoicingDocumentAttachments[] | No |
 | invoiceDiscountCalculation | string | No |
 | invoiceDiscountValue | float | No |
 | remainingAmount | float | No |
@@ -2884,17 +2884,17 @@
 | shipmentMethod | string | No |
 | salesperson | string | No |
 | currencyCode | string | No |
-| lines | nativeInvoicingSalesQuoteLines | No |
+| lines | nativeInvoicingSalesQuoteLines[] | No |
 | subtotalAmount | float | No |
 | discountAmount | float | No |
 | discountAppliedBeforeTax | bool | No |
-| coupons | nativeInvoicingSalesDocumentCoupons | No |
+| coupons | nativeInvoicingSalesDocumentCoupons[] | No |
 | totalAmountExcludingTax | float | No |
 | totalTaxAmount | float | No |
 | totalAmountIncludingTax | float | No |
 | noteForCustomer | string | No |
 | lastModifiedDateTime | date | Yes |
-| attachments | nativeInvoicingDocumentAttachments | No |
+| attachments | nativeInvoicingDocumentAttachments[] | No |
 | invoiceDiscountCalculation | string | No |
 | invoiceDiscountValue | float | No |
 | lastEmailSentStatus | string | No |
@@ -5959,6 +5959,3 @@
 | clientId | guid | No |
 | enabled | bool | No |
 
-
----
-Generated on 2020-05-22 07:30:30

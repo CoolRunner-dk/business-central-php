@@ -7,7 +7,6 @@ use BusinessCentral\Entity;
 /**
  *
  * Class CsVendorInfoDocuments
- * Auto-generated on: 2020-05-22 07:30:30
  *
  * @property string $type
  * @property string $documentType
