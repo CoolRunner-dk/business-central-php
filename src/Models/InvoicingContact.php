@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingContact
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingcontact
+ *
  * @property string $number
  * @property string $xrmId
  * @property string $displayName

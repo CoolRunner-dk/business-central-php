@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingSalesInvoiceOverview
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingsalesinvoiceoverview
+ *
  * @property-read string $id
  * @property string $number
  * @property string $customerNumber

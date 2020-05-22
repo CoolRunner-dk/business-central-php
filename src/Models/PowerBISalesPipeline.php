@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBISalesPipeline
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbisalespipeline
+ *
  * @property int $iD
  * @property string $rowNo
  * @property float $value

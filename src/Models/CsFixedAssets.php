@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsFixedAssets
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csfixedassets
+ *
  * @property string $no
  * @property string $description
  *

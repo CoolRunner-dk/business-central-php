@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoiceReminder
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicereminder
+ *
  * @property string $invoiceId
  * @property string $message
  *

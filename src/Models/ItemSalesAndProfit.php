@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ItemSalesAndProfit
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#itemsalesandprofit
+ *
  * @property string $no
  * @property string $description
  * @property string $genProdPostingGroup

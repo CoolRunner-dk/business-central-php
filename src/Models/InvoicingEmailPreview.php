@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingEmailPreview
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingemailpreview
+ *
  * @property string $documentId
  * @property string $email
  * @property string $subject

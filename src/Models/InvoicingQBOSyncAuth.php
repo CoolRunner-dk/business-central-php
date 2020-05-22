@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingQBOSyncAuth
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingqbosyncauth
+ *
  * @property int $key
  * @property string $authorizationUrl
  *

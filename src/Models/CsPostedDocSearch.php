@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedDocSearch
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csposteddocsearch
+ *
  * @property string $type
  * @property string $no
  * @property string $userID

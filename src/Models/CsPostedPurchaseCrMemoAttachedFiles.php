@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseCrMemoAttachedFiles
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchasecrmemoattachedfiles
+ *
  * @property string $no
  * @property string $currentUserId
  * @property int $tableID

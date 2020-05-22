@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingTaxRate
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingtaxrate
+ *
  * @property string $taxAreaId
  * @property string $taxGroupId
  * @property float $taxRate

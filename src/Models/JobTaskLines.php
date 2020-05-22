@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class JobTaskLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#jobtasklines
+ *
  * @property string $jobNo
  * @property string $jobTaskNo
  * @property string $description

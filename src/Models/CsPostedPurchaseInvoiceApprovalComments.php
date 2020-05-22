@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseInvoiceApprovalComments
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchaseinvoiceapprovalcomments
+ *
  * @property int $entryNo
  * @property string $userID
  * @property string $userName

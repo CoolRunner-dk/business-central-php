@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingVATSetup
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingvatsetup
+ *
  * @property-read string $id
  * @property bool $default
  * @property string $displayName

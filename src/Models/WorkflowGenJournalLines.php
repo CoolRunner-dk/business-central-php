@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class WorkflowGenJournalLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#workflowgenjournallines
+ *
  * @property string $journalTemplateName
  * @property string $journalBatchName
  * @property int $lineNumber

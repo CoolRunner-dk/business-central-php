@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingLanguage
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicinglanguage
+ *
  * @property int $languageId
  * @property string $languageCode
  * @property string $displayName

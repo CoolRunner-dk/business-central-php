@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class DimensionSetEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#dimensionsetentries
+ *
  * @property int $dimensionSetID
  * @property string $dimensionCode
  * @property string $dimensionValueCode

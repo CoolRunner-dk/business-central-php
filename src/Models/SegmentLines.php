@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class SegmentLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#segmentlines
+ *
  * @property string $segmentNo
  * @property int $lineNo
  * @property string $contactNo

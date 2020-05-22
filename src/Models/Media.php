@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class Media
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#media
+ *
  * @property string $iD
  * @property string $description
  * @property string $content

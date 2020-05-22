@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIVendorLedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbivendorledgerentries
+ *
  * @property int $entryNo
  * @property string $dueDate
  * @property bool $open

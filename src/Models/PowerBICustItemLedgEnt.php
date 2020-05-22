@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBICustItemLedgEnt
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbicustitemledgent
+ *
  * @property string $no
  * @property string $itemNo
  * @property float $quantity

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPurchaseDocument
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspurchasedocument
+ *
  * @property string $documentType
  * @property string $no
  * @property string $documentTypeInt

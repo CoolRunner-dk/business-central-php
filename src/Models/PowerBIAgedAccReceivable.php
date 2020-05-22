@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIAgedAccReceivable
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbiagedaccreceivable
+ *
  * @property int $iD
  * @property float $value
  * @property string $periodType

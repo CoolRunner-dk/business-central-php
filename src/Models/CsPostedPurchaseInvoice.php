@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseInvoice
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchaseinvoice
+ *
  * @property string $no
  * @property string $payToVendorNo
  * @property string $payToName

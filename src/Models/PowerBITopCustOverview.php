@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBITopCustOverview
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbitopcustoverview
+ *
  * @property int $entryNo
  * @property string $postingDate
  * @property string $customerNo

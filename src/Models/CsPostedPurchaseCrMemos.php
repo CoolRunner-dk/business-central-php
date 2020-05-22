@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseCrMemos
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchasecrmemos
+ *
  * @property string $no
  * @property string $vendorNo
  * @property string $name

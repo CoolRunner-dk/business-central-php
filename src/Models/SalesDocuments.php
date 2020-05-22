@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class SalesDocuments
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#salesdocuments
+ *
  * @property-read string $id
  * @property string $documentType
  * @property string $sellToCustomerNumber

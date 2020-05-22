@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateBalanceSheet
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplatebalancesheet
+ *
  * @property int $lineNumber
  * @property string $display
  * @property float $balance

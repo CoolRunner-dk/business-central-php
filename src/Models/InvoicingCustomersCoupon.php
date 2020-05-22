@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingCustomersCoupon
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingcustomerscoupon
+ *
  * @property string $claimId
  * @property string $graphContactId
  * @property string $customerId

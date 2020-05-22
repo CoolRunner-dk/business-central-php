@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class SalesDashboard
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#salesdashboard
+ *
  * @property int $entryNo
  * @property string $documentNo
  * @property string $postingDate

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBISalesList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbisaleslist
+ *
  * @property string $documentNo
  * @property string $requestedDeliveryDate
  * @property string $shipmentDate

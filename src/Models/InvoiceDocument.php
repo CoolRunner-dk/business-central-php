@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoiceDocument
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicedocument
+ *
  * @property string $invoiceId
  * @property string $base64
  * @property string $binary

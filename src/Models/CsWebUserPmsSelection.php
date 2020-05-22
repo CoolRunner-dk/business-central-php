@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebUserPmsSelection
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebuserpmsselection
+ *
  * @property string $permissionType
  * @property string $continiaUserID
  * @property string $type

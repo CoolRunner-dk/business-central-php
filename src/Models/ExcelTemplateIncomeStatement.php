@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateIncomeStatement
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplateincomestatement
+ *
  * @property int $lineNumber
  * @property string $display
  * @property float $netChange

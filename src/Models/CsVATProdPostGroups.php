@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsVATProdPostGroups
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csvatprodpostgroups
+ *
  * @property string $code
  * @property string $description
  *

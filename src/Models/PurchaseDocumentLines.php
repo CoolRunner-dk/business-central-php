@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PurchaseDocumentLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#purchasedocumentlines
+ *
  * @property string $documentType
  * @property string $documentNumber
  * @property int $lineNumber

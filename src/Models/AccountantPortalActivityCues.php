@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class AccountantPortalActivityCues
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#accountantportalactivitycues
+ *
  * @property string $primaryKey
  * @property string $overduePurchInvoiceAmount
  * @property string $overduePurchInvoiceStyle

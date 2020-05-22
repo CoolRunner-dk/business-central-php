@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsEnabledReasonCodes
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csenabledreasoncodes
+ *
  * @property int $tableID
  * @property string $docType
  * @property string $type

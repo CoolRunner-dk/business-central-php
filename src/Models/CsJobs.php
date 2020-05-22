@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsJobs
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csjobs
+ *
  * @property string $no
  * @property string $description
  * @property string $billToCustomerNo

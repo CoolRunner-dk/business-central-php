@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsApprovalSharing
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csapprovalsharing
+ *
  * @property string $ownerUserID
  * @property string $sharedToUserID
  * @property string $sharingType

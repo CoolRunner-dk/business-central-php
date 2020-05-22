@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class TopCustomerOverview
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#topcustomeroverview
+ *
  * @property string $name
  * @property string $no
  * @property string $countryRegionCode

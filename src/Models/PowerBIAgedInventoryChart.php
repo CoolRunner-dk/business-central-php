@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIAgedInventoryChart
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbiagedinventorychart
+ *
  * @property int $iD
  * @property float $value
  * @property string $date

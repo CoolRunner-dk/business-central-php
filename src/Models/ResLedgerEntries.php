@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ResLedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#resledgerentries
+ *
  * @property int $entryNo
  * @property string $entryType
  * @property string $resourceNo

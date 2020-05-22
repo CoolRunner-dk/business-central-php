@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ValueEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#valueentries
+ *
  * @property int $entryNo
  * @property string $itemNo
  * @property int $itemLedgerEntryNo

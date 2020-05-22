@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPurchaseDocumentApprovalComments
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspurchasedocumentapprovalcomments
+ *
  * @property int $entryNo
  * @property string $userID
  * @property string $userName

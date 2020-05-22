@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsApprovalDocument
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csapprovaldocument
+ *
  * @property int $entryNo
  * @property string $documentType
  * @property string $documentTypeInt

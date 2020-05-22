@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseCrMemoPurchLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchasecrmemopurchlines
+ *
  * @property string $documentNo
  * @property int $lineNo
  * @property string $currentUserId

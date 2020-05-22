@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class Company
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#company
+ *
  * @property string $name
  * @property bool $evaluationCompany
  * @property string $displayName

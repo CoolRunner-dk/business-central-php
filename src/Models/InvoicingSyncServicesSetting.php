@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingSyncServicesSetting
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingsyncservicessetting
+ *
  * @property int $key
  * @property string $qboSyncTitle
  * @property string $qboSyncDescription

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsItems
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csitems
+ *
  * @property string $no
  * @property string $description
  *

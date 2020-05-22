@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class GeneralJournals
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#generaljournals
+ *
  * @property string $journalTemplateName
  * @property string $journalBatchName
  * @property int $lineNo

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class GLEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#glentries
+ *
  * @property int $entryNo
  * @property int $transactionNo
  * @property string $gLAccountNo

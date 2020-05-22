@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsGLAccounts
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csglaccounts
+ *
  * @property string $no
  * @property string $name
  * @property bool $directPosting

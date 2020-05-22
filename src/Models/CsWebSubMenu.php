@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebSubMenu
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebsubmenu
+ *
  * @property string $webMenuCode
  * @property string $code
  * @property string $description

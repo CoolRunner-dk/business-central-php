@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingKPI
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingkpi
+ *
  * @property string $primaryKey
  * @property float $invoicedYearToDate
  * @property int $numberOfInvoicesYearToDate

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIReportLabels
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbireportlabels
+ *
  * @property string $labelID
  * @property string $textValue
  *

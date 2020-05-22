@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class BankAccountLedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#bankaccountledgerentries
+ *
  * @property int $entryNo
  * @property int $transactionNo
  * @property string $bankAccountNo

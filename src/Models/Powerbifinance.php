@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class Powerbifinance
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbifinance
+ *
  * @property int $no
  * @property string $date
  * @property bool $closedPeriod

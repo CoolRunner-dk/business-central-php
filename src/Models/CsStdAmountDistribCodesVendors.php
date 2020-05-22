@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsStdAmountDistribCodesVendors
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csstdamountdistribcodesvendors
+ *
  * @property string $vendorNo
  * @property string $amountDistributionCode
  *

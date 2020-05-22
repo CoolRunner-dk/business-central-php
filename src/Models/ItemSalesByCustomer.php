@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ItemSalesByCustomer
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#itemsalesbycustomer
+ *
  * @property int $entryNo
  * @property string $documentNo
  * @property string $postingDate

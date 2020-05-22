@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebUser
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebuser
+ *
  * @property string $userID
  * @property string $documentSearch
  * @property string $purchRespCenterFilter

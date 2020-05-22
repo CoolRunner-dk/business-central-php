@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class C2Graph
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#c2graph
+ *
  * @property string $component
  * @property string $type
  * @property string $schema

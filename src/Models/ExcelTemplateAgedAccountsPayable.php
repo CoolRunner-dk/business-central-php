@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateAgedAccountsPayable
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplateagedaccountspayable
+ *
  * @property string $vendorId
  * @property string $vendorNumber
  * @property string $name

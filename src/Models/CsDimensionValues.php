@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsDimensionValues
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csdimensionvalues
+ *
  * @property string $dimCode
  * @property string $code
  * @property string $name

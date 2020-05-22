@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class SalesOpportunities
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#salesopportunities
+ *
  * @property string $no
  * @property string $description
  * @property string $creationDate

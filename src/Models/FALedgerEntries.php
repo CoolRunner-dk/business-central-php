@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class FALedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#faledgerentries
+ *
  * @property int $entryNo
  * @property int $gLEntryNo
  * @property string $fANo

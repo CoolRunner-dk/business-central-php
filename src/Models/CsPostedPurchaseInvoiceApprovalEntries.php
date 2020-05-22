@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsPostedPurchaseInvoiceApprovalEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cspostedpurchaseinvoiceapprovalentries
+ *
  * @property int $entryNo
  * @property int $sequenceNo
  * @property string $approverID

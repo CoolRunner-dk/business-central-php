@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIJobActVBudgCost
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbijobactvbudgcost
+ *
  * @property int $iD
  * @property string $measureNo
  * @property string $measureName

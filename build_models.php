@@ -288,6 +288,8 @@ function __generate_doc(string $class, EntityType $type)
         ' *',
         ' * Class ' . class_basename($class),
         ' *',
+        ' * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#' . strtolower(class_basename($class)),
+        ' *',
     ];
     foreach ($properties as $property) {
         $prefix  = $property['read_only'] ? '@property-read' : '@property';

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingUnitsOfMeasure
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingunitsofmeasure
+ *
  * @property-read string $id
  * @property string $code
  * @property string $displayName

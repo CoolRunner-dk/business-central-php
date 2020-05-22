@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingPDF
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingpdf
+ *
  * @property string $documentId
  * @property string $fileName
  * @property string $content

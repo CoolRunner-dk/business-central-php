@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebUserPermissions
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebuserpermissions
+ *
  * @property string $continiaUserID
  * @property string $type
  * @property string $dimensionCode

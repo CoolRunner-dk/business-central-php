@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingSalesQuote
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingsalesquote
+ *
  * @property-read string $id
  * @property string $number
  * @property string $quoteDate

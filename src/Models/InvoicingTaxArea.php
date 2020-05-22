@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingTaxArea
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingtaxarea
+ *
  * @property-read string $id
  * @property string $code
  * @property string $displayName

@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIJobProfitability
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbijobprofitability
+ *
  * @property int $iD
  * @property string $measureNo
  * @property string $measureName

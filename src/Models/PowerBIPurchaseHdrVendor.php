@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIPurchaseHdrVendor
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbipurchasehdrvendor
+ *
  * @property string $no
  * @property string $itemNo
  * @property float $quantity

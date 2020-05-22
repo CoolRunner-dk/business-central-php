@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingAttachment
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingattachment
+ *
  * @property-read string $id
  * @property string $documentId
  * @property string $fileName

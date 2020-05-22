@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class JobLedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#jobledgerentries
+ *
  * @property int $entryNo
  * @property string $jobNo
  * @property string $jobTaskNo

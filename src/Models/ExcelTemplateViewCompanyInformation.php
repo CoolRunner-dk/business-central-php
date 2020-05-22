@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateViewCompanyInformation
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplateviewcompanyinformation
+ *
  * @property string $primaryKey
  * @property string $displayName
  * @property string $currency

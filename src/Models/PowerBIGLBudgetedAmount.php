@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIGLBudgetedAmount
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbiglbudgetedamount
+ *
  * @property string $gLAccountNo
  * @property string $name
  * @property string $accountType

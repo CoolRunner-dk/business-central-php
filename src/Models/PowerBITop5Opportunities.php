@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBITop5Opportunities
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbitop5opportunities
+ *
  * @property int $iD
  * @property string $measureNo
  * @property float $value

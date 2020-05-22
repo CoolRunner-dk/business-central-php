@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingEmailSetting
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingemailsetting
+ *
  * @property string $code
  * @property string $recipientType
  * @property string $eMail

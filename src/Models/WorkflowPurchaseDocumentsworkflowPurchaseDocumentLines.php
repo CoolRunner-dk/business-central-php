@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class WorkflowPurchaseDocumentsworkflowPurchaseDocumentLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#workflowpurchasedocumentsworkflowpurchasedocumentlines
+ *
  * @property string $documentType
  * @property string $documentNumber
  * @property int $lineNumber

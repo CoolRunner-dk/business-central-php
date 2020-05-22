@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class WorkflowCustomers
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#workflowcustomers
+ *
  * @property-read string $id
  * @property string $number
  * @property string $name

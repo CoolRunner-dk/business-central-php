@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingCountryRegion
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicingcountryregion
+ *
  * @property-read string $id
  * @property string $code
  * @property string $displayName

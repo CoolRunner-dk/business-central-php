@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class SalesOrdersBySalesPerson
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#salesordersbysalesperson
+ *
  * @property string $itemNo
  * @property string $itemDescription
  * @property string $documentNo

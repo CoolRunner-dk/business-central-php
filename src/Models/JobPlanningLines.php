@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class JobPlanningLines
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#jobplanninglines
+ *
  * @property string $jobNo
  * @property string $jobTaskNo
  * @property int $lineNo

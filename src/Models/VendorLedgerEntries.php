@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class VendorLedgerEntries
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#vendorledgerentries
+ *
  * @property int $entryNo
  * @property int $transactionNo
  * @property string $vendorNo

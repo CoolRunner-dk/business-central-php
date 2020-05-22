@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateCashFlowStatement
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplatecashflowstatement
+ *
  * @property int $lineNumber
  * @property string $display
  * @property float $netChange

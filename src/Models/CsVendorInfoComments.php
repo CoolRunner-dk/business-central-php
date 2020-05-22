@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsVendorInfoComments
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csvendorinfocomments
+ *
  * @property string $tableName
  * @property string $no
  * @property int $lineNo

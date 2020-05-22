@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIJobsList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbijobslist
+ *
  * @property string $jobNo
  * @property string $searchDescription
  * @property bool $complete

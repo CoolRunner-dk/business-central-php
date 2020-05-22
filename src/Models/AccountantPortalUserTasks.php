@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class AccountantPortalUserTasks
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#accountantportalusertasks
+ *
  * @property int $iD
  * @property string $title
  * @property string $dueDateTime

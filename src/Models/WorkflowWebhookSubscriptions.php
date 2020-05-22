@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class WorkflowWebhookSubscriptions
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#workflowwebhooksubscriptions
+ *
  * @property-read string $id
  * @property string $notificationUrl
  * @property string $conditions

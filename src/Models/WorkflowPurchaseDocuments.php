@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class WorkflowPurchaseDocuments
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#workflowpurchasedocuments
+ *
  * @property-read string $id
  * @property string $documentType
  * @property string $buyFromVendorNumber

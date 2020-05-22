@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class ExcelTemplateTrialBalance
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#exceltemplatetrialbalance
+ *
  * @property string $number
  * @property string $accountId
  * @property string $accountType

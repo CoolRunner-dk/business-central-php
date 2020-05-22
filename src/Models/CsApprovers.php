@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsApprovers
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csapprovers
+ *
  * @property string $userID
  * @property string $salespersPurchCode
  * @property string $name

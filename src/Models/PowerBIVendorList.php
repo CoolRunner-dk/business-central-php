@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIVendorList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbivendorlist
+ *
  * @property string $vendorNo
  * @property string $vendorName
  * @property float $balanceDue

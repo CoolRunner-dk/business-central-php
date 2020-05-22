@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class InvoicingGeneralSetting
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#invoicinggeneralsetting
+ *
  * @property string $primaryKey
  * @property string $currencySymbol
  * @property string $paypalEmailAddress

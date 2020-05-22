@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIGLAmountList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbiglamountlist
+ *
  * @property string $gLAccountNo
  * @property string $name
  * @property string $accountType

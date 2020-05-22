@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebHelp
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebhelp
+ *
  * @property string $section
  * @property int $lineNo
  * @property bool $heading

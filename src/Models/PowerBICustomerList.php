@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBICustomerList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbicustomerlist
+ *
  * @property string $customerName
  * @property string $customerNo
  * @property float $creditLimit

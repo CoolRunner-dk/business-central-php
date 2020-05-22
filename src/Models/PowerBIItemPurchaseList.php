@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class PowerBIItemPurchaseList
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#powerbiitempurchaselist
+ *
  * @property string $itemNo
  * @property string $searchDescription
  * @property string $purchasePostDate

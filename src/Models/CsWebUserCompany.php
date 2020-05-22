@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsWebUserCompany
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#cswebusercompany
+ *
  * @property string $userId
  * @property string $companyCode
  * @property string $companyGuid

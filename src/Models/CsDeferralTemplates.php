@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsDeferralTemplates
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csdeferraltemplates
+ *
  * @property string $deferralCode
  * @property string $description
  * @property float $deferralPct

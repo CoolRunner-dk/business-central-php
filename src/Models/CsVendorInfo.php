@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class CsVendorInfo
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#csvendorinfo
+ *
  * @property string $no
  * @property string $name
  * @property string $name2

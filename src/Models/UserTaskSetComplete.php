@@ -8,6 +8,8 @@ use BusinessCentral\Entity;
  *
  * Class UserTaskSetComplete
  *
+ * @see https://github.com/CoolRunner-dk/business-central-php/blob/master/entities.md#usertasksetcomplete
+ *
  * @property int $iD
  * @property string $title
  * @property string $dueDateTime
