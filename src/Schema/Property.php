@@ -18,6 +18,7 @@ use Illuminate\Support\Str;
  * @property string $name
  * @property string $type
  * @property bool   $read_only
+ * @property bool   $required
  * @property bool   $fillable
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -193,6 +194,8 @@ class Property
             case 'guarded':
             case 'fillable':
                 return $this->{$name};
+            case 'required':
+                return ! $this->validation['nullable'];
         }
     }
 

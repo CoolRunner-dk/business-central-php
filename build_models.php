@@ -142,17 +142,34 @@ $doc_contents = '';
 foreach ($docs as $class => $doc) {
     $doc_contents .= sprintf("# %s\n", class_basename($class));
     $doc_contents .= "## Properties\n";
-    $doc_contents .= "| Name | Type | Read Only |\n";
+    $doc_contents .= "| Name | Type | Read Only | Required |\n";
     $doc_contents .= "| --- | --- | :-: |\n";
+    /** @var \BusinessCentral\Schema\Property $item */
     foreach ($doc['properties'] as $item) {
         $doc_type = $item->getValidationType();
         if ($doc_type instanceof ComplexType) {
+            $complex = $doc_type;
+
             $doc_type = $doc_type->name;
-            if($item->isCollection()) {
-                $doc_type .= '[]';
+            if ($item->isCollection()) {
+                $doc_type = 'array';
             }
         }
-        $doc_contents .= sprintf("| %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'Yes' : 'No');
+        $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'X' : '', $property->required ? 'X' : '');
+
+        if (isset($complex)) {
+            if ($complex->name === 'nativeInvoicingSalesInvoiceLines') {
+                foreach ($complex->properties() as $property) {
+                    $doc_type = $property->getValidationType();
+
+                    $name = $item->name . '.';
+                    $name .= $item->isCollection() ? '*.' : '';
+                    $name .= $property->name;
+
+                    $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $name, $doc_type, $property->read_only ? 'X' : '', $property->required ? 'X' : '');
+                }
+            }
+        }
     }
     $doc_contents .= "\n";
 
