@@ -155,8 +155,6 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
      */
     public function save()
     {
-        $this->validate();
-
         $entity_set = $this->getEntityType()->getEntitySet();
 
         if ($entity_set) {
@@ -185,7 +183,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
             $response = $this->query->post($this->attributes);
 
             $this->setAttributes($response);
-            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->name), $this->id);
+            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->schema_type), $this->id);
 
         }
 
