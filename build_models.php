@@ -155,7 +155,7 @@ foreach ($docs as $class => $doc) {
                 $doc_type = 'array';
             }
         }
-        $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'X' : '', $property->required ? 'X' : '');
+        $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'X' : ' ', $property->required ? 'X' : ' ');
 
         if (isset($complex)) {
             if ($complex->name === 'nativeInvoicingSalesInvoiceLines') {
@@ -166,7 +166,7 @@ foreach ($docs as $class => $doc) {
                     $name .= $item->isCollection() ? '*.' : '';
                     $name .= $property->name;
 
-                    $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $name, $doc_type, $property->read_only ? 'X' : '', $property->required ? 'X' : '');
+                    $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $name, $doc_type, $property->read_only ? 'X' : ' ', $property->required ? 'X' : ' ');
                 }
             }
         }
