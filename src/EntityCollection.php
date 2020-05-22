@@ -54,10 +54,10 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     protected function insert($item)
     {
-        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? null);
+        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? $item['Id'] ?? null);
         $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
 
-        $this->collection[$entity['id']] = $entity;
+        $this->collection[$entity->id] = $entity;
 
         return $entity;
     }
@@ -80,7 +80,6 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
             $this->total_count = 1;
             $this->insert($response);
         }
-
     }
 
     public function count()
@@ -116,7 +115,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
         return $this->query
                    ->clone()
-                   ->where('id', $id)
+                   ->where($this->getEntitySet()->getEntityType()->key, $id)
                    ->limit(1)->first() ?? $default;
     }
 

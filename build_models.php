@@ -42,6 +42,15 @@ function __loadfiles($dir)
     return $results;
 }
 
+function __loadstub($name)
+{
+    if (file_exists("stubs/$name.stub")) {
+        return file_get_contents("stubs/$name.stub");
+    }
+
+    return file_get_contents('stubs/model.stub');
+}
+
 function __wl($msg)
 {
     echo "$msg\n";
@@ -62,12 +71,13 @@ $now = (new DateTime())->format('Y-m-d H:i:s');
 $map  = [];
 $docs = [];
 
-$stub  = file_get_contents('stubs/model.stub');
-$types = $sdk->schema->getEntityTypes()->sortKeys();
+$types   = $sdk->schema->getEntityTypes()->sortKeys();
+$aliases = $sdk->schema->getAliases();
 
 foreach ($types as $type) {
-    $class_name  = Str::studly($type->name);
-    $schema_type = $type->name;
+    $class_name = Str::studly($aliases[$type->name] ?? $type->name);
+
+    $schema_type = $type->schema_type;
     $path        = "src/Models/$class_name.php";
 
     foreach ($type->properties() as $property) {
@@ -104,7 +114,7 @@ foreach ($types as $type) {
         $schema_type,
         $fillable,
         $guarded,
-    ], $stub);
+    ], __loadstub($class_name));
 
     if ( ! file_exists($path) || in_array('--reset', $argv)) {
         file_put_contents($path, $contents);

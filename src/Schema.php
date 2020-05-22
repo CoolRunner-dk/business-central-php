@@ -35,7 +35,10 @@ class Schema
     public function __construct(array $json)
     {
         $this->version = $json['@attributes']['Version'];
-        $this->raw     = $json;
+
+        foreach ($json['DataServices']['Schema'] as $item) {
+            $this->raw[$item['@attributes']['Namespace']] = $item;
+        }
 
         $this->entity_types  = new Collection();
         $this->entity_sets   = new Collection();
@@ -49,19 +52,19 @@ class Schema
 
     protected function propagate()
     {
-        foreach ($this->raw['DataServices']['Schema']['ComplexType'] as $type) {
+        foreach ($this->raw['NAV.ComplexTypes']['ComplexType'] as $type) {
             $this->complex_types[$type['@attributes']['Name']] = new ComplexType($type, $this);
         }
 
-        foreach ($this->raw['DataServices']['Schema']['EntityType'] as $type) {
+        foreach ($this->raw['NAV']['EntityType'] as $type) {
             $this->entity_types[$type['@attributes']['Name']] = new EntityType($type, $this);
         }
 
-        foreach ($this->raw['DataServices']['Schema']['EntityContainer']['EntitySet'] as $set) {
+        foreach ($this->raw['NAV']['EntityContainer']['EntitySet'] as $set) {
             $this->entity_sets[$set['@attributes']['Name']] = new EntitySet($set, $this);
         }
 
-        foreach ($this->raw['DataServices']['Schema']['Action'] as $action) {
+        foreach ($this->raw['NAV']['Action'] as $action) {
             $this->actions[$action['@attributes']['Name']] = new Action($action, $this);
         }
     }
@@ -144,6 +147,8 @@ class Schema
         }
 
         $type = str_replace('Microsoft.NAV.', '', $type);
+        $type = str_replace('NAV.', '', $type);
+        $type = str_replace('ComplexTypes.', '', $type);
 
         return $type;
     }
@@ -163,6 +168,11 @@ class Schema
     public function getOverrides(string $type, string $property)
     {
         return $this->overrides[$type][$property] ?? [];
+    }
+
+    public function getAliases()
+    {
+        return $this->getOverrides('__always', 'aliases');
     }
 
     public function propertyIs(string $model, string $property, string $attribute)

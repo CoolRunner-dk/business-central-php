@@ -8,21 +8,21 @@
 namespace BusinessCentral\Exceptions;
 
 
-use BusinessCentral\Validator;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
+use Rakit\Validation\Validation;
 use Throwable;
 
 class ValidationException extends Exception implements Jsonable, \JsonSerializable, Arrayable
 {
     protected $validator;
 
-    public function __construct(Validator $validator, $code = 0, Throwable $previous = null)
+    public function __construct(Validation $validator, $code = 0, Throwable $previous = null)
     {
         $this->validator = $validator;
 
         $messages = '';
-        foreach ($this->errors()->all() as $property => $errors) {
+        foreach ($this->errors() as $property => $errors) {
             $prop_messages = [];
             foreach ($errors as $type => $error) {
                 $prop_messages[] = "[ $type : $error ]";
@@ -40,7 +40,7 @@ class ValidationException extends Exception implements Jsonable, \JsonSerializab
 
     public function errors()
     {
-        return $this->validator->getErrors();
+        return $this->validator->errors()->toArray();
     }
 
     public function toArray()

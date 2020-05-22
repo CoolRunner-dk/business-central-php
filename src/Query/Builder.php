@@ -274,7 +274,7 @@ class Builder
     {
         $components = [];
         foreach ($this->components as $entity => $item) {
-            $components[] = $item['component'] . (isset($item['id']) ? "($item[id])" : '');
+            $components[] = $item['component'] . (isset($item['id']) ? "('$item[id]')" : '');
         }
 
         return implode('/', $components);
