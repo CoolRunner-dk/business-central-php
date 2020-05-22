@@ -17,10 +17,12 @@ use BusinessCentral\Schema\EntityType;
 use BusinessCentral\Schema\NavigationProperty;
 use BusinessCentral\Schema\Property;
 use BusinessCentral\Traits\HasQueryBuilder;
+use BusinessCentral\Validator\Rules\TypeOf;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Pluralizer;
+use Rakit\Validation\Validator;
 
 /**
  * Class Entity
@@ -101,9 +103,9 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     {
         foreach ($attributes as $key => $attribute) {
             if ($property = $this->getEntityType()->getProperty($key)) {
-                $this->attributes[$key] = $this->original[$key] = $property->convert($attribute);
+                $this->attributes[$property->name] = $this->original[$property->name] = $property->convert($attribute);
             } elseif ($property = $this->getEntityType()->getRelation($key)) {
-                $this->relations[$key] = $property->convert($attribute, $this->query->clone());
+                $this->relations[$property->name] = $property->convert($attribute, $this->query->clone());
             } elseif ($key === '@odata.etag') {
                 $this->etag = $attribute;
             }
@@ -146,12 +148,14 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
      * Create or update entity to remote
      *
      * @return $this
-     * @throws ValidationException If entity validation fails
      * @throws OperationNotAllowedException If the operation isn't allowed on the Entity
+     * @throws QueryException If the request fails
+     * @throws ValidationException If entity validation fails
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
     public function save()
     {
+        dd($this->validate());
 
         $entity_set = $this->getEntityType()->getEntitySet();
 
@@ -222,13 +226,22 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     /**
      * Validate the entity
      *
-     * @return array
-     * @throws ValidationException If entity validation fails
+     * @return bool
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
     public function validate()
     {
-        return (new Validator($this->getEntityType(), $this))->validate();
+        $validator = new Validator();
+
+        $validator->addValidator('typeof', new TypeOf());
+
+        $validation = $validator->validate($this->getDirty(), $this->getEntityType()->getValidationRules());
+
+        if ($validation->fails()) {
+            throw new ValidationException($validation);
+        }
+
+        return true;
     }
 
     /**
@@ -264,10 +277,10 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
             $query = $this->query->cloneWithoutExtensions();
 
             if ($property->isCollection()) {
-                return $this->relations[$relation] = $query->navigateTo($relation)->fetch();
+                return $this->relations[$relation] = $query->navigateTo($property->route)->fetch();
             } else {
                 try {
-                    return $this->relations[$relation] = $query->navigateTo($relation)->first();
+                    return $this->relations[$relation] = $query->navigateTo($property->route)->first();
                 } catch (QueryException $exception) {
                     if ($exception->is('BadRequest_ResourceNotFound')) {
                         return null;
@@ -354,12 +367,11 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
     public function __call($name, $arguments)
     {
-        if ($this->getEntityType()->relationExists($name)) {
-            return $this->query->clone()->navigateTo($name);
+        if ($relation = $this->getEntityType()->getRelation($name)) {
+            return $this->query->clone()->navigateTo($relation->route);
         } elseif ($this->getEntityType()->actionExists($name)) {
             return $this->doAction($name);
         }
-        // TODO: Implement __call() method.
     }
 
     public function toArray()
@@ -384,5 +396,17 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function getSdk()
     {
         return $this->query->getSDK();
+    }
+
+    public function getDirty()
+    : array
+    {
+        return $this->dirty;
+    }
+
+    public function getAttributes()
+    : array
+    {
+        return $this->attributes;
     }
 }

@@ -57,6 +57,7 @@ class SDK
         // Defaults
         'default_collection_size' => 20,
         'auto_paginate'           => false,
+        'offline_map'             => true,
     ];
 
     protected function __construct($tenant, $options)
@@ -75,7 +76,7 @@ class SDK
         }
 
         $this->client = new Client([
-            'base_uri' => "https://api.businesscentral.dynamics.com/v1.0/$this->tenant/$this->environment/api/v1.0/",
+            'base_uri' => "https://api.businesscentral.dynamics.com/v2.0/$this->tenant/$this->environment/ODataV4/",
             'headers'  => [
                 'User-Agent'    => 'Business Central SDK',
                 'Authorization' => "Basic " . base64_encode("{$this->option('username')}:{$this->option('token')}"),
@@ -110,19 +111,24 @@ class SDK
      */
     public function company(string $id)
     {
-        return $this->query()->navigateTo('companies')->find($id);
+        return $this->query()->navigateTo('Company')->find($id);
     }
 
     public function companies()
     {
-        return $this->query()->navigateTo('companies');
+        return $this->query()->navigateTo('Company');
     }
 
     public function mapEntities()
     {
-        $response = $this->client->get('$metadata');
-        $raw      = $response->getBody()->getContents();
-        $raw      = str_replace(['<edmx:', '</edmx:'], ['<', '</'], $raw);
+        if ($this->option('offline_map')) {
+            $raw = file_get_contents(__DIR__ . '/../bcmetadata.xml');
+        } else {
+            $response = $this->client->get('$metadata');
+            $raw      = $response->getBody()->getContents();
+        }
+
+        $raw = str_replace(['<edmx:', '</edmx:'], ['<', '</'], $raw);
 
         $json = json_decode(json_encode(simplexml_load_string($raw)), true);
 

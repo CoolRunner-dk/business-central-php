@@ -13,12 +13,15 @@ use BusinessCentral\EntityCollection;
 use BusinessCentral\Query\Builder;
 use BusinessCentral\Schema;
 use BusinessCentral\Traits\HasSchema;
+use Illuminate\Support\Pluralizer;
+use Illuminate\Support\Str;
 
 /**
  * Class Property
  *
- * @property string $name
- * @property string $type
+ * @property-read string $name
+ * @property-read string $type
+ * @property-read string $route
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -29,14 +32,20 @@ class NavigationProperty
 
     protected $name;
     protected $type;
+    protected $route;
 
     protected $validation = [];
 
     public function __construct($property, Schema $schema)
     {
         $this->schema = $schema;
-        $this->name   = $property['@attributes']['Name'];
+        $this->name   = Str::camel($this->schema->getAliases()[$property['@attributes']['Name']] ?? $property['@attributes']['Name']);
+        $this->route  = $property['@attributes']['Name'];
         $this->type   = $property['@attributes']['Type'];
+
+        if($this->isCollection()) {
+            $this->name = Pluralizer::plural($this->name);
+        }
     }
 
     public function isCollection()
@@ -77,6 +86,7 @@ class NavigationProperty
         switch ($name) {
             case 'name':
             case 'type':
+            case 'route':
                 return $this->{$name};
         }
     }

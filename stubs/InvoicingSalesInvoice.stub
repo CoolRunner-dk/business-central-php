@@ -1,0 +1,24 @@
+<?php
+namespace BusinessCentral\Models;
+
+
+use BusinessCentral\Entity;
+
+class {CLASS_NAME} extends Entity
+{
+    protected static $schema_type = '{SCHEMA_TYPE}';
+
+    protected $fillable = [
+{FILLABLE}
+    ];
+
+    protected $guarded  = [
+{GUARDED}
+    ];
+
+    /** @return InvoicingSalesInvoicesPayment */
+    public function addPayment(array $attributes)
+    {
+        return $this->invoicingSalesInvoicesPayments->create($attributes);
+    }
+}

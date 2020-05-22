@@ -42,6 +42,15 @@ function __loadfiles($dir)
     return $results;
 }
 
+function __loadstub($name)
+{
+    if (file_exists("stubs/$name.stub")) {
+        return file_get_contents("stubs/$name.stub");
+    }
+
+    return file_get_contents('stubs/model.stub');
+}
+
 function __wl($msg)
 {
     echo "$msg\n";
@@ -51,23 +60,23 @@ $credentials = json_decode(file_get_contents('build_credentials.json'), true);
 
 __wl('Building models for Business Central using');
 __wl(" - Tenant:   $credentials[tenant]");
-__wl(" - Username: $credentials[tenant]");
-__wl(" - Token:    $credentials[tenant]");
+__wl(" - Username: $credentials[username]");
+__wl(" - Token:    $credentials[token]");
 
 readline("Press enter to continue");
 
 $sdk = SDK::instance($credentials['tenant'], $credentials);
-$now = (new DateTime())->format('Y-m-d H:i:s');
 
 $map  = [];
 $docs = [];
 
-$stub  = file_get_contents('stubs/model.stub');
-$types = $sdk->schema->getEntityTypes()->sortKeys();
+$types   = $sdk->schema->getEntityTypes()->sortKeys();
+$aliases = $sdk->schema->getAliases();
 
 foreach ($types as $type) {
-    $class_name  = Str::studly($type->name);
-    $schema_type = $type->name;
+    $class_name = Str::studly($aliases[$type->name] ?? $type->name);
+
+    $schema_type = $type->schema_type;
     $path        = "src/Models/$class_name.php";
 
     foreach ($type->properties() as $property) {
@@ -104,7 +113,7 @@ foreach ($types as $type) {
         $schema_type,
         $fillable,
         $guarded,
-    ], $stub);
+    ], __loadstub($class_name));
 
     if ( ! file_exists($path) || in_array('--reset', $argv)) {
         file_put_contents($path, $contents);
@@ -118,9 +127,7 @@ foreach ($types as $type) {
 
 $map_contents = file_get_contents('src/ClassMap.php');
 
-$map_lines = [
-    "        // Generated on $now\n",
-];
+$map_lines = [];
 foreach ($map as $type => $class) {
     $map_lines[] = "        '$type'  => $class::class,\n";
 }
@@ -135,14 +142,42 @@ $doc_contents = '';
 foreach ($docs as $class => $doc) {
     $doc_contents .= sprintf("# %s\n", class_basename($class));
     $doc_contents .= "## Properties\n";
-    $doc_contents .= "| Name | Type | Read Only |\n";
-    $doc_contents .= "| --- | --- | :-: |\n";
+    $doc_contents .= "| Name | Type | Read Only | Required | Nullable |\n";
+    $doc_contents .= "| --- | --- | :-: | :-: | :-: |\n";
+    /** @var \BusinessCentral\Schema\Property $item */
     foreach ($doc['properties'] as $item) {
         $doc_type = $item->getValidationType();
         if ($doc_type instanceof ComplexType) {
+            $complex = $doc_type;
+
             $doc_type = $doc_type->name;
+            if ($item->isCollection()) {
+                $doc_type = 'array';
+            }
         }
-        $doc_contents .= sprintf("| %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'Yes' : 'No');
+        $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
+            $item->name,
+            $doc_type,
+            $property->read_only ? 'X' : ' ',
+            $property->required ? 'X' : ' ',
+            ! $property->required ? 'X' : ' ');
+
+        if (isset($complex)) {
+            foreach ($complex->properties() as $property) {
+                $doc_type = $property->getValidationType();
+
+                $name = $item->name . '.';
+                $name .= $item->isCollection() ? '*.' : '';
+                $name .= $property->name;
+
+                $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
+                    $name,
+                    $doc_type,
+                    $property->read_only ? 'X' : ' ',
+                    $property->required ? 'X' : ' ',
+                    ! $property->required ? 'X' : ' ');
+            }
+        }
     }
     $doc_contents .= "\n";
 
@@ -166,22 +201,41 @@ foreach ($docs as $class => $doc) {
     if ( ! empty($doc['actions'])) {
         $doc_contents .= "## Actions\n";
         $doc_contents .= "\n";
-        $doc_contents .= "| Name |\n";
-        $doc_contents .= "| --- | --- | :-: |\n";
-        /** @var \BusinessCentral\Schema\Action $item */
-        foreach ($doc['relations'] ?? [] as $item) {
-            $doc_contents .= "| $item->name |\n";
+        /** @var \BusinessCentral\Schema\Action $action */
+        foreach ($doc['actions'] as $action) {
+            $doc_contents .= "### $action->name\n";
+
+            $parameters = [];
+            foreach ($action->parameters as $key => $parameter) {
+                if ($key !== 'bindingParameter') {
+                    $parameters[$key] = $parameter['type'];
+                }
+            }
+
+            if ( ! empty($parameters)) {
+                $doc_contents .= "### Parameters\n";
+                $doc_contents .= "| Key | Type |\n";
+                $doc_contents .= "| --- | --- |\n";
+                foreach ($parameters as $key => $value) {
+                    $doc_contents .= "| $key | $value |\n";
+                }
+            } else {
+                $doc_contents .= "No parameters\n";
+            }
+
+            if ($action->return_type) {
+                $doc_contents .= "Returns: $action->return_type\n";
+            }
+
         }
     }
 }
-
-$doc_contents .= "\n---\nGenerated on $now\n";
 
 file_put_contents('entities.md', $doc_contents);
 
 function __generate_doc(string $class, EntityType $type)
 {
-    global $now, $sdk;
+    global $sdk;
 
     $rfc = new ReflectionClass($class);
     $rfp = $rfc->getProperty('guarded');
@@ -232,7 +286,6 @@ function __generate_doc(string $class, EntityType $type)
         "/**",
         ' *',
         ' * Class ' . class_basename($class),
-        ' * Auto-generated on: ' . $now,
         ' *',
     ];
     foreach ($properties as $property) {

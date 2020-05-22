@@ -11,11 +11,14 @@ namespace BusinessCentral\Schema;
 use BusinessCentral\Schema;
 use BusinessCentral\Traits\HasSchema;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Str;
 
 /**
  * Class EntityType
  *
- * @property string $name
+ * @property-read string $name
+ * @property-read string $key
+ * @property-read string $schema_type
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -24,7 +27,7 @@ class EntityType
 {
     use HasSchema;
 
-    protected $name;
+    protected $name, $schema_type;
 
     /** @var array|Property[] */
     protected $properties = [];
@@ -33,10 +36,13 @@ class EntityType
     /** @var array|Action[] */
     protected $actions = [];
 
+    protected $key;
+
     public function __construct($entity_type, Schema $schema)
     {
-        $this->schema = $schema;
-        $this->name   = $entity_type['@attributes']['Name'];
+        $this->schema      = $schema;
+        $this->name        = $entity_type['@attributes']['Name'];
+        $this->schema_type = $entity_type['@attributes']['Name'];
 
         if (isset($entity_type['Property'])) {
             if (Arr::isAssoc($entity_type['Property'])) {
@@ -53,6 +59,17 @@ class EntityType
 
             } else {
                 $this->parseNavigationProperties($entity_type['NavigationProperty']);
+            }
+        }
+
+        if (isset($entity_type['Key'])) {
+            if ( ! isset($entity_type['Key']['PropertyRef'][0]) && isset($entity_type['Key']['PropertyRef'])) {
+                $entity_type['Key']['PropertyRef'] = [$entity_type['Key']['PropertyRef']];
+            }
+
+            foreach ($entity_type['Key']['PropertyRef'] as $item) {
+                $this->key = Str::camel($item['@attributes']['Name']);
+                break;
             }
         }
     }
@@ -83,22 +100,22 @@ class EntityType
      */
     public function getProperty(string $property)
     {
-        return $this->properties[$property] ?? null;
+        return $this->properties[Str::camel($property)] ?? null;
     }
 
     public function propertyExists(string $key)
     {
-        return isset($this->properties[$key]);
+        return isset($this->properties[Str::camel($key)]);
     }
 
     public function getRelation(string $relation)
     {
-        return $this->navigation_properties[$relation] ?? null;
+        return $this->navigation_properties[Str::camel($relation)] ?? null;
     }
 
     public function relationExists(string $key)
     {
-        return isset($this->navigation_properties[$key]);
+        return isset($this->navigation_properties[Str::camel($key)]);
     }
 
     public function getAction(string $name)
@@ -129,8 +146,11 @@ class EntityType
     public function __get($name)
     {
         switch ($name) {
+            case 'key':
+            case 'schema_type':
+                return $this->{$name};
             case 'name':
-                return $this->name;
+                return $this->schema->getOverrides('__always', 'aliases')[$this->name] ?? $this->name;
         }
     }
 

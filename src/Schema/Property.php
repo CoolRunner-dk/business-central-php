@@ -10,6 +10,7 @@ namespace BusinessCentral\Schema;
 use BusinessCentral\Schema;
 use BusinessCentral\Traits\HasSchema;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 /**
  * Class Property
@@ -17,6 +18,7 @@ use Carbon\Carbon;
  * @property string $name
  * @property string $type
  * @property bool   $read_only
+ * @property bool   $required
  * @property bool   $fillable
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -38,7 +40,7 @@ class Property
     public function __construct($property, Schema $schema, EntityType $entity_type)
     {
         $this->schema = $schema;
-        $this->name   = $property['@attributes']['Name'];
+        $this->name   = Str::camel($property['@attributes']['Name']);
         $this->type   = $property['@attributes']['Type'];
 
         $this->read_only = $this->schema->propertyIsReadOnly($entity_type->name, $this->name);
@@ -49,6 +51,11 @@ class Property
             'nullable'   => filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN),
             'max_length' => $property['@attributes']['MaxLength'] ?? null,
         ];
+    }
+
+    public function isCollection()
+    {
+        return ! ! preg_match('/Collection\(.+\)/i', $this->type);
     }
 
     public function convert($value)
@@ -110,7 +117,7 @@ class Property
             case 'Edm.Date':
                 return 'date';
             default:
-                if (strpos($this->type, 'Microsoft.NAV.') !== false) {
+                if (strpos($this->type, 'ComplexTypes.') !== false) {
                     return $this->schema->getComplexType(Schema::getType($this->type));
                 }
         }
@@ -143,30 +150,37 @@ class Property
     public function getValidation()
     {
         $rules = [];
-        if ($this->name === 'id') {
+        if (strtolower($this->name) === 'id') {
             return $rules;
         }
 
-        if ($this->validation['nullable']) {
-            $rules[$this->name][] = 'nullable';
-        } else {
+        if ( ! $this->validation['nullable']) {
             $rules[$this->name][] = 'required';
         }
 
         $type = $this->getValidationType();
 
         if ($type instanceof ComplexType) {
-            foreach ($type->getValidationRules() as $key => $value) {
-                $rules["$this->name.$key"] = $value;
+            if ($this->isCollection()) {
+                foreach ($type->getValidationRules() as $key => $value) {
+                    $rules["$this->name.*.$key"] = $value;
+                }
+            } else {
+                foreach ($type->getValidationRules() as $key => $value) {
+                    $rules["$this->name.$key"] = $value;
+                }
             }
         } else {
+            $rules[$this->name][] = "typeof:$type";
+
             if ($max = $this->validation['max_length']) {
-                $rules[$this->name][] = "$type:$max";
-            } else {
-                $rules[$this->name][] = $type;
+                $rules[$this->name][] = "max:$max";
             }
         }
 
+        $rules = array_map(function ($rules) {
+            return is_string($rules) ? $rules : implode('|', $rules);
+        }, $rules);
 
         return $rules;
     }
@@ -180,6 +194,8 @@ class Property
             case 'guarded':
             case 'fillable':
                 return $this->{$name};
+            case 'required':
+                return ! $this->validation['nullable'];
         }
     }
 
