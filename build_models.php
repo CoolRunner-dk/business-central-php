@@ -142,8 +142,8 @@ $doc_contents = '';
 foreach ($docs as $class => $doc) {
     $doc_contents .= sprintf("# %s\n", class_basename($class));
     $doc_contents .= "## Properties\n";
-    $doc_contents .= "| Name | Type | Read Only | Required |\n";
-    $doc_contents .= "| --- | --- | :-: | :-: |\n";
+    $doc_contents .= "| Name | Type | Read Only | Required | Nullable |\n";
+    $doc_contents .= "| --- | --- | :-: | :-: | :-: |\n";
     /** @var \BusinessCentral\Schema\Property $item */
     foreach ($doc['properties'] as $item) {
         $doc_type = $item->getValidationType();
@@ -155,7 +155,12 @@ foreach ($docs as $class => $doc) {
                 $doc_type = 'array';
             }
         }
-        $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $item->name, $doc_type, $item->read_only ? 'X' : ' ', $property->required ? 'X' : ' ');
+        $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
+            $item->name,
+            $doc_type,
+            $property->read_only ? 'X' : ' ',
+            $property->required ? 'X' : ' ',
+            ! $property->required ? 'X' : ' ');
 
         if (isset($complex)) {
             if ($complex->name === 'nativeInvoicingSalesInvoiceLines') {
@@ -166,7 +171,12 @@ foreach ($docs as $class => $doc) {
                     $name .= $item->isCollection() ? '*.' : '';
                     $name .= $property->name;
 
-                    $doc_contents .= sprintf("| %s | %s | %s | %s |\n", $name, $doc_type, $property->read_only ? 'X' : ' ', $property->required ? 'X' : ' ');
+                    $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
+                        $name,
+                        $doc_type,
+                        $property->read_only ? 'X' : ' ',
+                        $property->required ? 'X' : ' ',
+                        ! $property->required ? 'X' : ' ');
                 }
             }
         }
