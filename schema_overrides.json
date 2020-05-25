@@ -1,5 +1,5 @@
 {
-    "customer"                         : {
+    "customer"                             : {
         "properties" : {
             "taxAreaDisplayName" : {
                 "readOnly" : true
@@ -9,7 +9,7 @@
             }
         }
     },
-    "nativeInvoicingSalesInvoiceLines" : {
+    "nativeInvoicingSalesInvoiceLines"     : {
         "properties" : {
             "lineDiscountValue"     : {
                 "nullable" : true
@@ -37,14 +37,21 @@
             }
         }
     },
-    "__example"                        : {
+    "nativeInvoicingSalesInvoicesPayments" : {
+        "properties" : {
+            "paymentNo" : {
+                "readOnly" : true
+            }
+        }
+    },
+    "__example"                            : {
         "properties" : {
             "property" : {
                 "readOnly" : true
             }
         }
     },
-    "__always"                         : {
+    "__always"                             : {
         "properties" : {
             "id"                   : {
                 "readOnly" : true
