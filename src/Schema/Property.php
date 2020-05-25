@@ -45,9 +45,9 @@ class Property
         $this->name   = Str::camel($property['@attributes']['Name']);
         $this->type   = $property['@attributes']['Type'];
 
-        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->name, $this->name);
-        $this->fillable  = $this->schema->propertyIsFillable($entity_type->name, $this->name);
-        $this->nullable  = $this->schema->propertyIsNullable($entity_type->name, $this->name) ||
+        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->schema_type, $this->name);
+        $this->fillable  = $this->schema->propertyIsFillable($entity_type->schema_type, $this->name);
+        $this->nullable  = $this->schema->propertyIsNullable($entity_type->schema_type, $this->name) ||
                            filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
         $this->validation = [

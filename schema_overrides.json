@@ -9,7 +9,7 @@
             }
         }
     },
-    "nativeInvoicingSalesInvoiceLines"     : {
+    "nativeInvoicingSalesInvoicesPayments"     : {
         "properties" : {
             "lineDiscountValue"     : {
                 "nullable" : true
@@ -37,7 +37,7 @@
             }
         }
     },
-    "nativeInvoicingSalesInvoicesPayments" : {
+    "invoicingSalesInvoicesPayment" : {
         "properties" : {
             "paymentNo" : {
                 "readOnly" : true
