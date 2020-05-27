@@ -39,11 +39,11 @@ class NavigationProperty
     public function __construct($property, Schema $schema)
     {
         $this->schema = $schema;
-        $this->name   = Str::camel($this->schema->getAliases()[$property['@attributes']['Name']] ?? $property['@attributes']['Name']);
+        $this->name   = $this->schema->getAliases()[$property['@attributes']['Name']] ?? $property['@attributes']['Name'];
         $this->route  = $property['@attributes']['Name'];
         $this->type   = $property['@attributes']['Type'];
 
-        if($this->isCollection()) {
+        if ($this->isCollection()) {
             $this->name = Pluralizer::plural($this->name);
         }
     }

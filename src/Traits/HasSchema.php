@@ -15,10 +15,8 @@ trait HasSchema
     /** @var Schema */
     protected $schema;
 
-    public function __get($name)
+    public function getSchema()
     {
-        if ($name === 'schema') {
-            return $this->schema;
-        }
+        return $this->schema;
     }
 }

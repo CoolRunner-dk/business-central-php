@@ -15,6 +15,7 @@ use BusinessCentral\Query\Contracts\Expands;
 use BusinessCentral\Query\Contracts\Filters;
 use BusinessCentral\Query\Contracts\Pagination;
 use BusinessCentral\Query\Contracts\Sorting;
+use BusinessCentral\Schema;
 use BusinessCentral\SDK;
 use GuzzleHttp\Exception\ClientException;
 use GuzzleHttp\Exception\RequestException;
@@ -253,7 +254,7 @@ class Builder
 
     public function navigateTo(string $component, string $id = null)
     {
-        $this->components[$component] = array_filter(['component' => $component, 'id' => $id]);
+        $this->components[$component] = array_filter(['component' => $component, 'key' => $id]);
 
         return $this;
     }
@@ -274,7 +275,9 @@ class Builder
     {
         $components = [];
         foreach ($this->components as $entity => $item) {
-            $components[] = $item['component'] . (isset($item['id']) ? "('$item[id]')" : '');
+            $key = isset($item['key']) ? $this->formatValue($item['key'], false) : null;
+
+            $components[] = $item['component'] . ($key ? "($key)" : '');
         }
 
         return implode('/', $components);

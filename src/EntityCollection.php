@@ -54,10 +54,10 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     protected function insert($item)
     {
-        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item['id'] ?? $item['Id'] ?? null);
+        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item[$this->getEntitySet()->getEntityType()->key] ?? null);
         $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
 
-        $this->collection[$entity->id] = $entity;
+        $this->collection[] = $entity;
 
         return $entity;
     }
@@ -101,22 +101,15 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     }
 
     /**
-     * @param string $id
+     * @param string $identifier
      * @param null   $default
      *
      * @return Entity|mixed|null
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
-    public function find(string $id, $default = null)
+    public function find(string $identifier, $default = null)
     {
-        if (isset($this->collection[$id])) {
-            return $this->collection[$id];
-        }
-
-        return $this->query
-                   ->clone()
-                   ->where($this->getEntitySet()->getEntityType()->key, $id)
-                   ->limit(1)->first() ?? $default;
+        return $this->query->clone()->to($this->getEntitySet()->name, $identifier)->first($default);
     }
 
     /**
@@ -133,7 +126,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
         $entity_query = $this->query->clone()->withoutFilters()->navigateTo($this->getEntitySet()->name);
         $entity       = Entity::make([], $entity_query, $this->getEntitySet()->getEntityType())->fill($attributes)->save();
 
-        $this->collection[$entity->id] = $entity;
+        $this->collection[] = $entity;
         $this->total_count++;
 
         return $entity;

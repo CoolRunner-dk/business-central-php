@@ -9,6 +9,7 @@ namespace BusinessCentral\Schema;
 
 
 use BusinessCentral\Schema;
+use BusinessCentral\Traits\HasAnnotations;
 use BusinessCentral\Traits\HasSchema;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ use Illuminate\Support\Str;
  */
 class EntityType
 {
-    use HasSchema;
+    use HasSchema, HasAnnotations;
 
     protected $name, $schema_type;
 
@@ -68,10 +69,16 @@ class EntityType
             }
 
             foreach ($entity_type['Key']['PropertyRef'] as $item) {
-                $this->key = Str::camel($item['@attributes']['Name']);
+                $this->key = $item['@attributes']['Name'];
                 break;
             }
         }
+
+        if ($this->schema->hasOverrides($this->schema_type, 'key')) {
+            $this->key = $this->schema->getOverrides($this->schema_type, 'key');
+        }
+
+        $this->fillAnnotations($entity_type);
     }
 
     protected function parseProperties($properties)
@@ -100,22 +107,22 @@ class EntityType
      */
     public function getProperty(string $property)
     {
-        return $this->properties[Str::camel($property)] ?? null;
+        return $this->properties[$property] ?? null;
     }
 
     public function propertyExists(string $key)
     {
-        return isset($this->properties[Str::camel($key)]);
+        return isset($this->properties[$key]);
     }
 
     public function getRelation(string $relation)
     {
-        return $this->navigation_properties[Str::camel($relation)] ?? null;
+        return $this->navigation_properties[$relation] ?? null;
     }
 
     public function relationExists(string $key)
     {
-        return isset($this->navigation_properties[Str::camel($key)]);
+        return isset($this->navigation_properties[$key]);
     }
 
     public function getAction(string $name)
@@ -157,8 +164,11 @@ class EntityType
     public function getValidationRules()
     {
         $rules = [];
+
         foreach ($this->properties as $property) {
-            $rules = array_merge($rules, $property->getValidation());
+            if($property->name !== $this->key) {
+                $rules = array_merge($rules, $property->getValidation());
+            }
         }
 
         return $rules;
@@ -167,7 +177,7 @@ class EntityType
     /** @return EntitySet|null */
     public function getEntitySet()
     {
-        return $this->schema->getEntitySetByType($this->name);
+        return $this->schema->getEntitySetByType($this->schema_type);
     }
 
     public function addAction(Action $action)

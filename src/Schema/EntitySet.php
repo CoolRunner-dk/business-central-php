@@ -9,6 +9,7 @@ namespace BusinessCentral\Schema;
 
 
 use BusinessCentral\Schema;
+use BusinessCentral\Traits\HasAnnotations;
 use BusinessCentral\Traits\HasSchema;
 use Illuminate\Support\Str;
 
@@ -23,17 +24,10 @@ use Illuminate\Support\Str;
  */
 class EntitySet
 {
-    use HasSchema;
+    use HasSchema, HasAnnotations;
 
     protected $name;
     protected $type;
-
-    protected $capabilities = [
-        'change_tracking'     => false,
-        'delete_restrictions' => false,
-        'insert_restrictions' => false,
-        'update_restrictions' => false,
-    ];
 
     public function __construct($entity_set, Schema $schema)
     {
@@ -41,10 +35,7 @@ class EntitySet
         $this->name   = $entity_set['@attributes']['Name'];
         $this->type   = Schema::getType($entity_set['@attributes']['EntityType']);
 
-        foreach ($entity_set['Annotation'] as $capability) {
-            $term                      = Str::snake(collect(explode('.', $capability['@attributes']['Term']))->last());
-            $this->capabilities[$term] = filter_var($capability['Record']['PropertyValue']['@attributes']['Bool'], FILTER_VALIDATE_BOOLEAN);
-        }
+        $this->fillAnnotations($entity_set);
     }
 
     public function getEntityType()
@@ -62,27 +53,27 @@ class EntitySet
 
     public function is(string $capability)
     {
-        return $this->capabilities[$capability] ?? false;
+        return $this->annotations[$capability] ?? false;
     }
 
 
     public function changeTracked()
     {
-        return $this->is('change_tracking');
+        return $this->is('ChangeTracking');
     }
 
     public function deletable()
     {
-        return $this->is('delete_restrictions');
+        return $this->is('DeleteRestrictions');
     }
 
     public function updatable()
     {
-        return $this->is('update_restrictions');
+        return $this->is('UpdateRestrictions');
     }
 
     public function insertable()
     {
-        return $this->is('insert_restrictions');
+        return $this->is('InsertRestrictions');
     }
 }

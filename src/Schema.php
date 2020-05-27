@@ -89,7 +89,7 @@ class Schema
      */
     public function getEntityType(string $type)
     {
-        return $this->entity_types[static::getType($type)];
+        return $this->entity_types[static::getType($type)] ?? null;
     }
 
     public function getEntityTypeBySet(string $set)
@@ -119,7 +119,7 @@ class Schema
     public function getEntitySetByType(string $type)
     {
         return $this->entity_sets->first(function (EntitySet $entity_set) use ($type) {
-            return $entity_set->getEntityType()->name === $type;
+            return $entity_set->getEntityType()->schema_type === $type;
         });
     }
 
@@ -175,29 +175,29 @@ class Schema
         return $this->getOverrides('__always', 'aliases');
     }
 
-    public function propertyIs(string $model, string $property, string $attribute)
+    public function propertyIs(string $model, string $property, string $attribute, $default = false)
     {
         return $this->overrides[$model]["properties"][$property][$attribute] ??
-               $this->overrides['__always']["properties"][$property][$attribute] ?? false;
+               $this->overrides['__always']["properties"][$property][$attribute] ?? $default;
     }
 
-    public function propertyIsGuarded(string $model, string $property)
+    public function propertyIsGuarded(string $model, string $property, $default = false)
     {
-        return $this->propertyIs($model, $property, 'guarded');
+        return $this->propertyIs($model, $property, 'guarded', $default);
     }
 
-    public function propertyIsReadOnly(string $model, string $property)
+    public function propertyIsReadOnly(string $model, string $property, $default = false)
     {
-        return $this->propertyIs($model, $property, 'readOnly');
+        return $this->propertyIs($model, $property, 'readOnly', $default);
     }
 
-    public function propertyIsFillable(string $model, string $property)
+    public function propertyIsFillable(string $model, string $property, $default = false)
     {
-        return ! $this->propertyIs($model, $property, 'readOnly');
+        return ! $this->propertyIs($model, $property, 'readOnly', $default);
     }
 
-    public function propertyIsNullable(string $model, string $property)
+    public function propertyIsNullable(string $model, string $property, $default = false)
     {
-        return $this->propertyIs($model, $property, 'nullable');
+        return $this->propertyIs($model, $property, 'nullable', $default);
     }
 }

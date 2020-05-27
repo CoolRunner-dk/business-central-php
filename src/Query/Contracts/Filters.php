@@ -444,20 +444,23 @@ trait Filters
     /**
      * Converts the value into a usable state for $filter
      *
-     * @param $value
+     * @param      $value
+     * @param bool $for_query
      *
      * @return string
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
-    protected function formatValue($value)
+    protected function formatValue($value, $for_query = true)
     {
         if (is_string($value)) {
             if (preg_match(Schema::GUID_FORMAT, $value)) {
                 return $value; // Edm.Guid
             } elseif (is_int($value) || is_float($value) || is_double($value)) {
                 return $value;
-            } else {
+            } elseif ($for_query) {
                 return sprintf("'%s'", urlencode($value));
+            } else {
+                return sprintf("'%s'", $value);
             }
         }
 

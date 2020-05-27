@@ -13,6 +13,21 @@ If you find a bug or have a feature request, please create an [issue](https://gi
    - The SDK uses Basic Authentication
  - Install the library into your application
  - Load the SDK
+ 
+#### Building Models
+
+As Business Central's web services are dynamically created all entities could be pre generated.
+
+```php
+BusinessCentral\Constructor::buildModels(
+    'my-tenant-id.onmicrosoft.com',
+    'username',
+    'VGhpcyBpc24ndCBhIHJlYWwgdG9rZW4gLSBOaWNlIHRyeSB0aG91Z2g='
+);
+``` 
+
+This can be generated using a `post-autoload-dump` composer script using your credentials to get the entities exposed through your web services.
+
 #### Connecting to Business Central
 
 Business Central for PHP uses a singleton pattern for SDK instances.
@@ -20,7 +35,7 @@ Business Central for PHP uses a singleton pattern for SDK instances.
 Once an instance has been initiallized it will fetch the schema from your Business Central. (Standard entities are included).
 
 ```php
-$sdk = SDK::instance('my-tenant-id.onmicrosoft.com', [
+$sdk = \BusinessCentral\SDK::instance('my-tenant-id.onmicrosoft.com', [
 	// Basic auth username [Required]
     'username' => 'username',
     
@@ -51,7 +66,7 @@ $query = $sdk->query();
 $query = $sdk->query();
 
 // Navigate using ->navigateTo(...) (or shorthand ->to(...)
-$query->to('companies','companyId')->to('customers') // Equivalent of fetching from 'companies(companyId)/customers'
+$query->to('companies','companyId')->to('customers'); // Equivalent of fetching from 'companies(companyId)/customers'
 ```
 
 ##### Fetching results
@@ -78,7 +93,10 @@ Class for Entity fetched from Business Central
 
 #### Entity Properties / Relations
 
-Check the individual entity types under [Entities Overview](entities.md)
+Due to the dynamics of Business Central, the Entities from Business Central doesn't necessary have standardized properties across all implementations.
+Please refer to your specific implementation.
+
+Alternatively check the entities.md generated when building models.
 
 ##### Fetch Relation
 
@@ -307,7 +325,7 @@ You can replace the class used as the container if you want to - Only requiremen
 
 Example:
 ```php
-ClassMap::extend('customer', MyTotallyNewAwesomeCustomerModelReplacementOfAbsoluteDoom::class)
+\BusinessCentral\ClassMap::extend('nativeInvoicingSalesCustomers', MyTotallyNewAwesomeCustomerModelReplacementOfAbsoluteDoom::class);
 ```
 
 This overrides the model class used for all entities of type `customer` in the entire application.

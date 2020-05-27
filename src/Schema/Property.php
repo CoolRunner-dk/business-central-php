@@ -8,6 +8,7 @@
 namespace BusinessCentral\Schema;
 
 use BusinessCentral\Schema;
+use BusinessCentral\Traits\HasAnnotations;
 use BusinessCentral\Traits\HasSchema;
 use Carbon\Carbon;
 use Illuminate\Support\Str;
@@ -27,32 +28,40 @@ use Illuminate\Support\Str;
  */
 class Property
 {
-    use HasSchema;
+    use HasSchema, HasAnnotations;
 
     protected $name;
     protected $type;
 
     protected $validation = [];
 
-    protected $guarded   = false;
     protected $read_only = false;
-    protected $fillable  = false;
     protected $nullable  = false;
 
     public function __construct($property, Schema $schema, EntityType $entity_type)
     {
         $this->schema = $schema;
-        $this->name   = Str::camel($property['@attributes']['Name']);
-        $this->type   = $property['@attributes']['Type'];
 
-        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->schema_type, $this->name);
-        $this->fillable  = $this->schema->propertyIsFillable($entity_type->schema_type, $this->name);
-        $this->nullable  = $this->schema->propertyIsNullable($entity_type->schema_type, $this->name) ||
+
+        $this->name = $property['@attributes']['Name'];
+        $this->type = $property['@attributes']['Type'];
+
+        $this->fillAnnotations($property);
+
+        $edit_allowed = $this->getAnnotation('AllowEdit', true) === true;
+
+        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->schema_type, $this->name, ! $edit_allowed);
+        $this->nullable  = $this->schema->propertyIsNullable($entity_type->schema_type, $this->name, ! $edit_allowed) ||
                            filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
         $this->validation = [
             'max_length' => $property['@attributes']['MaxLength'] ?? null,
         ];
+    }
+
+    public function getAnnotation(string $annotation, $default = null)
+    {
+        return $this->annotations[$annotation] ?? $default;
     }
 
     public function isCollection()

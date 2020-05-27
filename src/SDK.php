@@ -105,7 +105,7 @@ class SDK
     /**
      * @param string $id
      *
-     * @return Company
+     * @return Company|Entity
      * @throws Exceptions\QueryException
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
@@ -114,18 +114,30 @@ class SDK
         return $this->query()->navigateTo('Company')->find($id);
     }
 
+    /**
+     * @return EntityCollection|array[]|Company[]|Entity[]
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
     public function companies()
     {
-        return $this->query()->navigateTo('Company');
+        return $this->query()->navigateTo('Company')->fetch();
+    }
+
+    public function fetchMetadata()
+    {
+        $response = $this->client->get('$metadata');
+        $raw      = $response->getBody()->getContents();
+        file_put_contents(__DIR__ . '/../bcmetadata.xml', $raw);
+
+        return $raw;
     }
 
     public function mapEntities()
     {
-        if ($this->option('offline_map')) {
+        if ($this->option('offline_map') && file_exists(__DIR__ . '/../bcmetadata.xml')) {
             $raw = file_get_contents(__DIR__ . '/../bcmetadata.xml');
         } else {
-            $response = $this->client->get('$metadata');
-            $raw      = $response->getBody()->getContents();
+            $raw = $this->fetchMetadata();
         }
 
         $raw = str_replace(['<edmx:', '</edmx:'], ['<', '</'], $raw);

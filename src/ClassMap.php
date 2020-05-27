@@ -12,187 +12,44 @@ use BusinessCentral\Schema\EntityType;
 
 class ClassMap
 {
+    protected static $map;
+
     public static function map(EntityType $type)
     {
+        self::init();
+
         return static::$map[$type->schema_type] ?? Entity::class;
     }
 
     public static function extend(string $name, string $class)
     {
+        self::init();
+
         if ( ! in_array(Entity::class, class_parents($class))) {
             throw new \RuntimeException(sprintf('Cannot use class %s as mapping for Business Central - Class must extend %s', $class, Entity::class));
         }
         static::$map[$name] = $class;
     }
 
-    protected static $map = [
-        'AccountantPortalActivityCues'  => \BusinessCentral\Models\AccountantPortalActivityCues::class,
-        'AccountantPortalFinanceCues'  => \BusinessCentral\Models\AccountantPortalFinanceCues::class,
-        'AccountantPortalUserTasks'  => \BusinessCentral\Models\AccountantPortalUserTasks::class,
-        'BankAccountLedgerEntries'  => \BusinessCentral\Models\BankAccountLedgerEntries::class,
-        'C2Graph'  => \BusinessCentral\Models\C2Graph::class,
-        'CS_ApprovalComments'  => \BusinessCentral\Models\CsApprovalComments::class,
-        'CS_ApprovalDocument'  => \BusinessCentral\Models\CsApprovalDocument::class,
-        'CS_ApprovalDocumentApprovalComments'  => \BusinessCentral\Models\CsApprovalDocumentApprovalComments::class,
-        'CS_ApprovalDocumentApprovalEntries'  => \BusinessCentral\Models\CsApprovalDocumentApprovalEntries::class,
-        'CS_ApprovalDocumentAttachedFiles'  => \BusinessCentral\Models\CsApprovalDocumentAttachedFiles::class,
-        'CS_ApprovalEntries'  => \BusinessCentral\Models\CsApprovalEntries::class,
-        'CS_ApprovalSharing'  => \BusinessCentral\Models\CsApprovalSharing::class,
-        'CS_Approvers'  => \BusinessCentral\Models\CsApprovers::class,
-        'CS_DeferralTemplates'  => \BusinessCentral\Models\CsDeferralTemplates::class,
-        'CS_DimensionValues'  => \BusinessCentral\Models\CsDimensionValues::class,
-        'CS_EnabledReasonCodes'  => \BusinessCentral\Models\CsEnabledReasonCodes::class,
-        'CS_FixedAssets'  => \BusinessCentral\Models\CsFixedAssets::class,
-        'CS_GLAccounts'  => \BusinessCentral\Models\CsGLAccounts::class,
-        'CS_ItemCharges'  => \BusinessCentral\Models\CsItemCharges::class,
-        'CS_Items'  => \BusinessCentral\Models\CsItems::class,
-        'CS_JobTasks'  => \BusinessCentral\Models\CsJobTasks::class,
-        'CS_Jobs'  => \BusinessCentral\Models\CsJobs::class,
-        'CS_LocationCodes'  => \BusinessCentral\Models\CsLocationCodes::class,
-        'CS_PostedApprovalEntries'  => \BusinessCentral\Models\CsPostedApprovalEntries::class,
-        'CS_PostedDocSearch'  => \BusinessCentral\Models\CsPostedDocSearch::class,
-        'CS_PostedPurchaseCrMemo'  => \BusinessCentral\Models\CsPostedPurchaseCrMemo::class,
-        'CS_PostedPurchaseCrMemoApprovalComments'  => \BusinessCentral\Models\CsPostedPurchaseCrMemoApprovalComments::class,
-        'CS_PostedPurchaseCrMemoApprovalEntries'  => \BusinessCentral\Models\CsPostedPurchaseCrMemoApprovalEntries::class,
-        'CS_PostedPurchaseCrMemoAttachedFiles'  => \BusinessCentral\Models\CsPostedPurchaseCrMemoAttachedFiles::class,
-        'CS_PostedPurchaseCrMemoPurchLines'  => \BusinessCentral\Models\CsPostedPurchaseCrMemoPurchLines::class,
-        'CS_PostedPurchaseCrMemos'  => \BusinessCentral\Models\CsPostedPurchaseCrMemos::class,
-        'CS_PostedPurchaseInvoice'  => \BusinessCentral\Models\CsPostedPurchaseInvoice::class,
-        'CS_PostedPurchaseInvoiceApprovalComments'  => \BusinessCentral\Models\CsPostedPurchaseInvoiceApprovalComments::class,
-        'CS_PostedPurchaseInvoiceApprovalEntries'  => \BusinessCentral\Models\CsPostedPurchaseInvoiceApprovalEntries::class,
-        'CS_PostedPurchaseInvoiceAttachedFiles'  => \BusinessCentral\Models\CsPostedPurchaseInvoiceAttachedFiles::class,
-        'CS_PostedPurchaseInvoicePurchLines'  => \BusinessCentral\Models\CsPostedPurchaseInvoicePurchLines::class,
-        'CS_PostedPurchaseInvoices'  => \BusinessCentral\Models\CsPostedPurchaseInvoices::class,
-        'CS_ProdPostGroups'  => \BusinessCentral\Models\CsProdPostGroups::class,
-        'CS_PurchaseDocument'  => \BusinessCentral\Models\CsPurchaseDocument::class,
-        'CS_PurchaseDocumentApprovalComments'  => \BusinessCentral\Models\CsPurchaseDocumentApprovalComments::class,
-        'CS_PurchaseDocumentApprovalEntries'  => \BusinessCentral\Models\CsPurchaseDocumentApprovalEntries::class,
-        'CS_PurchaseDocumentAttachedFiles'  => \BusinessCentral\Models\CsPurchaseDocumentAttachedFiles::class,
-        'CS_PurchaseDocumentPurchLines'  => \BusinessCentral\Models\CsPurchaseDocumentPurchLines::class,
-        'CS_PurchaseLine'  => \BusinessCentral\Models\CsPurchaseLine::class,
-        'CS_StdAmountDistribCodes'  => \BusinessCentral\Models\CsStdAmountDistribCodes::class,
-        'CS_StdAmountDistribCodesVendors'  => \BusinessCentral\Models\CsStdAmountDistribCodesVendors::class,
-        'CS_UnitOfMeasure'  => \BusinessCentral\Models\CsUnitOfMeasure::class,
-        'CS_VATProdPostGroups'  => \BusinessCentral\Models\CsVATProdPostGroups::class,
-        'CS_VendorInfo'  => \BusinessCentral\Models\CsVendorInfo::class,
-        'CS_VendorInfoComments'  => \BusinessCentral\Models\CsVendorInfoComments::class,
-        'CS_VendorInfoContacts'  => \BusinessCentral\Models\CsVendorInfoContacts::class,
-        'CS_VendorInfoDocuments'  => \BusinessCentral\Models\CsVendorInfoDocuments::class,
-        'CS_WebHelp'  => \BusinessCentral\Models\CsWebHelp::class,
-        'CS_WebMenu'  => \BusinessCentral\Models\CsWebMenu::class,
-        'CS_WebSetup'  => \BusinessCentral\Models\CsWebSetup::class,
-        'CS_WebSubMenu'  => \BusinessCentral\Models\CsWebSubMenu::class,
-        'CS_WebUser'  => \BusinessCentral\Models\CsWebUser::class,
-        'CS_WebUserCompany'  => \BusinessCentral\Models\CsWebUserCompany::class,
-        'CS_WebUserPermissions'  => \BusinessCentral\Models\CsWebUserPermissions::class,
-        'CS_WebUserPmsSelection'  => \BusinessCentral\Models\CsWebUserPmsSelection::class,
-        'Company'  => \BusinessCentral\Models\Company::class,
-        'Cust_LedgerEntries'  => \BusinessCentral\Models\CustLedgerEntries::class,
-        'DimensionSetEntries'  => \BusinessCentral\Models\DimensionSetEntries::class,
-        'ExcelTemplateAgedAccountsPayable'  => \BusinessCentral\Models\ExcelTemplateAgedAccountsPayable::class,
-        'ExcelTemplateAgedAccountsReceivable'  => \BusinessCentral\Models\ExcelTemplateAgedAccountsReceivable::class,
-        'ExcelTemplateBalanceSheet'  => \BusinessCentral\Models\ExcelTemplateBalanceSheet::class,
-        'ExcelTemplateCashFlowStatement'  => \BusinessCentral\Models\ExcelTemplateCashFlowStatement::class,
-        'ExcelTemplateIncomeStatement'  => \BusinessCentral\Models\ExcelTemplateIncomeStatement::class,
-        'ExcelTemplateRetainedEarnings'  => \BusinessCentral\Models\ExcelTemplateRetainedEarnings::class,
-        'ExcelTemplateTrialBalance'  => \BusinessCentral\Models\ExcelTemplateTrialBalance::class,
-        'ExcelTemplateViewCompanyInformation'  => \BusinessCentral\Models\ExcelTemplateViewCompanyInformation::class,
-        'FALedgerEntries'  => \BusinessCentral\Models\FALedgerEntries::class,
-        'G_LBudgetEntries'  => \BusinessCentral\Models\GLBudgetEntries::class,
-        'G_LEntries'  => \BusinessCentral\Models\GLEntries::class,
-        'General_Journals'  => \BusinessCentral\Models\GeneralJournals::class,
-        'InvoiceDocument'  => \BusinessCentral\Models\InvoiceDocument::class,
-        'InvoiceReminder'  => \BusinessCentral\Models\InvoiceReminder::class,
-        'ItemLedgerEntries'  => \BusinessCentral\Models\ItemLedgerEntries::class,
-        'ItemSalesAndProfit'  => \BusinessCentral\Models\ItemSalesAndProfit::class,
-        'ItemSalesByCustomer'  => \BusinessCentral\Models\ItemSalesByCustomer::class,
-        'JobLedgerEntries'  => \BusinessCentral\Models\JobLedgerEntries::class,
-        'Job_List'  => \BusinessCentral\Models\JobList::class,
-        'Job_Planning_Lines'  => \BusinessCentral\Models\JobPlanningLines::class,
-        'Job_Task_Lines'  => \BusinessCentral\Models\JobTaskLines::class,
-        'Media'  => \BusinessCentral\Models\Media::class,
-        'Power_BI_Aged_Acc_Payable'  => \BusinessCentral\Models\PowerBIAgedAccPayable::class,
-        'Power_BI_Aged_Acc_Receivable'  => \BusinessCentral\Models\PowerBIAgedAccReceivable::class,
-        'Power_BI_Aged_Inventory_Chart'  => \BusinessCentral\Models\PowerBIAgedInventoryChart::class,
-        'Power_BI_Cust_Item_Ledg_Ent'  => \BusinessCentral\Models\PowerBICustItemLedgEnt::class,
-        'Power_BI_Cust_Ledger_Entries'  => \BusinessCentral\Models\PowerBICustLedgerEntries::class,
-        'Power_BI_Customer_List'  => \BusinessCentral\Models\PowerBICustomerList::class,
-        'Power_BI_GL_Amount_List'  => \BusinessCentral\Models\PowerBIGLAmountList::class,
-        'Power_BI_GL_BudgetedAmount'  => \BusinessCentral\Models\PowerBIGLBudgetedAmount::class,
-        'Power_BI_Item_Purchase_List'  => \BusinessCentral\Models\PowerBIItemPurchaseList::class,
-        'Power_BI_Item_Sales_List'  => \BusinessCentral\Models\PowerBIItemSalesList::class,
-        'Power_BI_Job_Act_v_Budg_Cost'  => \BusinessCentral\Models\PowerBIJobActVBudgCost::class,
-        'Power_BI_Job_Act_v_Budg_Price'  => \BusinessCentral\Models\PowerBIJobActVBudgPrice::class,
-        'Power_BI_Job_Profitability'  => \BusinessCentral\Models\PowerBIJobProfitability::class,
-        'Power_BI_Jobs_List'  => \BusinessCentral\Models\PowerBIJobsList::class,
-        'Power_BI_Purchase_Hdr_Vendor'  => \BusinessCentral\Models\PowerBIPurchaseHdrVendor::class,
-        'Power_BI_Purchase_List'  => \BusinessCentral\Models\PowerBIPurchaseList::class,
-        'Power_BI_Report_Labels'  => \BusinessCentral\Models\PowerBIReportLabels::class,
-        'Power_BI_Sales_Hdr_Cust'  => \BusinessCentral\Models\PowerBISalesHdrCust::class,
-        'Power_BI_Sales_List'  => \BusinessCentral\Models\PowerBISalesList::class,
-        'Power_BI_Sales_Pipeline'  => \BusinessCentral\Models\PowerBISalesPipeline::class,
-        'Power_BI_Top_5_Opportunities'  => \BusinessCentral\Models\PowerBITop5Opportunities::class,
-        'Power_BI_Top_Cust_Overview'  => \BusinessCentral\Models\PowerBITopCustOverview::class,
-        'Power_BI_Vend_Item_Ledg_Ent'  => \BusinessCentral\Models\PowerBIVendItemLedgEnt::class,
-        'Power_BI_Vendor_Ledger_Entries'  => \BusinessCentral\Models\PowerBIVendorLedgerEntries::class,
-        'Power_BI_Vendor_List'  => \BusinessCentral\Models\PowerBIVendorList::class,
-        'Power_BI_WorkDate_Calc'  => \BusinessCentral\Models\PowerBIWorkDateCalc::class,
-        'Res_LedgerEntries'  => \BusinessCentral\Models\ResLedgerEntries::class,
-        'SalesDashboard'  => \BusinessCentral\Models\SalesDashboard::class,
-        'SalesOpportunities'  => \BusinessCentral\Models\SalesOpportunities::class,
-        'SalesOrdersBySalesPerson'  => \BusinessCentral\Models\SalesOrdersBySalesPerson::class,
-        'SegmentLines'  => \BusinessCentral\Models\SegmentLines::class,
-        'TopCustomerOverview'  => \BusinessCentral\Models\TopCustomerOverview::class,
-        'UserTaskSetComplete'  => \BusinessCentral\Models\UserTaskSetComplete::class,
-        'ValueEntries'  => \BusinessCentral\Models\ValueEntries::class,
-        'VendorLedgerEntries'  => \BusinessCentral\Models\VendorLedgerEntries::class,
-        'nativeInvoicingAttachments'  => \BusinessCentral\Models\InvoicingAttachment::class,
-        'nativeInvoicingContacts'  => \BusinessCentral\Models\InvoicingContact::class,
-        'nativeInvoicingCountryRegion'  => \BusinessCentral\Models\InvoicingCountryRegion::class,
-        'nativeInvoicingCustomers'  => \BusinessCentral\Models\InvoicingCustomer::class,
-        'nativeInvoicingCustomersCoupons'  => \BusinessCentral\Models\InvoicingCustomersCoupon::class,
-        'nativeInvoicingEmailPreview'  => \BusinessCentral\Models\InvoicingEmailPreview::class,
-        'nativeInvoicingEmailSetting'  => \BusinessCentral\Models\InvoicingEmailSetting::class,
-        'nativeInvoicingExportInvoices'  => \BusinessCentral\Models\InvoicingExportInvoice::class,
-        'nativeInvoicingGeneralSettings'  => \BusinessCentral\Models\InvoicingGeneralSetting::class,
-        'nativeInvoicingItems'  => \BusinessCentral\Models\InvoicingItem::class,
-        'nativeInvoicingKPIs'  => \BusinessCentral\Models\InvoicingKPI::class,
-        'nativeInvoicingLanguages'  => \BusinessCentral\Models\InvoicingLanguage::class,
-        'nativeInvoicingPDFs'  => \BusinessCentral\Models\InvoicingPDF::class,
-        'nativeInvoicingPaymentMethods'  => \BusinessCentral\Models\InvoicingPaymentMethod::class,
-        'nativeInvoicingPaymentTerms'  => \BusinessCentral\Models\InvoicingPaymentTerm::class,
-        'nativeInvoicingQBOSyncAuth'  => \BusinessCentral\Models\InvoicingQBOSyncAuth::class,
-        'nativeInvoicingSMTPMailSetup'  => \BusinessCentral\Models\InvoicingSMTPMailSetup::class,
-        'nativeInvoicingSalesInvoiceOverview'  => \BusinessCentral\Models\InvoicingSalesInvoiceOverview::class,
-        'nativeInvoicingSalesInvoices'  => \BusinessCentral\Models\InvoicingSalesInvoice::class,
-        'nativeInvoicingSalesInvoicesPayments'  => \BusinessCentral\Models\InvoicingSalesInvoicesPayment::class,
-        'nativeInvoicingSalesQuotes'  => \BusinessCentral\Models\InvoicingSalesQuote::class,
-        'nativeInvoicingSalesTaxSetup'  => \BusinessCentral\Models\InvoicingSalesTaxSetup::class,
-        'nativeInvoicingSyncServicesSetting'  => \BusinessCentral\Models\InvoicingSyncServicesSetting::class,
-        'nativeInvoicingTaxAreas'  => \BusinessCentral\Models\InvoicingTaxArea::class,
-        'nativeInvoicingTaxGroups'  => \BusinessCentral\Models\InvoicingTaxGroup::class,
-        'nativeInvoicingTaxRates'  => \BusinessCentral\Models\InvoicingTaxRate::class,
-        'nativeInvoicingTestMail'  => \BusinessCentral\Models\InvoicingTestMail::class,
-        'nativeInvoicingUnitsOfMeasure'  => \BusinessCentral\Models\InvoicingUnitsOfMeasure::class,
-        'nativeInvoicingVATSetup'  => \BusinessCentral\Models\InvoicingVATSetup::class,
-        'powerbifinance'  => \BusinessCentral\Models\Powerbifinance::class,
-        'purchaseDocumentLines'  => \BusinessCentral\Models\PurchaseDocumentLines::class,
-        'purchaseDocuments'  => \BusinessCentral\Models\PurchaseDocuments::class,
-        'purchaseDocumentsworkflowPurchaseDocumentLines'  => \BusinessCentral\Models\PurchaseDocumentsworkflowPurchaseDocumentLines::class,
-        'salesDocumentLines'  => \BusinessCentral\Models\SalesDocumentLines::class,
-        'salesDocuments'  => \BusinessCentral\Models\SalesDocuments::class,
-        'salesDocumentsworkflowSalesDocumentLines'  => \BusinessCentral\Models\SalesDocumentsworkflowSalesDocumentLines::class,
-        'workflowCustomers'  => \BusinessCentral\Models\WorkflowCustomers::class,
-        'workflowGenJournalBatches'  => \BusinessCentral\Models\WorkflowGenJournalBatches::class,
-        'workflowGenJournalLines'  => \BusinessCentral\Models\WorkflowGenJournalLines::class,
-        'workflowItems'  => \BusinessCentral\Models\WorkflowItems::class,
-        'workflowPurchaseDocumentLines'  => \BusinessCentral\Models\WorkflowPurchaseDocumentLines::class,
-        'workflowPurchaseDocuments'  => \BusinessCentral\Models\WorkflowPurchaseDocuments::class,
-        'workflowPurchaseDocumentsworkflowPurchaseDocumentLines'  => \BusinessCentral\Models\WorkflowPurchaseDocumentsworkflowPurchaseDocumentLines::class,
-        'workflowSalesDocumentLines'  => \BusinessCentral\Models\WorkflowSalesDocumentLines::class,
-        'workflowSalesDocuments'  => \BusinessCentral\Models\WorkflowSalesDocuments::class,
-        'workflowSalesDocumentsworkflowSalesDocumentLines'  => \BusinessCentral\Models\WorkflowSalesDocumentsworkflowSalesDocumentLines::class,
-        'workflowVendors'  => \BusinessCentral\Models\WorkflowVendors::class,
-        'workflowWebhookSubscriptions'  => \BusinessCentral\Models\WorkflowWebhookSubscriptions::class,
-    ];
+    public static function extendMultiple(array $map)
+    {
+        static::init();
+
+        static::$map = array_merge(static::$map, $map);
+    }
+
+    protected static function init()
+    {
+        if (isset(static::$map)) {
+            return static::$map;
+        }
+
+        $map_path = __DIR__ . '/../class_map.json';
+
+        if (file_exists($map_path)) {
+            static::$map = json_decode(file_get_contents($map_path), true);
+        }
+
+        return static::$map;
+    }
 }

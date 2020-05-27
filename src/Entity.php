@@ -133,7 +133,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function reload()
     {
         if ($this->exists()) {
-            $entity = $this->query->find($this->id);
+            $entity = $this->query->cloneWithoutExtensions()->find($this->identifier());
             if ($entity) {
                 $this->setAttributes($entity->attributes);
                 $this->dirty = $entity->dirty;
@@ -183,7 +183,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
             $response = $this->query->post($this->attributes);
 
             $this->setAttributes($response);
-            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->schema_type), $this->id);
+            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->schema_type), $this->identifier());
 
         }
 
@@ -292,11 +292,13 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         return null;
     }
 
-    public function doAction(string $name)
+    public function doAction(string $name, array $properties = [])
     {
         $action = $this->getEntityType()->getAction($name);
 
-        $result = $this->query->cloneWithoutExtensions()->to($action->fqn)->post([], ['no_ext' => true]);
+        $result = $this->query->cloneWithoutExtensions()->to($action->fqn)->post($properties, ['no_ext' => true]);
+
+        $this->reload();
 
         if ($result === null) {
             return true;
@@ -330,7 +332,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
                     }
                 }
 
-                $value = $value->id;
+                $value = $value->identifier();
             }
 
             if ( ! $property->read_only && ( ! isset($this->attributes[$offset]) || $value !== $this->attributes[$offset])) {
@@ -366,7 +368,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function __call($name, $arguments)
     {
         if ($relation = $this->getEntityType()->getRelation($name)) {
-            return $this->query->clone()->navigateTo($relation->route);
+            return $this->query->cloneWithoutExtensions()->navigateTo($relation->route);
         } elseif ($this->getEntityType()->actionExists($name)) {
             return $this->doAction($name);
         }
@@ -406,5 +408,10 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     : array
     {
         return $this->attributes;
+    }
+
+    public function identifier()
+    {
+        return $this->{$this->getEntityType()->key};
     }
 }

@@ -8,4 +8,8 @@
 /.vagrant
 
 /test.php
-/build_credentials.json
+/build.php
+
+/class_map.json
+/bcmetadata.xml
+/entities.md
