@@ -331,8 +331,6 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
                         throw new Exception(sprintf("Cannot use type '%s' for property '%s' on type '%s'", $value->getEntityType()->name, $offset, $this->getEntityType()->name));
                     }
                 }
-
-                $value = $value->identifier();
             }
 
             if ( ! $property->read_only && ( ! isset($this->attributes[$offset]) || $value !== $this->attributes[$offset])) {
