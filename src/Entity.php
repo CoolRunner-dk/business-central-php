@@ -133,7 +133,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     public function reload()
     {
         if ($this->exists()) {
-            $entity = $this->query->cloneWithoutExtensions()->find($this->identifier());
+            $entity = $this->query->cloneWithoutExtensions()->find($this->identifiers());
             if ($entity) {
                 $this->setAttributes($entity->attributes);
                 $this->dirty = $entity->dirty;
@@ -183,7 +183,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
             $response = $this->query->post($this->attributes);
 
             $this->setAttributes($response);
-            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->schema_type), $this->identifier());
+            $this->query->navigateTo($entity_set->name ?? Pluralizer::plural($this->type->schema_type), $this->identifiers());
 
         }
 
@@ -408,8 +408,13 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         return $this->attributes;
     }
 
-    public function identifier()
+    public function identifiers()
     {
-        return $this->{$this->getEntityType()->keys};
+        $keys = [];
+        foreach ($this->getEntityType()->keys as $key) {
+            $keys = $this->{$key};
+        }
+
+        return $keys;
     }
 }

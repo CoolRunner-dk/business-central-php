@@ -108,15 +108,15 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     }
 
     /**
-     * @param string $identifier
-     * @param null   $default
+     * @param string|string[] $identifier
+     * @param null            $default
      *
      * @return Entity|mixed|null
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
-    public function find(string $identifier, $default = null)
+    public function find($identifier, $default = null)
     {
-        return $this->query->clone()->to($this->getEntitySet()->name, $identifier)->first($default);
+        return $this->query->clone()->navigateTo($this->getEntitySet()->name, $identifier)->first($default);
     }
 
     /**
