@@ -233,7 +233,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
         $validator->addValidator('typeof', new TypeOf());
 
-        $validation = $validator->validate($this->getDirty(), $this->getEntityType()->getValidationRules());
+        $validation = $validator->validate($this->getAttributes(), $this->getEntityType()->getValidationRules());
 
         if ($validation->fails()) {
             throw new ValidationException($validation);
