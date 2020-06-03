@@ -10,6 +10,14 @@ namespace BusinessCentral\Query\Contracts;
 
 use BusinessCentral\Query\Builder;
 
+/**
+ * Trait Expands
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Query\Contracts
+ *
+ * @mixin Builder
+ */
 trait Expands
 {
     protected $expands = [];

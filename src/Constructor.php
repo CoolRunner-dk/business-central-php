@@ -43,14 +43,14 @@ class Constructor
         static::line("| Building Classes:  ", false);
         static::buildClasses();
 
+        static::line("| Building ClassMap: ", false);
+        static::buildClassMap();
+
         static::line("| Building Docs:     ", false);
         static::buildDocs();
 
         static::line("| Building Markdown: ", false);
         static::buildMarkdown();
-
-        static::line("| Building ClassMap: ", false);
-        static::buildClassMap();
         static::line('+------------------------------');
 
     }

@@ -25,7 +25,7 @@ use GuzzleHttp\RequestOptions;
 /**
  * Class Builder
  *
- * @method $this to(string $component, string $id = null)
+ * @method $this to(string $component, string[]|string $id = null)
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Query
@@ -252,9 +252,20 @@ class Builder
         return array_filter($query_string);
     }
 
-    public function navigateTo(string $component, string $id = null)
+    /**
+     * @param string               $component
+     * @param string[]|string|null $keys
+     *
+     * @return $this
+     * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
+     */
+    public function navigateTo(string $component, $keys = null)
     {
-        $this->components[$component] = array_filter(['component' => $component, 'key' => $id]);
+        if ( ! is_array($keys)) {
+            $keys = [$keys];
+        }
+
+        $this->components[$component] = array_filter(['component' => $component, 'key' => array_filter($keys)]);
 
         return $this;
     }
@@ -275,9 +286,13 @@ class Builder
     {
         $components = [];
         foreach ($this->components as $entity => $item) {
-            $key = isset($item['key']) ? $this->formatValue($item['key'], false) : null;
+            $identifier = array_map(function ($key) {
+                return $this->formatValue($key, false);
+            }, $item['key'] ?? []);
 
-            $components[] = $item['component'] . ($key ? "($key)" : '');
+            $identifier = implode(',', $identifier);
+
+            $components[] = $item['component'] . ($identifier ? "($identifier)" : '');
         }
 
         return implode('/', $components);

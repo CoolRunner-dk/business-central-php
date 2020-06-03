@@ -412,6 +412,6 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
     public function identifier()
     {
-        return $this->{$this->getEntityType()->key};
+        return $this->{$this->getEntityType()->keys};
     }
 }

@@ -26,6 +26,8 @@ use Illuminate\Support\Arr;
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral
+ *
+ * @mixin Builder
  */
 class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Jsonable, Arrayable
 {
@@ -54,7 +56,12 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     protected function insert($item)
     {
-        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $item[$this->getEntitySet()->getEntityType()->key] ?? null);
+        $keys = $this->getEntitySet()->getEntityType()->keys;
+        foreach ($keys as $i => $key) {
+            $keys[$i] = $item[$key];
+        }
+
+        $entity_query = $this->query->clone()->navigateTo($this->getEntitySet()->name, $keys);
         $entity       = Entity::make($item, $entity_query, $this->getEntitySet()->getEntityType());
 
         $this->collection[] = $entity;
@@ -261,5 +268,12 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     public function all()
     {
         return array_values($this->collection);
+    }
+
+    public function __call($name, $arguments)
+    {
+        if (method_exists($this->query, $name)) {
+            return $this->query()->clone()->{$name}(...$arguments);
+        }
     }
 }

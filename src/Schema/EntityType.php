@@ -17,9 +17,9 @@ use Illuminate\Support\Str;
 /**
  * Class EntityType
  *
- * @property-read string $name
- * @property-read string $key
- * @property-read string $schema_type
+ * @property-read string   $name
+ * @property-read string[] $keys
+ * @property-read string   $schema_type
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -37,7 +37,7 @@ class EntityType
     /** @var array|Action[] */
     protected $actions = [];
 
-    protected $key;
+    protected $keys = [];
 
     public function __construct($entity_type, Schema $schema)
     {
@@ -69,13 +69,12 @@ class EntityType
             }
 
             foreach ($entity_type['Key']['PropertyRef'] as $item) {
-                $this->key = $item['@attributes']['Name'];
-                break;
+                $this->keys[] = $item['@attributes']['Name'];
             }
         }
 
         if ($this->schema->hasOverrides($this->schema_type, 'key')) {
-            $this->key = $this->schema->getOverrides($this->schema_type, 'key');
+            $this->keys[] = $this->schema->getOverrides($this->schema_type, 'key');
         }
 
         $this->fillAnnotations($entity_type);
@@ -153,7 +152,7 @@ class EntityType
     public function __get($name)
     {
         switch ($name) {
-            case 'key':
+            case 'keys':
             case 'schema_type':
                 return $this->{$name};
             case 'name':
@@ -166,7 +165,7 @@ class EntityType
         $rules = [];
 
         foreach ($this->properties as $property) {
-            if($property->name !== $this->key) {
+            if ($property->name !== $this->keys) {
                 $rules = array_merge($rules, $property->getValidation());
             }
         }

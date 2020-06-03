@@ -8,6 +8,16 @@
 namespace BusinessCentral\Query\Contracts;
 
 
+use BusinessCentral\Query\Builder;
+
+/**
+ * Trait Pagination
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Query\Contracts
+ *
+ * @mixin Builder
+ */
 trait Pagination
 {
     protected $limit = 20;
@@ -53,7 +63,7 @@ trait Pagination
     {
         $this->page--;
 
-        if($this->page < 0) {
+        if ($this->page < 0) {
             $this->page = 0;
         }
 

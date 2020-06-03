@@ -7,15 +7,42 @@
 
 namespace BusinessCentral\Query\Contracts;
 
+use BusinessCentral\Query\Builder;
 
+/**
+ * Trait Sorting
+ *
+ * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
+ * @package BusinessCentral\Query\Contracts
+ *
+ * @mixin Builder
+ */
 trait Sorting
 {
     protected $order_by = [];
 
+    protected $sort_map = [
+        'asc'  => [
+            SORT_ASC,
+        ],
+        'desc' => [
+            SORT_DESC,
+        ],
+    ];
+
     public function orderBy($property, string $direction = 'asc')
     {
+        foreach ($this->sort_map as $dir => $aliases) {
+            if (strtolower($direction) === $dir || in_array($direction, $aliases)) {
+                $direction = $dir;
+                break;
+            }
+        }
+
         if (is_array($property)) {
-            $this->order_by = array_merge($this->order_by, $property);
+            foreach ($property as $key => $direction) {
+                $this->orderBy($key, $direction);
+            }
         } else {
             $this->order_by[$property] = $direction;
         }
@@ -26,12 +53,12 @@ trait Sorting
 
     public function orderByAsc(string $property)
     {
-        $this->order_by[$property] = 'asc';
+        return $this->orderBy($property, 'asc');
     }
 
     public function orderByDesc(string $property)
     {
-        $this->order_by[$property] = 'desc';
+        return $this->orderBy($property, 'desc');
     }
 
     public function getSorting()
@@ -51,5 +78,15 @@ trait Sorting
         }
 
         return ($with_prefix ? '$orderby=' : '') . implode(', ', $sorting);
+    }
+
+    public function lastest(string $key = 'lastModifiedDateTime')
+    {
+        return $this->orderByDesc($key);
+    }
+
+    public function newest(string $key = 'lastModifiedDateTime')
+    {
+        return $this->orderByAsc($key);
     }
 }
