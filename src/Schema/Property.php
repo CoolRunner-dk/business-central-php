@@ -166,7 +166,7 @@ class Property
         }
 
         if ( ! $this->nullable) {
-            $rules[$this->name][] = 'required';
+            $rules[$this->name][] = 'not-null';
         }
 
         $type = $this->getValidationType();

@@ -14,11 +14,9 @@ use BusinessCentral\Exceptions\QueryException;
 use BusinessCentral\Exceptions\ValidationException;
 use BusinessCentral\Query\Builder;
 use BusinessCentral\Schema\EntityType;
-use BusinessCentral\Schema\NavigationProperty;
-use BusinessCentral\Schema\Property;
 use BusinessCentral\Traits\HasQueryBuilder;
+use BusinessCentral\Validator\Rules\NotNull;
 use BusinessCentral\Validator\Rules\TypeOf;
-use GuzzleHttp\Exception\RequestException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Support\Pluralizer;
@@ -232,6 +230,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         $validator = new Validator();
 
         $validator->addValidator('typeof', new TypeOf());
+        $validator->setValidator('not-null', new NotNull());
 
         $validation = $validator->validate($this->getAttributes(), $this->getEntityType()->getValidationRules());
 
