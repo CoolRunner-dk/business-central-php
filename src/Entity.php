@@ -64,6 +64,10 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     {
         $class = ClassMap::map($type);
 
+        if ( ! class_exists($class)) {
+            $class = Entity::class;
+        }
+
         return new $class($attributes, $query, $type);
     }
 
