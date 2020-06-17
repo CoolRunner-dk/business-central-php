@@ -29,7 +29,7 @@ use Illuminate\Support\Arr;
  *
  * @mixin Builder
  */
-class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Jsonable, Arrayable
+class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Jsonable, Arrayable, \Countable
 {
     use HasQueryBuilder;
 
@@ -42,7 +42,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     {
         $this->query         = $query;
         $this->type          = $type;
-        $this->auto_paginate = $query->getSDK()->option('auto_paginate', false);
+        $this->auto_paginate = $query->getSdk()->option('auto_paginate', false);
 
         if ($type) {
             foreach ($items as $item) {
@@ -267,6 +267,16 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     public function all()
     {
+        if (count($this->collection) !== $this->count()) {
+            $this->collection = [];
+
+            $this->query
+                ->limit($this->count())
+                ->page(0);
+
+            $this->propagate();
+        }
+
         return array_values($this->collection);
     }
 

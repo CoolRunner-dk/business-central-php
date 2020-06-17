@@ -22,10 +22,11 @@ use WsdlToPhp\PackageBase\Tests\SoapClient;
 /**
  * Class SDK
  *
- * @property string $tenant
- * @property string $environment
- * @property Client $client
- * @property Schema $schema
+ * @property string             $tenant
+ * @property string             $environment
+ * @property Client             $client
+ * @property Schema             $schema
+ * @property array|RequestLog[] $request_log
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral
@@ -86,15 +87,9 @@ class SDK
         $this->mapEntities();
     }
 
-    public function logRequest($method, $uri, $time, $request_options, $code)
+    public function logRequest($method, $uri, $time, $request_options, $code, $response)
     {
-        $this->request_log[] = [
-            'method'  => $method,
-            'code'    => $code,
-            'uri'     => $uri,
-            'time'    => $time * 1000,
-            'options' => $request_options,
-        ];
+        $this->request_log[] = new RequestLog($method, $code, $uri, $time, $request_options, $response);
     }
 
     public function query()
@@ -158,6 +153,8 @@ class SDK
                 return $this->client;
             case 'schema':
                 return $this->schema;
+            case 'request_log':
+                return $this->request_log;
         }
     }
 

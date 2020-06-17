@@ -62,17 +62,18 @@ class Builder
         try {
             $response = $this->sdk->client->request($method, $uri, $request_options);
 
-            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode());
+            $result = json_decode($response->getBody()->getContents(), true);
+            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode(), $result);
 
-            return json_decode($response->getBody()->getContents(), true);
+            return $result;
 
         } catch (ClientException $exception) {
             $response = $exception->getResponse();
 
-            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode());
+            $result = json_decode($response->getBody()->getContents(), true);
+            $this->sdk->logRequest($method, $uri, microtime(true) - $time, $request_options, $response->getStatusCode(), $result);
 
-            $response_data = json_decode($response->getBody()->getContents(), true);
-            throw new QueryException($this, $response_data, $exception);
+            throw new QueryException($this, $result, $exception);
         } catch (ServerException $exception) {
             $response = $exception->getResponse();
 
@@ -90,7 +91,12 @@ class Builder
 
     public function exists()
     {
-        return ! ! $this->fetch()->first(false);
+        return ! ! $this->limit(1)->fetch()->first(false);
+    }
+
+    public function all()
+    {
+        return $this->limit(0)->fetch()->all();
     }
 
     /**
@@ -319,7 +325,7 @@ class Builder
         return $clone;
     }
 
-    public function getSDK()
+    public function getSdk()
     {
         return $this->sdk;
     }

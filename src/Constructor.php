@@ -22,11 +22,6 @@ class Constructor
     protected static $map  = [];
     protected static $docs = [];
 
-    public static function buildComposer($event)
-    {
-        var_dump($event->getArguments());
-    }
-
     public static function buildModels($tenant, $username, $token)
     {
         static::$sdk = SDK::instance($tenant, [

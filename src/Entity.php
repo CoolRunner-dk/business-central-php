@@ -396,7 +396,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
     public function getSdk()
     {
-        return $this->query->getSDK();
+        return $this->query->getSdk();
     }
 
     public function getDirty()
