@@ -66,7 +66,7 @@ $query = $sdk->query();
 $query = $sdk->query();
 
 // Navigate using ->navigateTo(...) (or shorthand ->to(...)
-$query->to('companies','companyId')->to('customers'); // Equivalent of fetching from 'companies(companyId)/customers'
+$query->to('Company','CompanyName')->to('invoicingCustomers'); // Equivalent of fetching from 'Company(CompanyName)/invoicingCustomers'
 ```
 
 ##### Fetching results
@@ -144,26 +144,27 @@ None
 
 #### EntityCollection Methods
 
-- `find(string $id, $default = null)` : [Entity](#entity) | `null`
+- `find(string|array $id, $default = null)` : [Entity](#entity) | `null`
   - Finds and returns an entity from the collection with the given id or `$default` on failure
 
 - `create(array $attributes)` : [Entity](#entity)
   - Creates and returns a new Entity with the given attributes
 
-- `update(string $id, array $attributes)` : [Entity](#entity)
+- `update(string|array  $id, array $attributes)` : [Entity](#entity)
   - Updates and returns an existing Entity with the given attributes
 
-- `delete(string $id)` : `bool`
+- `delete(string|array  $id)` : `bool`
   - Deletes en entity from the collection with the given id - Returns true/false on success/failure
 
-- `first($default = null)` : [Entity](#class-entity) | `null` | `mixed`
+- `first($default = null)` : [Entity](#entity) | `null` | `mixed`
   - Returns the first index of the collection or `$default` is empty
 
 - `count()` : `int`
   - Returns the amount of entities in the collection
  
 - `all()` : `array`
-  - Get the collection as an array
+  - Get all Entities in the collection as an array
+  - Note: If the EntityCollection isn't fully loaded then the remaining Entities will be fetched!
 
 - `getEntitySet`: [EntitySet](#entityset)
   - Get the collections EntitySet
@@ -194,6 +195,14 @@ None
 
 - `fetch()` : [EntityCollection](#entitycollection)
   - Fetch all entities at the pointer
+  
+##### Builder Meta
+
+- `count()` : `int`
+  - Get the total count matching the Builder
+
+- `exists()` : `bool`
+  - Check if anything matches the builder
   
 ##### Builder Pagination
   
@@ -296,15 +305,16 @@ The `$before` argument is the boolean operator prepended to the query before eve
     `whereGroup(function(Builder $query) { $query->where('property', 'Foo')->orWhere('property', 'Bar'))`
   - This functionality can be shorthanded as `where(function(Builder $query) { ... })`
   
-Operators:  
-| Logical   | OData equiv |
-| :-:       | :-:         |
-| =         | eq          |
-| !=        | ne          |
-| >         | gt          |
-| >=        | ge          |
-| <         | lt          |
-| <=        | le          |
+Operators:
+  
+| Logical | OData equiv |
+|:-------:|:-----------:|
+|    =    |      eq     |
+|    !=   |      ne     |
+|    >    |      gt     |
+|    >=   |      ge     |
+|    <    |      lt     |
+|    <=   |      le     |
 
 ###### Basic Usage
   
@@ -329,6 +339,24 @@ Example:
 ```
 
 This overrides the model class used for all entities of type `customer` in the entire application.
+
+## Debugging
+
+The SDK logs all requests to and from your application to Business Central for debugging and monitoring purposes.
+
+You can get all log entries from the SDK at any time from `$sdk->request_log`, which returns an array of RequestLog objects.
+
+#### RequestLog Properties
+
+| Name	   | Type     |
+|----------|----------|
+| method   | `string` |
+| code     | `int`    |
+| uri      | `string` |
+| time     | `float`  |
+| options  | `array`  |
+| response | `mixed`  |
+
 
 # Contribution
 
