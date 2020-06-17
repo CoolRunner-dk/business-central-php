@@ -91,7 +91,12 @@ class Builder
 
     public function exists()
     {
-        return ! ! $this->limit(1)->fetch()->first(false);
+        return ! ! $this->count();
+    }
+
+    public function count()
+    {
+        return $this->clone()->limit(0)->fetch()->count();
     }
 
     public function all()
