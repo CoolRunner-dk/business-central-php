@@ -32,7 +32,7 @@ This can be generated using a `post-autoload-dump` composer script using your cr
 
 Business Central for PHP uses a singleton pattern for SDK instances.
 
-Once an instance has been initiallized it will fetch the schema from your Business Central. (Standard entities are included).
+Once an instance has been initialized it will fetch the schema from your Business Central. (Standard entities are included).
 
 ```php
 $sdk = \BusinessCentral\SDK::instance('my-tenant-id.onmicrosoft.com', [
@@ -65,7 +65,7 @@ $query = $sdk->query();
 ```php
 $query = $sdk->query();
 
-// Navigate using ->navigateTo(...) (or shorthand ->to(...)
+// Navigate using ->navigateTo(...) (or shorthand ->to(...))
 $query->to('Company','CompanyName')->to('invoicingCustomers'); // Equivalent of fetching from 'Company(CompanyName)/invoicingCustomers'
 ```
 
@@ -75,13 +75,16 @@ $collection = $query->fetch(); // Fetches the results of the query as a collecti
 
 // Fetches the first result of the query 
 $entity = $query->first(); // equivalent of $query->fetch()->first()
+
+// Fetches all the results of the query 
+$entity = $query->all(); // Fetches all matching entities
 ```
 
 #### Fetching Entities
 
 ```php
 // Fetch a single company
-$company = $sdk->company('xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx');
+$company = $sdk->company('CompanyName');
 // Fetch all companies available to the authorized user
 $companies = $sdk->companies();
 ```
@@ -164,6 +167,7 @@ None
  
 - `all()` : `array`
   - Get all Entities in the collection as an array
+  - This is a heavy method call on large collections - Use wisely!
   - Note: If the EntityCollection isn't fully loaded then the remaining Entities will be fetched!
 
 - `getEntitySet`: [EntitySet](#entityset)
