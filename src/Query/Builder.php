@@ -14,6 +14,7 @@ use BusinessCentral\Exceptions\QueryException;
 use BusinessCentral\Query\Contracts\Expands;
 use BusinessCentral\Query\Contracts\Filters;
 use BusinessCentral\Query\Contracts\Pagination;
+use BusinessCentral\Query\Contracts\Selects;
 use BusinessCentral\Query\Contracts\Sorting;
 use BusinessCentral\Schema;
 use BusinessCentral\SDK;
@@ -38,6 +39,7 @@ class Builder
     use Expands;
     use Pagination;
     use Sorting;
+    use Selects;
 
     protected $components = [];
     protected $sdk;

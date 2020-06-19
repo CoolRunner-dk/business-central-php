@@ -33,12 +33,12 @@ trait Pagination
 
     public function getLimitString($with_prefix = true)
     {
-        return $this->limit >= 0 ? (($with_prefix ? '$top=' : '') . $this->limit) : null;
+        return $this->limit > 0 ? (($with_prefix ? '$top=' : '') . $this->limit) : null;
     }
 
     public function getPageString($with_prefix = true)
     {
-        return $this->page >= 0 ? (($with_prefix ? '$skip=' : '') . ($this->limit * ($this->page - 1))) : null;
+        return $this->page > 1 ? (($with_prefix ? '$skip=' : '') . ($this->limit * ($this->page - 1))) : null;
     }
 
     public function page(int $page = null)
