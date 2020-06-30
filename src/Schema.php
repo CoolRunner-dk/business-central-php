@@ -69,6 +69,11 @@ class Schema
         }
     }
 
+    public function rebuild()
+    {
+        $this->propagate();
+    }
+
     // region EntityTypes
 
     public function getEntityTypes()
@@ -168,6 +173,22 @@ class Schema
     public function getOverrides(string $type, string $property)
     {
         return $this->overrides[$type][$property] ?? [];
+    }
+
+    public function getAllOverrides()
+    {
+        return $this->overrides;
+    }
+
+    public function setOverrides(array $overrides, bool $merge = false)
+    {
+        if ($merge) {
+            $this->overrides = array_merge($this->overrides, $overrides);
+        } else {
+            $this->overrides = $overrides;
+        }
+
+        return $this;
     }
 
     public function getAliases()
