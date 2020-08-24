@@ -47,7 +47,7 @@ class ValidationException extends Exception implements Jsonable, \JsonSerializab
     {
         return [
             'message' => $this->getMessage(),
-            'errors'  => $this->errors()->all(),
+            'errors'  => $this->errors(),
         ];
     }
 
