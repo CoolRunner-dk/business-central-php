@@ -171,6 +171,10 @@ class Constructor
                         $name .= $item->isCollection() ? '*.' : '';
                         $name .= $property->name;
 
+                        if($doc_type instanceof ComplexType) {
+                            $doc_type = $doc_type->name;
+                        }
+
                         $doc_contents .= sprintf("| %s | %s | %s | %s | %s |\n",
                             $name,
                             $doc_type,
