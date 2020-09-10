@@ -27,6 +27,7 @@ use WsdlToPhp\PackageBase\Tests\SoapClient;
  * @property Client             $client
  * @property Schema             $schema
  * @property array|RequestLog[] $request_log
+ * @property int                $request_count
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral
@@ -47,7 +48,8 @@ class SDK
     protected $tenant;
     protected $client;
 
-    protected $request_log = [];
+    protected $request_log     = [];
+    protected $request_counter = 0;
 
     protected $options = [
         // Credentials
@@ -59,6 +61,7 @@ class SDK
         'default_collection_size' => 20,
         'auto_paginate'           => false,
         'offline_map'             => true,
+        'logs_requests'           => false,
     ];
 
     protected function __construct($tenant, $options)
@@ -89,7 +92,11 @@ class SDK
 
     public function logRequest($method, $uri, $time, $request_options, $code, $response)
     {
-        $this->request_log[] = new RequestLog($method, $code, $uri, $time, $request_options, $response);
+        if ($this->option('logs_requests')) {
+            $this->request_log[] = new RequestLog($method, $code, $uri, $time, $request_options, $response);
+        }
+
+        $this->request_counter++;
     }
 
     public function query()
@@ -155,6 +162,8 @@ class SDK
                 return $this->schema;
             case 'request_log':
                 return $this->request_log;
+            case 'request_count':
+                return $this->request_counter;
         }
     }
 

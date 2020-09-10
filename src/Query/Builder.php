@@ -10,6 +10,7 @@ namespace BusinessCentral\Query;
 
 use BusinessCentral\EntityCollection;
 use BusinessCentral\Exceptions\Exception;
+use BusinessCentral\Exceptions\FatalException;
 use BusinessCentral\Exceptions\QueryException;
 use BusinessCentral\Query\Contracts\Expands;
 use BusinessCentral\Query\Contracts\Filters;
@@ -81,7 +82,7 @@ class Builder
 
             $message = "Business Central responded with [{$response->getStatusCode()} - {$response->getReasonPhrase()}] - {$response->getBody()->getContents()}";
 
-            throw new Exception($message, 0, $exception);
+            throw new FatalException($message, $response->getStatusCode(), $exception);
         }
     }
 
