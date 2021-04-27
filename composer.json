@@ -3,7 +3,7 @@
     "description" : "PHP SDK for Microsoft Business Central",
     "type"        : "library",
     "require"     : {
-        "php"                : "^7.3",
+        "php"                : "^7.3 || ^8.0",
         "ext-json"           : "*",
         "guzzlehttp/guzzle"  : "^6.5 || ^7.0",
         "illuminate/support" : "^5.0 || ^6.0 || ^7.0 || ^8.0",
