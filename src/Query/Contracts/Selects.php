@@ -14,7 +14,7 @@ trait Selects
 
     public function getSelectsString($with_prefix = true)
     {
-        if ( ! empty($this->selects)) {
+        if (!empty($this->selects)) {
             return ($with_prefix ? '$select=' : '') . implode(',', $this->selects);
         }
 
@@ -24,7 +24,7 @@ trait Selects
     public function select($field, $_ = null)
     {
         foreach (func_get_args() as $arg) {
-            $fields = ! is_array($arg) ? [$arg] : $arg;
+            $fields = !is_array($arg) ? [$arg] : $arg;
 
             $this->selects = array_unique(array_merge($this->selects, $fields));
         }

@@ -109,7 +109,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     /**
      * @param string|string[] $identifier
-     * @param null            $default
+     * @param null $default
      *
      * @return Entity|mixed|null
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -212,7 +212,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
     public function next()
     {
         $exists = next($this->collection);
-        if ( ! $exists && $this->auto_paginate) {
+        if (!$exists && $this->auto_paginate) {
             $this->nextPage();
         }
     }
@@ -234,7 +234,7 @@ class EntityCollection implements \ArrayAccess, \Iterator, \JsonSerializable, Js
 
     public function offsetExists($offset)
     {
-        return ! ! $this->find($offset);
+        return !!$this->find($offset);
     }
 
     public function offsetGet($offset)

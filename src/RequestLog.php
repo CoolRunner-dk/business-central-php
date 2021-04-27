@@ -11,11 +11,11 @@ namespace BusinessCentral;
  * Class RequestLog
  *
  * @property-read string $method   Request method
- * @property-read int    $code     Response code
+ * @property-read int $code     Response code
  * @property-read string $uri      Request URI
- * @property-read float  $time     Respone time
- * @property-read array  $options  Request options
- * @property-read mixed  $response Response
+ * @property-read float $time     Respone time
+ * @property-read array $options  Request options
+ * @property-read mixed $response Response
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral

@@ -16,9 +16,9 @@ trait HasAnnotations
 
     public function fillAnnotations(array $object)
     {
-        if (isset($object['Annotation']) && ! isset($object['Annotation'][0])) {
+        if (isset($object['Annotation']) && !isset($object['Annotation'][0])) {
             $object['Annotation'] = [$object['Annotation']];
-        } elseif ( ! isset($object['Annotation'])) {
+        } elseif (!isset($object['Annotation'])) {
             $object['Annotation'] = [];
         }
 

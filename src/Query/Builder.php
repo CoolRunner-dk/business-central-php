@@ -20,6 +20,7 @@ use BusinessCentral\Query\Contracts\Sorting;
 use BusinessCentral\Schema;
 use BusinessCentral\SDK;
 use GuzzleHttp\Exception\ClientException;
+use GuzzleHttp\Exception\ConnectException;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\RequestOptions;
@@ -83,6 +84,8 @@ class Builder
             $message = "Business Central responded with [{$response->getStatusCode()} - {$response->getReasonPhrase()}] - {$response->getBody()->getContents()}";
 
             throw new FatalException($message, $response->getStatusCode(), $exception);
+        } catch (ConnectException $exception) {
+            throw new FatalException('Failed to connect to Business Centralk', 500, $exception);
         }
     }
 
@@ -94,7 +97,7 @@ class Builder
 
     public function exists()
     {
-        return ! ! $this->count();
+        return !!$this->count();
     }
 
     public function count()
@@ -133,7 +136,7 @@ class Builder
     }
 
     /**
-     * @param array  $attributes
+     * @param array $attributes
      * @param string $etag
      *
      * @return mixed
@@ -172,7 +175,7 @@ class Builder
     {
         $context = explode('#', $odata_context, 2)[1] ?? false;
 
-        if ( ! $context) {
+        if (!$context) {
             return null;
         }
 
@@ -236,7 +239,7 @@ class Builder
     {
         $uri = $this->compileComponents();
 
-        if ( ! $without_extensions) {
+        if (!$without_extensions) {
             $query_string = implode('&', $this->getQueryOptions());
 
             $uri .= $query_string ? "?$query_string" : null;
@@ -256,7 +259,7 @@ class Builder
             $basename = $class->getShortName();
             if ($class->hasMethod("get{$basename}String")) {
                 $result       = $this->{"get{$basename}String"}(true);
-                $result       = ! is_array($result) ? [$result] : $result;
+                $result       = !is_array($result) ? [$result] : $result;
                 $query_string = array_merge($query_string, $result);
             }
         }
@@ -267,7 +270,7 @@ class Builder
     }
 
     /**
-     * @param string               $component
+     * @param string $component
      * @param string[]|string|null $keys
      *
      * @return $this
@@ -275,7 +278,7 @@ class Builder
      */
     public function navigateTo(string $component, $keys = null)
     {
-        if ( ! is_array($keys)) {
+        if (!is_array($keys)) {
             $keys = [$keys];
         }
 

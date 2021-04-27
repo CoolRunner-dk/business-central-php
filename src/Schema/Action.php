@@ -34,7 +34,7 @@ class Action
         $this->schema = $schema;
         $this->name   = $action['@attributes']['Name'];
 
-        if ( ! isset($action['Parameter'][0]) && isset($action['Parameter'])) {
+        if (!isset($action['Parameter'][0]) && isset($action['Parameter'])) {
             $action['Parameter'] = [$action['Parameter']];
         }
 

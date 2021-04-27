@@ -46,9 +46,9 @@ trait Filters
      * Add a basic where clause to the query
      *
      * @param string|Closure $property
-     * @param null           $operator
-     * @param null           $value
-     * @param string         $before
+     * @param null $operator
+     * @param null $value
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -82,9 +82,9 @@ trait Filters
      * Add a basic where clause to the query
      *
      * @param string|Closure $property
-     * @param null           $operator
-     * @param null           $value
-     * @param string         $before
+     * @param null $operator
+     * @param null $value
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -99,9 +99,9 @@ trait Filters
     /**
      * Add a where in clause to the query
      *
-     * @param string         $property
+     * @param string $property
      * @param array|string[] $values
-     * @param string         $before
+     * @param string $before
      *
      * @return $this
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -122,9 +122,9 @@ trait Filters
     /**
      * Add a where in clause to the query
      *
-     * @param string         $property
+     * @param string $property
      * @param array|string[] $values
-     * @param string         $before
+     * @param string $before
      *
      * @return $this
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -140,10 +140,10 @@ trait Filters
     /**
      * Add a DateTime where clause to the query
      *
-     * @param string   $property
-     * @param null     $operator
+     * @param string $property
+     * @param null $operator
      * @param DateTime $value
-     * @param string   $before
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -169,10 +169,10 @@ trait Filters
     /**
      * Add a DateTime where clause to the query
      *
-     * @param string   $property
-     * @param null     $operator
+     * @param string $property
+     * @param null $operator
      * @param DateTime $value
-     * @param string   $before
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -186,7 +186,7 @@ trait Filters
      * Add a where not clause to the query
      *
      * @param Closure $callback
-     * @param string  $before
+     * @param string $before
      *
      * @return $this
      * @author     Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -210,7 +210,7 @@ trait Filters
      * Add a where not clause to the query
      *
      * @param Closure $callback
-     * @param string  $before
+     * @param string $before
      *
      * @return $this
      * @author     Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -228,7 +228,7 @@ trait Filters
      * Add a grouped where clause to the query
      *
      * @param Closure $callback
-     * @param string  $before
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -249,7 +249,7 @@ trait Filters
      * Add a grouped where clause to the query
      *
      * @param Closure $callback
-     * @param string  $before
+     * @param string $before
      *
      * @return $this|Builder
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
@@ -262,9 +262,9 @@ trait Filters
     /**
      * Add a where contains clause to the query
      *
-     * @param string     $property
+     * @param string $property
      * @param string|int $value
-     * @param string     $before
+     * @param string $before
      *
      * @return $this|Builder
      *
@@ -286,9 +286,9 @@ trait Filters
     /**
      * Add a where contains clause to the query
      *
-     * @param string     $property
+     * @param string $property
      * @param string|int $value
-     * @param string     $before
+     * @param string $before
      *
      * @return $this|Builder
      *
@@ -303,9 +303,9 @@ trait Filters
      *
      * Add a where starts with clause to the query
      *
-     * @param string           $property
+     * @param string $property
      * @param string|int|float $value
-     * @param string           $before
+     * @param string $before
      *
      * @return $this|Builder
      *
@@ -327,9 +327,9 @@ trait Filters
      *
      * Add a where starts with clause to the query
      *
-     * @param string           $property
+     * @param string $property
      * @param string|int|float $value
-     * @param string           $before
+     * @param string $before
      *
      * @return $this|Builder
      *
@@ -344,9 +344,9 @@ trait Filters
      *
      * Add a where ends with clause to the query
      *
-     * @param string           $property
+     * @param string $property
      * @param string|int|float $value
-     * @param string           $before
+     * @param string $before
      *
      * @return $this|Builder
      *
@@ -368,9 +368,9 @@ trait Filters
      *
      * Add a where ends with clause to the query
      *
-     * @param string           $property
+     * @param string $property
      * @param string|int|float $value
-     * @param string           $before
+     * @param string $before
      *
      * @return $this|Builder
      *

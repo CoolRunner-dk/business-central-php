@@ -17,9 +17,9 @@ use Illuminate\Support\Str;
 /**
  * Class EntityType
  *
- * @property-read string   $name
+ * @property-read string $name
  * @property-read string[] $keys
- * @property-read string   $schema_type
+ * @property-read string $schema_type
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -64,7 +64,7 @@ class EntityType
         }
 
         if (isset($entity_type['Key'])) {
-            if ( ! isset($entity_type['Key']['PropertyRef'][0]) && isset($entity_type['Key']['PropertyRef'])) {
+            if (!isset($entity_type['Key']['PropertyRef'][0]) && isset($entity_type['Key']['PropertyRef'])) {
                 $entity_type['Key']['PropertyRef'] = [$entity_type['Key']['PropertyRef']];
             }
 

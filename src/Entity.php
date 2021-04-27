@@ -64,7 +64,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     {
         $class = ClassMap::map($type);
 
-        if ( ! class_exists($class)) {
+        if (!class_exists($class)) {
             $class = Entity::class;
         }
 
@@ -122,7 +122,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
      */
     public function exists()
     {
-        return ! ! $this->etag;
+        return !!$this->etag;
     }
 
     /**
@@ -161,18 +161,18 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
         if ($entity_set) {
             if ($this->exists()) {
-                if ( ! $entity_set->updatable()) {
+                if (!$entity_set->updatable()) {
                     throw new OperationNotAllowedException($this, 'update');
                 }
             } else {
-                if ( ! $entity_set->insertable()) {
+                if (!$entity_set->insertable()) {
                     throw new OperationNotAllowedException($this, 'insert');
                 }
             }
         }
 
         if ($this->exists()) {
-            if ( ! empty($this->dirty)) {
+            if (!empty($this->dirty)) {
                 $this->validate();
 
                 $response = $this->query->patch($this->dirty, $this->etag);
@@ -208,7 +208,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
 
             if ($entity_set) {
                 if ($this->exists()) {
-                    if ( ! $entity_set->deletable()) {
+                    if (!$entity_set->deletable()) {
                         throw new OperationNotAllowedException($this, 'delete');
                     }
                 }
@@ -336,7 +336,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
                 }
             }
 
-            if ( ! $property->read_only && ( ! isset($this->attributes[$offset]) || $value !== $this->attributes[$offset])) {
+            if (!$property->read_only && (!isset($this->attributes[$offset]) || $value !== $this->attributes[$offset])) {
                 $this->attributes[$offset] = $this->dirty[$offset] = $value;
             }
         }
@@ -399,14 +399,12 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
         return $this->query->getSdk();
     }
 
-    public function getDirty()
-    : array
+    public function getDirty() : array
     {
         return $this->dirty;
     }
 
-    public function getAttributes()
-    : array
+    public function getAttributes() : array
     {
         return $this->attributes;
     }

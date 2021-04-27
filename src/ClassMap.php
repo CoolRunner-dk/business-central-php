@@ -25,7 +25,7 @@ class ClassMap
     {
         self::init();
 
-        if ( ! in_array(Entity::class, class_parents($class))) {
+        if (!in_array(Entity::class, class_parents($class))) {
             throw new \RuntimeException(sprintf('Cannot use class %s as mapping for Business Central - Class must extend %s', $class, Entity::class));
         }
         static::$map[$name] = $class;

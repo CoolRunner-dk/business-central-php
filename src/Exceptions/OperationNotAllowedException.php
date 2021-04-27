@@ -20,7 +20,7 @@ class OperationNotAllowedException extends Exception
     {
         $this->entity    = $entity;
         $this->operation = $operation;
-        
+
         $message = "Operation '$operation' not allowed on Entity of type '{$this->entity->getEntityType()->name}'";
 
         parent::__construct($message, $code = 0, $previous);

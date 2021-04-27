@@ -167,7 +167,7 @@ class Schema
 
     public function hasOverrides(string $type, string $property)
     {
-        return ! empty($this->getOverrides($type, $property));
+        return !empty($this->getOverrides($type, $property));
     }
 
     public function getOverrides(string $type, string $property)
@@ -214,7 +214,7 @@ class Schema
 
     public function propertyIsFillable(string $model, string $property, $default = false)
     {
-        return ! $this->propertyIs($model, $property, 'readOnly', $default);
+        return !$this->propertyIs($model, $property, 'readOnly', $default);
     }
 
     public function propertyIsNullable(string $model, string $property, $default = false)

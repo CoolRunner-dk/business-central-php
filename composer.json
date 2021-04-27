@@ -5,8 +5,8 @@
     "require"     : {
         "php"                : "^7.3",
         "ext-json"           : "*",
-        "guzzlehttp/guzzle"  : "^6.5",
-        "illuminate/support" : "^5.0 || ^6.0 || ^7.0",
+        "guzzlehttp/guzzle"  : "^6.5 || ^7.0",
+        "illuminate/support" : "^5.0 || ^6.0 || ^7.0 || ^8.0",
         "rakit/validation"   : "^1.2"
     },
     "require-dev" : {

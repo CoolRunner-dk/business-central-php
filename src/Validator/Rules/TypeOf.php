@@ -15,15 +15,15 @@ class TypeOf extends Rule
 {
     protected $message = "The :attribute must be of type ':type'";
 
-    public function fillParameters(array $params)
-    : Rule {
+    public function fillParameters(array $params) : Rule
+    {
         $this->params['type'] = array_shift($params);
 
         return $this;
     }
 
-    public function check($value)
-    : bool {
+    public function check($value) : bool
+    {
         $this->requireParameters(['type']);
         $type = $this->parameter('type');
 
@@ -31,7 +31,7 @@ class TypeOf extends Rule
 
         switch ($type) {
             case 'required':
-                return ! is_null($value);
+                return !is_null($value);
             case 'guid':
                 return preg_match('/[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}/i', $value);
             case 'string':
@@ -45,7 +45,7 @@ class TypeOf extends Rule
             case 'boolean':
                 return is_bool($value);
             case 'date':
-                return ! ! \DateTime::createFromFormat('Y-m-d', $value);
+                return !!\DateTime::createFromFormat('Y-m-d', $value);
             case 'null':
                 return is_null($value);
             default:

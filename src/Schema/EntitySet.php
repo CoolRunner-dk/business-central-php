@@ -17,7 +17,7 @@ use Illuminate\Support\Str;
  * Class EntitySet
  *
  * @property EntityType $type
- * @property string     $name
+ * @property string $name
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema

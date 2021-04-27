@@ -64,10 +64,10 @@ trait Expands
     public function expand(array $relations)
     {
         foreach ($relations as $key => $relation) {
-            if (is_string($key) && ! is_string($relation)) {
+            if (is_string($key) && !is_string($relation)) {
                 if ($relation instanceof \Closure) {
                     $this->expands[$key] = $relation;
-                } elseif ( ! is_array($relation)) {
+                } elseif (!is_array($relation)) {
                     $relation = [$relation];
                 }
 

@@ -22,7 +22,7 @@ class Constructor
     protected static $map  = [];
     protected static $docs = [];
 
-    public static function buildModels($tenant, $username, $token, $environment='production')
+    public static function buildModels($tenant, $username, $token, $environment = 'production')
     {
         static::$sdk = SDK::instance($tenant, [
             'username'    => $username,
@@ -79,7 +79,7 @@ class Constructor
             $fillable = [];
             $guarded  = [];
             foreach ($type->properties() as $property) {
-                if ( ! $property->read_only) {
+                if (!$property->read_only) {
                     $fillable[] = "        '$property->name',";
                 } else {
                     $guarded[] = "        '$property->name',";
@@ -162,7 +162,7 @@ class Constructor
                     $doc_type,
                     $item->read_only ? 'X' : ' ',
                     $item->required ? 'X' : ' ',
-                    ! $item->read_only ? 'X' : ' ');
+                    !$item->read_only ? 'X' : ' ');
 
                 if ($complex) {
                     foreach ($complex->properties() as $property) {
@@ -172,7 +172,7 @@ class Constructor
                         $name .= $item->isCollection() ? '*.' : '';
                         $name .= $property->name;
 
-                        if($doc_type instanceof ComplexType) {
+                        if ($doc_type instanceof ComplexType) {
                             $doc_type = $doc_type->name;
                         }
 
@@ -181,13 +181,13 @@ class Constructor
                             $doc_type,
                             $item->read_only ? 'X' : ' ',
                             $item->required ? 'X' : ' ',
-                            ! $item->read_only ? 'X' : ' ');
+                            !$item->read_only ? 'X' : ' ');
                     }
                 }
             }
             $doc_contents .= "\n";
 
-            if ( ! empty($doc['relations'] ?? [])) {
+            if (!empty($doc['relations'] ?? [])) {
                 $doc_contents .= "## Relations\n";
                 $doc_contents .= "| Name | Type | Collection |\n";
                 $doc_contents .= "| --- | --- | :-: |\n";
@@ -204,7 +204,7 @@ class Constructor
                 }
             }
 
-            if ( ! empty($doc['actions'])) {
+            if (!empty($doc['actions'])) {
                 $doc_contents .= "## Actions\n";
                 $doc_contents .= "\n";
                 /** @var Action $action */
@@ -218,7 +218,7 @@ class Constructor
                         }
                     }
 
-                    if ( ! empty($parameters)) {
+                    if (!empty($parameters)) {
                         $doc_contents .= "### Parameters\n";
                         $doc_contents .= "| Key | Type |\n";
                         $doc_contents .= "| --- | --- |\n";
@@ -347,7 +347,7 @@ class Constructor
         $old_doc  = $rfc->getDocComment();
 
         $replace = $old_doc;
-        if ( ! $replace) {
+        if (!$replace) {
             $replace = "class {$rfc->getShortName()}";
             $new_doc .= "\n" . "class {$rfc->getShortName()}";
         }

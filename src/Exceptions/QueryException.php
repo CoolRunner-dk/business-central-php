@@ -83,7 +83,7 @@ class QueryException extends \Exception
      */
     public function isBadRequest()
     {
-        return ! ! preg_match('/^BadRequest_.+$/', $this->error_code);
+        return !!preg_match('/^BadRequest_.+$/', $this->error_code);
     }
 
     /**
@@ -94,7 +94,7 @@ class QueryException extends \Exception
      */
     public function isAuthentication()
     {
-        return ! ! preg_match('/^Authentication_.+$/', $this->error_code);
+        return !!preg_match('/^Authentication_.+$/', $this->error_code);
     }
 
     /**
@@ -105,7 +105,7 @@ class QueryException extends \Exception
      */
     public function isAuthorization()
     {
-        return ! ! preg_match('/^Authorization_.+$/', $this->error_code);
+        return !!preg_match('/^Authorization_.+$/', $this->error_code);
     }
 
     /**
@@ -117,7 +117,7 @@ class QueryException extends \Exception
      */
     public function isInternal()
     {
-        return ! ! preg_match('/^Internal_.+$/', $this->error_code);
+        return !!preg_match('/^Internal_.+$/', $this->error_code);
     }
 
     /**
@@ -128,7 +128,7 @@ class QueryException extends \Exception
      */
     public function isApplication()
     {
-        return ! ! preg_match('/^Application_.+$/', $this->error_code);
+        return !!preg_match('/^Application_.+$/', $this->error_code);
     }
 
     /**

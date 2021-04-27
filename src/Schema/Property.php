@@ -18,10 +18,10 @@ use Illuminate\Support\Str;
  *
  * @property string $name
  * @property string $type
- * @property bool   $read_only
- * @property bool   $required
- * @property bool   $fillable
- * @property bool   $nullable
+ * @property bool $read_only
+ * @property bool $required
+ * @property bool $fillable
+ * @property bool $nullable
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral\Schema
@@ -50,8 +50,8 @@ class Property
 
         $edit_allowed = $this->getAnnotation('AllowEdit', true) === true;
 
-        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->schema_type, $this->name, ! $edit_allowed);
-        $this->nullable  = $this->schema->propertyIsNullable($entity_type->schema_type, $this->name, ! $edit_allowed) ||
+        $this->read_only = $this->schema->propertyIsReadOnly($entity_type->schema_type, $this->name, !$edit_allowed);
+        $this->nullable  = $this->schema->propertyIsNullable($entity_type->schema_type, $this->name, !$edit_allowed) ||
                            filter_var($property['@attributes']['Nullable'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
         $this->validation = [
@@ -66,7 +66,7 @@ class Property
 
     public function isCollection()
     {
-        return ! ! preg_match('/Collection\(.+\)/i', $this->type);
+        return !!preg_match('/Collection\(.+\)/i', $this->type);
     }
 
     public function convert($value)
@@ -165,7 +165,7 @@ class Property
             return $rules;
         }
 
-        if ( ! $this->nullable) {
+        if (!$this->nullable) {
             $rules[$this->name][] = 'not-null';
         }
 
@@ -206,7 +206,7 @@ class Property
             case 'fillable':
                 return $this->{$name};
             case 'required':
-                return ! $this->nullable;
+                return !$this->nullable;
         }
     }
 

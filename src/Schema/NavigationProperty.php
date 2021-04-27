@@ -50,7 +50,7 @@ class NavigationProperty
 
     public function isCollection()
     {
-        return ! ! preg_match('/Collection\(.+\)/i', $this->type);
+        return !!preg_match('/Collection\(.+\)/i', $this->type);
     }
 
     public function getEntityType()

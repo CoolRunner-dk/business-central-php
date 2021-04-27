@@ -22,12 +22,12 @@ use WsdlToPhp\PackageBase\Tests\SoapClient;
 /**
  * Class SDK
  *
- * @property string             $tenant
- * @property string             $environment
- * @property Client             $client
- * @property Schema             $schema
+ * @property string $tenant
+ * @property string $environment
+ * @property Client $client
+ * @property Schema $schema
  * @property array|RequestLog[] $request_log
- * @property int                $request_count
+ * @property int $request_count
  *
  * @author  Morten K. Harders 🐢 <mh@coolrunner.dk>
  * @package BusinessCentral
@@ -71,11 +71,11 @@ class SDK
 
         $this->options = array_merge($this->options, $options);
 
-        if ( ! $this->option('username') || ! $this->option('token')) {
+        if (!$this->option('username') || !$this->option('token')) {
             throw new \RuntimeException("Missing credentials for BusinessCentral SDK");
         }
 
-        if ( ! $this->option('environment')) {
+        if (!$this->option('environment')) {
             throw new \RuntimeException("Missing environment for BusinessCentral SDK");
         }
 
