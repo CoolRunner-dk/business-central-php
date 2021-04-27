@@ -22,12 +22,13 @@ class Constructor
     protected static $map  = [];
     protected static $docs = [];
 
-    public static function buildModels($tenant, $username, $token)
+    public static function buildModels($tenant, $username, $token, $environment='production')
     {
         static::$sdk = SDK::instance($tenant, [
             'username'    => $username,
             'token'       => $token,
             'offline_map' => false,
+            'environment' => $environment,
         ]);
 
         static::line('+------------------------------');
