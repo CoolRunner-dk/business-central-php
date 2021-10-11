@@ -46,6 +46,8 @@ class Builder
     protected $components = [];
     protected $sdk;
 
+    protected $with_count = true;
+
     public function __construct(SDK $sdk)
     {
         $this->sdk = $sdk;
@@ -264,7 +266,9 @@ class Builder
             }
         }
 
-        $query_string[] = '$count=true';
+        if($this->with_count) {
+            $query_string[] = '$count=true';
+        }
 
         return array_filter($query_string);
     }
@@ -324,6 +328,7 @@ class Builder
         $clone->limit($this->limit);
         $clone->page($this->page);
         $clone->orderBy($this->order_by);
+        $clone->with_count = $this->with_count;
 
         return $clone;
     }
@@ -352,5 +357,19 @@ class Builder
         }
 
         trigger_error('Call to undefined method ' . static::class . '::' . "$name()", E_USER_ERROR);
+    }
+
+    public function withoutCount()
+    {
+        $this->with_count = false;
+
+        return $this;
+    }
+
+    public function withCount()
+    {
+        $this->with_count = true;
+
+        return $this;
     }
 }
