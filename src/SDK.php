@@ -62,6 +62,7 @@ class SDK
         'auto_paginate'           => false,
         'offline_map'             => true,
         'logs_requests'           => false,
+        'language'                => false,
     ];
 
     protected function __construct($tenant, $options)

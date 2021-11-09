@@ -65,6 +65,12 @@ class Builder
             RequestOptions::HEADERS => $headers,
         ]);
 
+        $language = $options['lang'] ?? $this->sdk->option('language');
+
+        if($language) {
+            $request_options[RequestOptions::HEADERS]['Accept-Language'] = $language;
+        }
+
         try {
             $response = $this->sdk->client->request($method, $uri, $request_options);
 
