@@ -406,7 +406,7 @@ trait Filters
                     break;
 
                 case 'datetime':
-                    $filters[] = "$filter[property] $filter[operator] {$filter['value']->format('Y-m-d\TH:i:s.v\Z')}'";
+                    $filters[] = "$filter[property] $filter[operator] {$filter['value']->format('Y-m-d\TH:i:s.v\Z')}";
                     break;
 
                 case 'group':
