@@ -22,11 +22,11 @@ class Constructor
     protected static $map  = [];
     protected static $docs = [];
 
-    public static function buildModels($tenant, $username, $token, $environment = 'production')
+    public static function buildModels($tenant, $client_id, $client_secret, $environment = 'production')
     {
         static::$sdk = SDK::instance($tenant, [
-            'username'    => $username,
-            'token'       => $token,
+            'client_id'    => $client_id,
+            'client_secret'=> $client_secret,
             'offline_map' => false,
             'environment' => $environment,
         ]);
@@ -34,7 +34,7 @@ class Constructor
         static::line('+------------------------------');
         static::line('| Constructing Business Central');
         static::line("| Tenant:            \033[0;32m$tenant\033[0m");
-        static::line("| Authentication     \033[0;32m$username\033[0m | \033[0;32m$token\033[0m");
+        static::line("| Authentication     \033[0;32m$client_id\033[0m | \033[0;32m$client_secret\033[0m");
 
         static::line("| Building Classes:  ", false);
         static::buildClasses();

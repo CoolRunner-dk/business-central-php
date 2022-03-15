@@ -21,8 +21,8 @@ As Business Central's web services are dynamically created all entities could be
 ```php
 BusinessCentral\Constructor::buildModels(
     'my-tenant-id.onmicrosoft.com',
-    'username',
-    'VGhpcyBpc24ndCBhIHJlYWwgdG9rZW4gLSBOaWNlIHRyeSB0aG91Z2g='
+    'Application (client) ID',
+    'CLIENT_SECRET'
 );
 ``` 
 
@@ -36,11 +36,11 @@ Once an instance has been initialized it will fetch the schema from your Busines
 
 ```php
 $sdk = \BusinessCentral\SDK::instance('my-tenant-id.onmicrosoft.com', [
-	// Basic auth username [Required]
-    'username' => 'username',
+	// OAuth2 [Required]
+    'client_id' => 'Application (client) ID',
     
     // Basic auth token [Required]
-    'token'    => 'VGhpcyBpc24ndCBhIHJlYWwgdG9rZW4gLSBOaWNlIHRyeSB0aG91Z2g=',
+    'client_secret'    => '***',
     
     // Default collection size [Optional]
     // Amount of entities to load initially and per page per collection
