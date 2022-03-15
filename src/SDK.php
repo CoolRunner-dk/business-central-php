@@ -50,6 +50,7 @@ class SDK
 
     protected $request_log     = [];
     protected $request_counter = 0;
+    protected  $base_uri = "https://api.businesscentral.dynamics.com";
 
     protected $options = [
         // Credentials
