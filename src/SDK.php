@@ -47,6 +47,8 @@ class SDK
 
     protected $tenant;
     protected $client;
+    protected $token_expired;
+    protected $token;
 
     protected $request_log     = [];
     protected $request_counter = 0;
@@ -83,6 +85,11 @@ class SDK
             throw new \RuntimeException("Missing environment for BusinessCentral SDK");
         }
 
+        $this->getNewToken();
+
+        $this->mapEntities();
+    }
+    public function getNewToken(){
         if(! $scope = $this->option('scope'))
             $scope = "$this->base_uri/.default";
 
@@ -92,7 +99,6 @@ class SDK
                 'Content-type' => 'application/x-www-form-urlencoded'
             ],
         ]);
-
 
         $response = $test->post('',[
             'form_params' => [
@@ -104,17 +110,16 @@ class SDK
 
         $reponse = (json_decode($response->getBody()->getContents()));
 
-        $token = $reponse->access_token;
+        $this->token = $reponse->access_token;
+        $this->token_expired = time() + ($reponse->expires_in - 10);
 
         $this->client = new Client([
             'base_uri' => "https://api.businesscentral.dynamics.com/v2.0/$this->tenant/$this->environment/ODataV4/",
             'headers'  => [
                 'User-Agent'    => 'Business Central SDK',
-                'Authorization' => "Bearer $token",
+                'Authorization' => "Bearer $this->token",
             ],
         ]);
-
-        $this->mapEntities();
     }
 
     public function logRequest($method, $uri, $time, $request_options, $code, $response)
@@ -184,6 +189,9 @@ class SDK
             case 'environment':
                 return $this->option('environment');
             case 'client':
+                if($this->token_expired < time()){
+                    $this->getNewToken();
+                }
                 return $this->client;
             case 'schema':
                 return $this->schema;
