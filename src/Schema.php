@@ -36,8 +36,8 @@ class Schema
     {
         $this->version = $json['@attributes']['Version'];
 
-        foreach ($json['DataServices']['Schema'] as $item) {
-            $this->raw[$item['@attributes']['Namespace']] = $item;
+        foreach ($json['DataServices']['Schema'] as $key => $item) {
+            $this->raw[$json['DataServices']['Schema']['@attributes']['Namespace']][$key] = $item;
         }
 
         $this->entity_types  = new Collection();
