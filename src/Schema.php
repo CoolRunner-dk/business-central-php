@@ -30,14 +30,14 @@ class Schema
     protected $actions;
 
     /** @var array */
-    protected $raw, $overrides;
+    protected $raw = [], $overrides;
 
     public function __construct(array $json)
     {
         $this->version = $json['@attributes']['Version'];
 
         foreach ($json['DataServices']['Schema'] as $key => $item) {
-            $this->raw[$key] = $item;
+            $this->raw = array_merge($this->raw, $item);
         }
 
         $this->entity_types  = new Collection();
