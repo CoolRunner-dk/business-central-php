@@ -1,11 +1,13 @@
 <?php
-namespace BusinessCentral\Models;
+namespace {CLASS_NAMESPACE};
 
 
 use BusinessCentral\Entity;
 
 class {CLASS_NAME} extends Entity
 {
+    public const SCHEMA_NAME = '{SCHEMA_TYPE}';
+
     protected static $schema_type = '{SCHEMA_TYPE}';
 
     protected $fillable = [

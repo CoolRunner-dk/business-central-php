@@ -1,4 +1,6 @@
 <?php
+/** @noinspection PhpComposerExtensionStubsInspection */
+
 /**
  * @package   business-central-sdk
  * @author    Morten Harders 🐢
@@ -8,16 +10,10 @@
 namespace BusinessCentral;
 
 
-use BusinessCentral\Models\Company;
 use BusinessCentral\Query\Builder;
 use BusinessCentral\Traits\HasSchema;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Request;
-use Illuminate\Support\Collection;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use WsdlToPhp\PackageBase\Tests\SoapClient;
+use GuzzleHttp\Exception\GuzzleException;
 
 /**
  * Class SDK
@@ -36,25 +32,26 @@ class SDK
 {
     use HasSchema;
 
-    protected static $instances = [];
+    protected static array $instances = [];
 
-    public static function instance($tenant, array $options = [])
+    public static function instance(string $APIUri, string $tenant, array $options = [])
     {
-        $key = hash('sha256', json_encode([$tenant, $options]));
+        $key = hash('sha256', json_encode([$APIUri, $tenant, $options], JSON_THROW_ON_ERROR));
 
-        return static::$instances[$key] ?? static::$instances[$key] = new static($tenant, $options);
+        return static::$instances[$key] ?? static::$instances[$key] = new static($APIUri, $tenant, $options);
     }
 
-    protected $tenant;
-    protected $client;
-    protected $token_expired;
-    protected $token;
+    protected string $tenant;
+    protected Client $client;
+    protected int $token_expired;
+    protected string $token;
 
-    protected $request_log     = [];
-    protected $request_counter = 0;
-    protected  $base_uri = "https://api.businesscentral.dynamics.com";
+    protected array $request_log     = [];
+    protected int $request_counter = 0;
+    protected string $base_uri = "https://api.businesscentral.dynamics.com";
+    protected string $APIUri = "https://api.businesscentral.dynamics.com/v2.0/{tenant}/{environment}/ODataV4/";
 
-    protected $options = [
+    protected array $options = [
         // Credentials
         'environment'             => 'production',
         'client_id' => null,
@@ -67,10 +64,12 @@ class SDK
         'offline_map'             => true,
         'logs_requests'           => false,
         'language'                => false,
+        'target_dir'              => __DIR__,
     ];
 
-    protected function __construct($tenant, $options)
+    protected function __construct($APIUri, $tenant, $options)
     {
+        $this->APIUri = $APIUri;
 
         $this->tenant = $tenant;
 
@@ -89,9 +88,16 @@ class SDK
 
         $this->mapEntities();
     }
-    public function getNewToken(){
-        if(! $scope = $this->option('scope'))
+
+    /**
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
+    public function getNewToken(): void
+    {
+        if(! $scope = $this->option('scope')) {
             $scope = "$this->base_uri/.default";
+        }
 
         $test = new Client([
             'base_uri' => "https://login.microsoftonline.com/$this->tenant/oauth2/v2.0/token",
@@ -108,13 +114,26 @@ class SDK
                 'scope' => $scope
             ]]);
 
-        $reponse = (json_decode($response->getBody()->getContents()));
+        $reponse = (json_decode($response->getBody()->getContents(), false, 512, JSON_THROW_ON_ERROR));
 
         $this->token = $reponse->access_token;
         $this->token_expired = time() + ($reponse->expires_in - 10);
 
+        $uri = str_replace(
+            [
+                '{tenant}',
+                '{environment}',
+            ],
+            [
+                $this->tenant,
+                $this->environment,
+            ],
+            $this->APIUri
+        );
+
+
         $this->client = new Client([
-            'base_uri' => "https://api.businesscentral.dynamics.com/v2.0/$this->tenant/$this->environment/ODataV4/",
+            'base_uri' => $uri,
             'headers'  => [
                 'User-Agent'    => 'Business Central SDK',
                 'Authorization' => "Bearer $this->token",
@@ -122,7 +141,7 @@ class SDK
         ]);
     }
 
-    public function logRequest($method, $uri, $time, $request_options, $code, $response)
+    public function logRequest($method, $uri, $time, $request_options, $code, $response): void
     {
         if ($this->option('logs_requests')) {
             $this->request_log[] = new RequestLog($method, $code, $uri, $time, $request_options, $response);
@@ -131,7 +150,7 @@ class SDK
         $this->request_counter++;
     }
 
-    public function query()
+    public function query(): Builder
     {
         return new Builder($this);
     }
@@ -139,11 +158,11 @@ class SDK
     /**
      * @param string $id
      *
-     * @return Company|Entity
+     * @return Entity
      * @throws Exceptions\QueryException
      * @author Morten K. Harders 🐢 <mh@coolrunner.dk>
      */
-    public function company(string $id)
+    public function company(string $id): Entity
     {
         return $this->query()->navigateTo('Company')->find($id);
     }
@@ -157,30 +176,41 @@ class SDK
         return $this->query()->navigateTo('Company')->fetch();
     }
 
-    public function fetchMetadata()
+    /**
+     * @throws GuzzleException
+     */
+    public function fetchMetadata(): string
     {
         $response = $this->client->get('$metadata');
         $raw      = $response->getBody()->getContents();
-        file_put_contents(__DIR__ . '/../bcmetadata.xml', $raw);
+        file_put_contents($this->option('target_dir') . '/bcmetadata.xml', $raw);
 
         return $raw;
     }
 
-    public function mapEntities()
+    /**
+     * @throws \JsonException
+     * @throws GuzzleException
+     */
+    public function mapEntities(): void
     {
-        if ($this->option('offline_map') && file_exists(__DIR__ . '/../bcmetadata.xml')) {
-            $raw = file_get_contents(__DIR__ . '/../bcmetadata.xml');
+        if ($this->option('offline_map') && file_exists($this->option('target_dir') . '/bcmetadata.xml')) {
+            $raw = file_get_contents($this->option('target_dir') . '/bcmetadata.xml');
         } else {
             $raw = $this->fetchMetadata();
         }
 
         $raw = str_replace(['<edmx:', '</edmx:'], ['<', '</'], $raw);
 
-        $json = json_decode(json_encode(simplexml_load_string($raw)), true);
+        $json = json_decode(json_encode(simplexml_load_string($raw), JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
 
-        $this->schema = new Schema($json);
+        $this->setSchema(new Schema($json));
     }
 
+    /**
+     * @throws GuzzleException
+     * @throws \JsonException
+     */
     public function __get($name)
     {
         switch ($name) {
@@ -200,6 +230,7 @@ class SDK
             case 'request_count':
                 return $this->request_counter;
         }
+        return null;
     }
 
     public function option(string $option, $default = null)
