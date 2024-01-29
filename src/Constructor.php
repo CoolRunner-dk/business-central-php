@@ -14,22 +14,41 @@ use BusinessCentral\Schema\EntityType;
 use BusinessCentral\Schema\NavigationProperty;
 use BusinessCentral\Schema\Property;
 use Illuminate\Support\Str;
+use BusinessCentral\Query\Builder;
 
 class Constructor
 {
     /** @var SDK */
-    protected static $sdk;
-    protected static $map  = [];
-    protected static $docs = [];
+    protected static SDK $sdk;
+    protected static array $map  = [];
+    protected static array $docs = [];
 
-    public static function buildModels($tenant, $client_id, $client_secret, $environment = 'production')
+    /**
+     * @throws \JsonException
+     * @throws \ReflectionException
+     */
+    public static function buildModels(
+        string $baseUri,
+        string $tenant,
+        string $client_id,
+        string $client_secret,
+        string $environment = 'production',
+        string $namespace = 'BusinessCentral\\Models',
+        string $targetDir = __DIR__,
+        string $stubDir = __DIR__ . '/../stubs'
+    ): void
     {
-        static::$sdk = SDK::instance($tenant, [
-            'client_id'    => $client_id,
-            'client_secret'=> $client_secret,
-            'offline_map' => false,
-            'environment' => $environment,
-        ]);
+        static::$sdk = SDK::instance(
+            $baseUri,
+            $tenant,
+            [
+                'client_id'    => $client_id,
+                'client_secret'=> $client_secret,
+                'offline_map' => false,
+                'environment' => $environment,
+                'target_dir' => $targetDir,
+            ]
+        );
 
         static::line('+------------------------------');
         static::line('| Constructing Business Central');
@@ -37,43 +56,48 @@ class Constructor
         static::line("| Authentication     \033[0;32m$client_id\033[0m | \033[0;32m$client_secret\033[0m");
 
         static::line("| Building Classes:  ", false);
-        static::buildClasses();
+        static::buildClasses($namespace, $targetDir, $stubDir);
 
         static::line("| Building ClassMap: ", false);
-        static::buildClassMap();
+        static::buildClassMap($targetDir);
 
         static::line("| Building Docs:     ", false);
-        static::buildDocs();
+        static::buildDocs($namespace, $targetDir);
 
         static::line("| Building Markdown: ", false);
-        static::buildMarkdown();
+        static::buildMarkdown($targetDir);
         static::line('+------------------------------');
 
     }
 
-    protected static function buildClasses()
+    protected static function buildClasses(
+        string $namespace,
+        string $targetDir,
+        string $stubDir,
+    ): void
     {
-        array_map('unlink', glob(__DIR__ . '/Models/*.php'));
+        array_map('unlink', glob($targetDir . '/Models/*.php'));
 
         $types   = static::$sdk->schema->getEntityTypes()->sortKeys();
         $aliases = static::$sdk->schema->getAliases();
 
         foreach ($types as $type) {
             $class_name = Str::studly($aliases[$type->name] ?? $type->name);
+            $classKey   = '\\'.$namespace . '\\' . $class_name;
 
             $schema_type = $type->schema_type;
-            $path        = __DIR__ . "/Models/$class_name.php";
+            $path        = $targetDir . "/Models/$class_name.php";
 
             foreach ($type->properties() as $property) {
-                static::$docs["\BusinessCentral\Models\\$class_name"]['properties'][] = $property;
+                static::$docs[$classKey]['properties'][] = $property;
             }
 
             foreach ($type->relations() as $property) {
-                static::$docs["\BusinessCentral\Models\\$class_name"]['relations'][] = $property;
+                static::$docs[$classKey]['relations'][] = $property;
             }
 
             foreach ($type->actions() as $action) {
-                static::$docs["\BusinessCentral\Models\\$class_name"]['actions'][] = $action;
+                static::$docs[$classKey]['actions'][] = $action;
             }
 
             $fillable = [];
@@ -89,43 +113,57 @@ class Constructor
             $guarded  = implode("\n", $guarded);
 
             $contents = str_replace([
+                '{CLASS_NAMESPACE}',
                 '{CLASS_NAME}',
                 '{SCHEMA_TYPE}',
                 '{FILLABLE}',
                 '{GUARDED}',
             ], [
+                $namespace,
                 $class_name,
                 $schema_type,
                 $fillable,
                 $guarded,
-            ], static::loadStub($class_name));
+            ], static::loadStub($stubDir, $class_name));
 
             file_put_contents($path, $contents);
 
-            static::$map[$schema_type] = "\BusinessCentral\Models\\$class_name";
+            static::$map[$schema_type] = $classKey;
         }
 
         static::line("\033[0;32mDone\033[0m");
     }
 
-    protected static function buildClassMap()
+    /**
+     * @throws \JsonException
+     */
+    protected static function buildClassMap(string $targetDir): void
     {
-        file_put_contents(__DIR__ . '/../class_map.json', json_encode(static::$map, JSON_PRETTY_PRINT));
+        file_put_contents($targetDir . '/class_map.json',
+            json_encode(static::$map, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT)
+        );
         static::line("\033[0;32mDone\033[0m");
     }
 
-    protected static function buildDocs()
+    /**
+     * @throws \ReflectionException
+     */
+    protected static function buildDocs(string $namespace, string $targetDir): void
     {
-        static::loadFiles(__DIR__ . '/Models');
+        static::loadFiles($targetDir . '/Models');
 
-        $classes = array_filter(get_declared_classes(), function ($class) {
-            return strpos($class, 'BusinessCentral\Models\\') !== false;
+        $classes = array_filter(get_declared_classes(), static function ($class) use ($namespace) {
+            return str_contains($class, $namespace );
         });
 
         foreach ($classes as $class) {
             $rfc         = new \ReflectionClass($class);
             $type        = $rfc->getStaticProperties()['schema_type'];
-            $entity_type = static::$sdk->schema->getEntityType($type);
+            $entity_type = static::$sdk->getSchema()->getEntityType($type);
+
+            if (!$entity_type) {
+                continue;
+            }
 
             $map_class = static::$map[$entity_type->schema_type] ?? Entity::class;
 
@@ -137,7 +175,7 @@ class Constructor
         static::line("\033[0;32mDone\033[0m");
     }
 
-    protected static function buildMarkdown()
+    protected static function buildMarkdown(string $targetDir): void
     {
         $doc_contents = '';
         foreach (static::$docs as $class => $doc) {
@@ -237,46 +275,47 @@ class Constructor
             }
         }
 
-        file_put_contents(__DIR__ . '/../entities.md', $doc_contents);
+        file_put_contents($targetDir . '/entities.md', $doc_contents);
 
         static::line("\033[0;32mDone\033[0m");
     }
 
-    protected static function line($msg, $newline = true)
+    protected static function line(string $msg, $newline = true): void
     {
-        if (php_sapi_name() === 'cli') {
-            echo "$msg" . ($newline ? "\n" : null);
+        if (PHP_SAPI === 'cli') {
+            echo $msg . ($newline ? "\n" : null);
         }
     }
 
-    protected static function loadStub($name)
+    protected static function loadStub($stubDir, $name): false|string
     {
-        if (file_exists(__DIR__ . "/../stubs/$name.stub")) {
-            return file_get_contents(__DIR__ . "/../stubs/$name.stub");
+        if (file_exists($stubDir . "/$name.stub")) {
+            return file_get_contents($stubDir . "/$name.stub");
         }
 
-        return file_get_contents(__DIR__ . '/../stubs/model.stub');
+        return file_get_contents($stubDir . '/model.stub');
     }
 
-    protected static function loadFiles($dir)
+    protected static function loadFiles($dir): array
     {
         $results = [];
 
         foreach (glob("$dir/*") as $file) {
             if (is_dir($file)) {
                 $results = array_merge($results, static::loadFiles($file));
-            } else {
-                if (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
-                    require_once $file;
-                    $results[] = $file;
-                }
+            } elseif (pathinfo($file, PATHINFO_EXTENSION) === 'php') {
+                require_once $file;
+                $results[] = $file;
             }
         }
 
         return $results;
     }
 
-    protected static function generateDocs(string $class, EntityType $type)
+    /**
+     * @throws \ReflectionException
+     */
+    protected static function generateDocs(string $class, EntityType $type): void
     {
         $rfc = new \ReflectionClass($class);
         $rfp = $rfc->getProperty('guarded');
@@ -304,8 +343,8 @@ class Constructor
 
             $doc_prop = [
                 'name'        => $property->name,
-                'type'        => $base_type . ($is_collection ? '[]|\\' . EntityCollection::class . '' : ''),
-                'method_type' => "\BusinessCentral\Query\Builder",
+                'type'        => $base_type . ($is_collection ? '[]|\\' . EntityCollection::class : ''),
+                'method_type' => Builder::class,
                 'read_only'   => true,
             ];
 

@@ -36,9 +36,12 @@ class Schema
     {
         $this->version = $json['@attributes']['Version'];
 
-        foreach ($json['DataServices']['Schema'] as $key => $item) {
-            $this->raw = array_merge($this->raw, $item);
+        // check array keys are numeric, then we have multiple schemas
+        if (array_keys($json['DataServices']['Schema']) === range(0, count($json['DataServices']['Schema']) - 1)) {
+            $json['DataServices']['Schema'] = array_merge(...$json['DataServices']['Schema']);
         }
+
+        $this->raw = $json['DataServices']['Schema'];
 
         $this->entity_types  = new Collection();
         $this->entity_sets   = new Collection();
@@ -159,9 +162,7 @@ class Schema
             $type = $matches[1] ?? $type;
         }
 
-        $type = str_replace('Microsoft.NAV.', '', $type);
-        $type = str_replace('NAV.', '', $type);
-        $type = str_replace('ComplexTypes.', '', $type);
+        $type = str_replace(['Microsoft.NAV.', 'NAV.', 'ComplexTypes.'], '', $type);
 
         return $type;
     }

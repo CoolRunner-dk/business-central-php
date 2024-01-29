@@ -13,10 +13,14 @@ use BusinessCentral\Schema;
 trait HasSchema
 {
     /** @var Schema */
-    protected $schema;
+    protected Schema $schema;
 
-    public function getSchema()
+    public function getSchema(): Schema
     {
         return $this->schema;
+    }
+    protected function setSchema(Schema $schema): void
+    {
+        $this->schema = $schema;
     }
 }
