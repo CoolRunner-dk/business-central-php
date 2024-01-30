@@ -51,6 +51,8 @@ class SDK
     protected string $base_uri = "https://api.businesscentral.dynamics.com";
     protected string $APIUri = "https://api.businesscentral.dynamics.com/v2.0/{tenant}/{environment}/ODataV4/";
 
+    protected ClassMap $classMap;
+
     protected array $options = [
         // Credentials
         'environment'             => 'production',
@@ -87,6 +89,8 @@ class SDK
         $this->getNewToken();
 
         $this->mapEntities();
+
+
     }
 
     /**
@@ -205,6 +209,8 @@ class SDK
         $json = json_decode(json_encode(simplexml_load_string($raw), JSON_THROW_ON_ERROR), true, 512, JSON_THROW_ON_ERROR);
 
         $this->setSchema(new Schema($json));
+
+        $this->classMap = new ClassMap($this->option('target_dir'));
     }
 
     /**
@@ -237,4 +243,10 @@ class SDK
     {
         return $this->options[$option] ?? $default;
     }
+
+    public function getClassMap(): ClassMap
+    {
+        return $this->classMap;
+    }
+
 }

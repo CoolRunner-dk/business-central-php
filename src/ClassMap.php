@@ -9,47 +9,57 @@ namespace BusinessCentral;
 
 
 use BusinessCentral\Schema\EntityType;
+use JsonException;
 
 class ClassMap
 {
-    protected static $map;
+    protected ?array $map = null;
 
-    public static function map(EntityType $type)
+    public function __construct(
+        protected readonly string $mapDir
+    )
+    { }
+
+    /** @throws JsonException */
+    public function map(EntityType $type)
     {
-        self::init();
+        $this->init();
 
-        return static::$map[$type->schema_type] ?? Entity::class;
+        return $this->map[$type->schema_type] ?? Entity::class;
     }
 
-    public static function extend(string $name, string $class)
+    /** @throws JsonException */
+    public function extend(string $name, string $class): void
     {
-        self::init();
+        $this->init();
 
-        if (!in_array(Entity::class, class_parents($class))) {
+        if (!in_array(Entity::class, class_parents($class), true)) {
             throw new \RuntimeException(sprintf('Cannot use class %s as mapping for Business Central - Class must extend %s', $class, Entity::class));
         }
-        static::$map[$name] = $class;
+        $this->map[$name] = $class;
     }
 
-    public static function extendMultiple(array $map)
+    /** @throws JsonException */
+    public function extendMultiple(array $map): void
     {
-        static::init();
+        $this->init();
 
-        static::$map = array_merge(static::$map, $map);
+        $this->map = array_merge($this->map, $map);
     }
 
-    protected static function init()
+    /** @throws JsonException */
+    protected function init(): array
     {
-        if (isset(static::$map)) {
-            return static::$map;
+        if ( $this->map !== null ) {
+            return $this->map;
         }
 
-        $map_path = __DIR__ . '/../class_map.json';
+        $map_path = $this->mapDir . '/class_map.json';
 
         if (file_exists($map_path)) {
-            static::$map = json_decode(file_get_contents($map_path), true);
+            $this->map = json_decode(file_get_contents($map_path), true, 512, JSON_THROW_ON_ERROR);
         }
 
-        return static::$map;
+        return $this->map;
     }
 }

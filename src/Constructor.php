@@ -38,6 +38,8 @@ class Constructor
         string $stubDir = __DIR__ . '/../stubs'
     ): void
     {
+        static::$map  = [];
+        static::$docs = [];
         static::$sdk = SDK::instance(
             $baseUri,
             $tenant,
@@ -168,7 +170,7 @@ class Constructor
             $map_class = static::$map[$entity_type->schema_type] ?? Entity::class;
 
             if ($map_class !== Entity::class) {
-                static::generateDocs($map_class, $entity_type);
+                static::generateDocs($targetDir, $map_class, $entity_type);
             }
         }
 
@@ -177,6 +179,8 @@ class Constructor
 
     protected static function buildMarkdown(string $targetDir): void
     {
+        $classMap = new ClassMap($targetDir);
+
         $doc_contents = '';
         foreach (static::$docs as $class => $doc) {
             $doc_contents .= sprintf("# %s\n", class_basename($class));
@@ -231,7 +235,7 @@ class Constructor
                 $doc_contents .= "| --- | --- | :-: |\n";
                 /** @var NavigationProperty $item */
                 foreach ($doc['relations'] ?? [] as $item) {
-                    $class        = class_basename(ClassMap::map($item->getEntityType()));
+                    $class        = class_basename($classMap->map($item->getEntityType()));
                     $doc_contents .= sprintf(
                         "| %s | [%s](#%s) | %s |\n",
                         $item->name,
@@ -315,7 +319,7 @@ class Constructor
     /**
      * @throws \ReflectionException
      */
-    protected static function generateDocs(string $class, EntityType $type): void
+    protected static function generateDocs(, string $targetDir, string $class, EntityType $type): void
     {
         $rfc = new \ReflectionClass($class);
         $rfp = $rfc->getProperty('guarded');
@@ -337,8 +341,9 @@ class Constructor
             $properties[] = $doc_prop;
         }
 
+        $classMap = new ClassMap($targetDir);
         foreach ($type->relations() as $property) {
-            $base_type     = ClassMap::map($property->getEntityType());
+            $base_type     = $classMap->map($property->getEntityType());
             $is_collection = $property->isCollection();
 
             $doc_prop = [

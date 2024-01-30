@@ -62,7 +62,7 @@ class Entity implements \ArrayAccess, \JsonSerializable, Jsonable, Arrayable
     /** @return Entity */
     public static function make(array $attributes, Builder $query, EntityType $type)
     {
-        $class = ClassMap::map($type);
+        $class = $query->getSdk()->getClassMap()->map($type);
 
         if (!class_exists($class)) {
             $class = Entity::class;
